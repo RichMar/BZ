@@ -62,7 +62,9 @@ with open('Lesy_CR_komplet.csv') as csv_file:
                     n = m
                     m = sum(1 for line in data)
                     print("pocet radku m =" + str(m))
-                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a"))
+                #osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", newline=""))
+                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline=""))
+
                 # vymaže dotaz
                 overpass_query = ""
                 overpass_query = """[out:csv(::lat, ::lon, "ref")];""" + "\n"
