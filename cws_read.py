@@ -6,7 +6,7 @@ import json
 
 # json.loads("")
 
-with open('Lesy_CR_komplet.csv') as csv_file:
+with open('Lesy_CR_komplet.csv', encoding='ANSI') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
@@ -42,7 +42,7 @@ with open('Lesy_CR_komplet.csv') as csv_file:
                 f.write(overpass_query + "\n")
                 print("Overpass_query_ja:" + overpass_query)
                 print(line_count)
-                # pošle dotaz na overpass
+                # posle dotaz na overpass
 
                         #print(future.get())
                         #response = r.get()
