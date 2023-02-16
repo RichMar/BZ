@@ -10,8 +10,8 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
-    overpass_query = """[out:csv(::lat, ::lon, "ref")];"""
-    overpass_end = "\n out; \n"
+    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
+    overpass_end = "\n ); \n out; \n out count; \n"
     f = open("comm_wr.txt", "w")
     c = 1
     prvni = 0
@@ -30,13 +30,16 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
             #odstrani tab meyeru pred nazvem bodu
             row[2] = row[2].replace("\t", "")
             row[2] = row[2].replace(" ", "")
-            dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
+            #dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
+            dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);
+                            node[emergency=access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
             overpass_query = overpass_query + dotaz_body
-            overpass_query = overpass_query + overpass_end
+            #overpass_query = overpass_query + overpass_end
             print(f'x={row[0]}; y= {row[1]}; {row[2]}.')
             line_count += 1
             print(line_count)
-            if line_count == c * 50:
+            if line_count == c * 20:
+                overpass_query = overpass_query + overpass_end
                 c = c + 1
                 #zapise prikaz api overpaass do souboru txt }
                 f.write(overpass_query + "\n")
@@ -63,22 +66,29 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
                     m = sum(1 for line in data)
                     print("pocet radku m =" + str(m))
                 #osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", newline=""))
-                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline=""))
+                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline="", encoding='cp852'))
 
                 # vymaže dotaz
                 overpass_query = ""
-                overpass_query = """[out:csv(::lat, ::lon, "ref")];""" + "\n"
+                overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
                 #prvni = 3
                 #osm_bz_resp.writerow(str(c*50))
+
+
                 for x in data[:m]:
+                    try:
+                        if x[2] == "NJ014" in str(x):
+                            print("ref")
+                    except:
+                        print("An exception occurred")
                     print("x: " + str(x))
                     if prvni == 0 and "lat" in str(x):
-                        if not str(x) == "" and len(x) == 3:
+                        if not str(x) == "" and len(x) == 5:
                             osm_bz_resp.writerow(x)
                             #print(x)
                             prvni = 0
                     if prvni == 2 and not "lat" in str(x) and not "<" in str(x) and not "/" in str(x):
-                        if not str(x) == "" and len(x) == 3:
+                        if not str(x) == "" and len(x) == 5:
                             #osm_bz_resp.writerow(str(rad))
                             #print("Sloupce: " + str(len(x)))
 
