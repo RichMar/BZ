@@ -27,6 +27,11 @@ jobs:
       run: |
         python3 -m pip install requests
         python cws_read.py
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "crongenerated"
+        git push
 
     #- name: Lint with flake8
      # run: |
