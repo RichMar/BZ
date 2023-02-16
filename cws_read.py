@@ -6,7 +6,7 @@ import json
 
 # json.loads("")
 
-with open('Lesy_CR_komplet.csv', encoding='ANSI') as csv_file:
+with open('Lesy_CR_komplet.csv', encoding='mbcs') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
