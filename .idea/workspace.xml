@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="991615cd-0074-4f0a-b333-e92cfe2200ed" name="Changes" comment="Popisky">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comm_wr.txt" beforeDir="false" afterPath="$PROJECT_DIR$/comm_wr.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cws_read.py" beforeDir="false" afterPath="$PROJECT_DIR$/cws_read.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,5 +57,16 @@
       <updated>1676466355904</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cws_read.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
