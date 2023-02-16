@@ -27,7 +27,7 @@ jobs:
       run: |
         #python -m idlelib
         #pip3 install -r requirements.txt
-        pip install requests
+        pip3 install requests
         python cws_read.py
        #python -m pip install --upgrade pip
         #pip install flake8 pytest
