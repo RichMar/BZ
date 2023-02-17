@@ -53,6 +53,10 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
 
                 response = requests.get(overpass_url, params={'data': overpass_query})
                                     #print(type(response))
+                print("encoding :" + response.encoding)
+                #response.encoding = 'cp852'
+                response.encoding = 'windows - 1250'
+                print("encoding cov:" + response.encoding)
                 data = [row.split('\t') for row in response.text.split('\n')]
                 m = sum(1 for line in data)
                 print("pocet radku m =" + str(m))
@@ -66,8 +70,9 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
                     m = sum(1 for line in data)
                     print("pocet radku m =" + str(m))
                 #osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", newline=""))
-                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline="", encoding='cp852'))
-
+                osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline="", encoding='windows - 1250'))
+                #windows - 1250
+                #cp852
                 # vymaže dotaz
                 overpass_query = ""
                 overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
