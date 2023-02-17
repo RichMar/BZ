@@ -5,7 +5,7 @@ from multiprocessing.dummy import Pool
 import json
 
 # json.loads("")
-
+pocetboducelkem = 0
 with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line_count = 0
@@ -38,6 +38,7 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
             print(f'x={row[0]}; y= {row[1]}; {row[2]}.')
             line_count += 1
             print(line_count)
+
             if line_count == c * 20:
                 overpass_query = overpass_query + overpass_end
                 c = c + 1
@@ -93,12 +94,16 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
                             #print(x)
                             prvni = 0
                     if prvni == 2 and not "lat" in str(x) and not "<" in str(x) and not "/" in str(x):
-                        if not str(x) == "" and len(x) == 5:
+                        if not str(x) == "" and len(x) == 5 and x[4] == "":
                             #osm_bz_resp.writerow(str(rad))
                             #print("Sloupce: " + str(len(x)))
 
                             osm_bz_resp.writerow(x)
                             rad = rad + 1
+
+                    if len(x) == 5 and not x[4] =="" and  not x[4] =="@count":
+                        pocetbodu = int(x[4])
+                        pocetboducelkem = pocetboducelkem + pocetbodu
 
                     prvni = 2
                     try:
@@ -112,7 +117,9 @@ with open('Lesy_CR_komplet.csv', encoding='cp852') as csv_file:
                         print("chyba")
                 prvni = 1
         print(f"Processed {line_count} lines.")
+
         if line_count == 2172:
+            print("Pocet nalezenych bodu v OSM: " + str(pocetboducelkem))
             break
 
         # print(type(e))
