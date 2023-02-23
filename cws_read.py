@@ -72,14 +72,14 @@ def decrypt_file(efile, klic):
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 #NEMAZAT!!!
 # key generation
-key = Fernet.generate_key()
+# key = Fernet.generate_key()
 
 #prevezme klic z Gitu
-# key = os.environ['REPO_SECRET']
+key = os.environ['REPO_SECRET']
 # key = ""
 # string the key in a file
-with open('filekey.key', 'wb') as filekey:
-     filekey.write(key)
+# with open('filekey.key', 'wb') as filekey:
+#      filekey.write(key)
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
