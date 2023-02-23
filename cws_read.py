@@ -75,8 +75,8 @@ def decrypt_file(efile, klic):
 # key = Fernet.generate_key()
 
 #prevezme klic y Gitu
-# key = os.environ['REPO_SECRET']
-key = "tS_FpGgsn0d4Y2mYolN_x73gtRAPdKxR-QAmodmIrG4="
+key = os.environ['REPO_SECRET']
+# key = "tS_FpGgsn0d4Y2mYolN_x73gtRAPdKxR-QAmodmIrG4="
 # string the key in a file
 # with open('filekey.key', 'wb') as filekey:
 #     filekey.write(key)
