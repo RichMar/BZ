@@ -2,14 +2,14 @@ import csv
 import requests
 import time
 import math
-import os.path
+import os
 from cryptography.fernet import Fernet
 from multiprocessing.dummy import Pool
 import json
 
 
-def get_distance(lat_1, lng_1, lat_2, lng_2):
-    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2])
+def get_distance(lat_1, lng_1, lat_2, lng_2): #vypocet vdalenosti bodu
+    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2]) #prevede uhly na radiany
     d_lat = lat_2 - lat_1
     d_lng = lng_2 - lng_1
 
@@ -23,27 +23,85 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 
+def encrypt_file(ofile, klic):
+    # using the generated key
+    fernet = Fernet(klic)
+
+    # opening the original file to encrypt
+    with open(ofile, 'rb') as file:
+        original = file.read()
+
+    # encrypting the file
+    encrypted = fernet.encrypt(original)
+
+    # opening the file in write mode and
+    # writing the encrypted data
+    with open('enc-' + ofile, 'wb') as encrypted_file:
+        encrypted_file.write(encrypted)
+
+    os.remove(ofile)
+    return
+
+
+def decrypt_file(efile, klic):
+    # using the generated key
+    fernet = Fernet(klic)
+    # opening the encrypted file
+    with open(efile, 'rb') as enc_file:
+        encrypted = enc_file.read()
+    # decrypting the file
+    decrypted = fernet.decrypt(encrypted)
+
+    # using the key
+    fernet = Fernet(key)
+
+    # opening the encrypted file
+    with open(efile, 'rb') as enc_file:
+        encrypted = enc_file.read()
+
+    # decrypting the file
+    decrypted = fernet.decrypt(encrypted)
+
+    # opening the file in write mode and
+    # writing the decrypted data
+    with open(efile[4:], 'wb') as dec_file:
+        dec_file.write(decrypted)
+    return
+
+
+#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+#NEMAZAT!!!
 # key generation
-key = Fernet.generate_key()
+# key = Fernet.generate_key()
 
+#prevezme klic y Gitu
+# key = os.environ['REPO_SECRET']
+key = "tS_FpGgsn0d4Y2mYolN_x73gtRAPdKxR-QAmodmIrG4="
 # string the key in a file
-with open('filekey.key', 'wb') as filekey:
-    filekey.write(key)
+# with open('filekey.key', 'wb') as filekey:
+#     filekey.write(key)
 
+#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
+#encrypt_file("Lesy_CR_komplet_.csv", key )
 pocetboducelkem = 0
 body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
 chybejicibody_noref= []
-if os.path.exists('Lesy_CR_komplet.csv'):
-    vstup = 'Lesy_CR_komplet.csv'
+if os.path.exists('enc-Lesy_CR_komplet100.csv'):
+    vstup = 'enc-Lesy_CR_komplet100.csv'
     oddelovac = ';'
+    decrypt_file(vstup, key)
 else:
-    vstup = 'chybejicibody.csv'
+    vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
-    vystup = 'chybejicibody_bezref.csv'
-with open(vstup, encoding='cp852') as csv_file:
+    vystup = 'enc-OSMchybejicibody_bezref.csv'
+    decrypt_file(vstup, key)
+
+
+# with open(vstup, encoding='cp852') as csv_file:
+with open(vstup[4:], encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
@@ -114,8 +172,9 @@ with open(vstup, encoding='cp852') as csv_file:
                     m = sum(1 for line in data)
                     print("pocet radku m =" + str(m))
                 # osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", newline=""))
-                osm_bz_resp = csv.writer(
-                    open("osm_bz_resp-" + timestr + ".csv", "a", newline="", encoding='windows - 1250'))
+                # osm_bz_resp = csv.writer(open("osm_bz_resp-" + timestr + ".csv", "a", newline="", encoding='windows - 1250'))
+                # osm_bz_resp = csv.writer(
+                #     open("osm_bz.csv", "a", newline="", encoding='windows - 1250'))
                 # windows - 1250
                 # cp852
                 # vymaže dotaz
@@ -133,7 +192,8 @@ with open(vstup, encoding='cp852') as csv_file:
                     print("x: " + str(x))
                     if prvni == 0 and "lat" in str(x):
                         if not str(x) == "" and len(x) == 5:
-                            osm_bz_resp.writerow(x)
+                            # osm_bz_resp.writerow(x)
+                            # body_overpass_seznam.append('lat,lon,ref')
                             # print(x)
                             prvni = 0
                     if prvni == 2 and not "lat" in str(x) and not "<" in str(x) and not "/" in str(x):
@@ -141,11 +201,12 @@ with open(vstup, encoding='cp852') as csv_file:
                             # osm_bz_resp.writerow(str(rad))
                             # print("Sloupce: " + str(len(x)))
                             bod_overpass = [x[0], x[1], x[2]]
+                            #pokud bod v OSM nema hodntu REF yapise do seznamu bezref
                             if not x[2] == "":
                                 body_overpass_seznam.append(bod_overpass)
                             else:
                                 body_les_seznam_bezref.append(bod_overpass)
-                            osm_bz_resp.writerow(x)
+                            # osm_bz_resp.writerow(x)
                             rad = rad + 1
 
                     if len(x) == 5 and not x[4] == "" and not x[4] == "@count":
@@ -176,37 +237,51 @@ with open(vstup, encoding='cp852') as csv_file:
     chybejicibody = body_les_seznam
 
 for y in body_overpass_seznam:
-    ref = y[2].replace(" ", "")
-    index_les = [(i, element.index(ref)) for i, element in enumerate(body_les_seznam) if ref in element]
-    # y kompletniho seznamu odstrani polozky, ktere jiz v oSM existuji.
-    del chybejicibody[index_les[0][0]]
-    # print(index_les[0][0], index_les[0][1])
-    # overeni vzdalenosti bodu v km se stejnym ref overpass a lesy
-    vzdalenost = get_distance(float(body_les_seznam[index_les[0][0]][0]),
-                              float(body_les_seznam[index_les[0][0]][1]),
-                              float(y[0]), float(y[1]))
-    # prevod na metry
-    vzdalenost = vzdalenost * 1000
-    if vzdalenost > 100:
-        f.write(ref + " " + str(vzdalenost) + "\n")
-    print(vzdalenost, " ", y[2])
+    if not "lat" in str(y):
+        ref = y[2].replace(" ", "")
+        index_les = [(i, element.index(ref)) for i, element in enumerate(body_les_seznam) if ref in element]
+        # y kompletniho seznamu odstrani polozky, ktere jiz v oSM existuji.
+        del chybejicibody[index_les[0][0]]
+        # print(index_les[0][0], index_les[0][1])
+        # overeni vzdalenosti bodu v km se stejnym ref overpass a lesy
+        vzdalenost = get_distance(float(body_les_seznam[index_les[0][0]][0]),
+                                  float(body_les_seznam[index_les[0][0]][1]),
+                                  float(y[0]), float(y[1]))
+        # prevod na metry
+        vzdalenost = vzdalenost * 1000
+        if vzdalenost > 100:
+            f.write(ref + " " + str(vzdalenost) + "\n")
+        print(vzdalenost, " ", y[2])
 
-    print(f"Processed {line_count} lines.")
+        print(f"Processed {line_count} lines.")
 # vytvoří seznam chbejicich bodu v OSM bez ref
-with open('chybejicibody_bezref.csv', 'w', newline='') as f:
+with open('OSMchybejicibody_bezref.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['lat', 'lon', 'ref'])
     # chybejicibody_noref= []
     chybejicibody_noref = [x[0:2] for x in chybejicibody]
     writer.writerows(chybejicibody_noref)
-# vytvoří seznam chbejicich bodu v OSM s ref
-with open('chybejicibody.csv', 'w', newline='') as f:
+
+# zapise body zachrany, keré jsou v OSM
+with open('OSMBZ.csv', 'w', newline='') as f:
+    writer = csv.writer(f, delimiter=',')
+    writer.writerow(['lat', 'lon', 'ref'])
+    writer.writerows(body_overpass_seznam)
+
+
+# vytvoří seznam chybejicich bodu v OSM s ref
+with open('OSMchybejicibody.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['lat', 'lon'])
     writer.writerows(chybejicibody)
-# vztvori seznam bodu v OSM ale s chybejici hodnotou REF
+encrypt_file('OSMchybejicibody.csv', key)
+
+# vytvori seznam bodu v OSM ale s chybejici hodnotou REF
 # body_les_seznam_bezref
 with open('OSMbodybezref.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['lat', 'lon'])
     writer.writerows(body_les_seznam_bezref)
+
+if os.path.exists('Lesy_CR_komplet.csv'):
+    os.remove('Lesy_CR_komplet.csv')
