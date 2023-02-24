@@ -86,7 +86,7 @@ if key == '':
 # with open('filekey.key', 'wb') as filekey:
 #        filekey.write(key)
 
-#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
 #encrypt_file("Lesy_CR_komplet_.csv", key )
 pocetboducelkem = 0
