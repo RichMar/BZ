@@ -7,10 +7,7 @@ on: push
   #push:
   #  branches: [ "main" ]
   #pull_request:
-   # branches: [ "main" ]
-
-#permissions:
- # contents: read
+# BZ
 
 jobs:
   build:
@@ -24,6 +21,10 @@ jobs:
       with:
         python-version: "3.10"
     - name: Install dependencies
+    
+      env:
+        REPO_SECRET: ${{ secrets.KEYOSMBZ }}
+    
       run: |
         python3 -m pip install requests
         python3 -m pip install cryptography
@@ -33,9 +34,10 @@ jobs:
         git add .
         git commit -m "crongenerated"
         git push
-      env:
+        
+      #env:
         #ENV_SECRET: ${{ env.AHOJ }} 
-        REPO_SECRET: ${{ secrets.KEYOSMBZ }}
+        #REPO_SECRET: ${{ secrets.KEYOSMBZ }}
 
     #- name: Lint with flake8
      # run: |

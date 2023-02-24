@@ -4,6 +4,7 @@ import time
 import math
 import os
 from cryptography.fernet import Fernet
+import sys
 from multiprocessing.dummy import Pool
 import json
 
@@ -76,6 +77,9 @@ def decrypt_file(efile, klic):
 
 #prevezme klic z Gitu
 key = os.environ['REPO_SECRET']
+if key == '':
+    print('Hodnota KEY není nastavena! Končíme.')
+    sys.exit()
 # key = ""
 # string the key in a file
 # with open('filekey.key', 'wb') as filekey:
