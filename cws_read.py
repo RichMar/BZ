@@ -93,8 +93,8 @@ body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
 chybejicibody_noref= []
-if os.path.exists('enc-Lesy_CR_komplet100.csv'):
-    vstup = 'enc-Lesy_CR_komplet100.csv'
+if os.path.exists('Lesy_CR_komplet100.csv'):
+    vstup = 'Lesy_CR_komplet100.csv'
     oddelovac = ';'
     decrypt_file(vstup, key)
 else:
