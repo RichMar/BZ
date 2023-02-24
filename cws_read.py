@@ -74,9 +74,12 @@ def decrypt_file(efile, klic):
 #NEMAZAT!!!
 # key generation
 # key = Fernet.generate_key()
-
+key = ''
 #prevezme klic z Gitu
-key = os.environ['REPO_SECRET']
+try:
+    key = os.environ['REPO_SECRET']
+except:
+    print("Pristup k REPO_SECRET zamitnut")
 # key = ''
 if key == '':
     print('Hodnota KEY není nastavena! Končíme.')
@@ -266,39 +269,42 @@ for y in body_overpass_seznam:
 #aktualni pocet bodu nalazenych v OSM
 novyseznambodu= len(body_overpass_seznam)
 #pocet bodu nalazenych v OSM pri minulem behu
-with open('OSMBZ.csv', newline='') as csvfile:
-    fileObject = csv.reader(csvfile)
-    puvodniseznambodu = sum(1 for row in fileObject)
+if os.path.exists('OSMBZ.csv'):
+    with open('OSMBZ.csv', newline='') as csvfileOSM:
+        fileObject = csv.reader(csvfileOSM)
+        puvodniseznambodu = sum(1 for row in fileObject)
+else:
+    puvodniseznambodu = 1
+
+if (puvodniseznambodu-1) < novyseznambodu:
+    # vytvoří seznam chbejicich bodu v OSM bez ref
+    with open('OSMbodybezref.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['lat', 'lon', 'ref'])
+        # chybejicibody_noref= []
+        chybejicibody_noref = [x[0:2] for x in chybejicibody]
+        writer.writerows(chybejicibody_noref)
+
+    # zapise body zachrany, keré jsou v OSM
+    with open('OSMBZ.csv', 'w', newline='') as f:
+        writer = csv.writer(f, delimiter=',')
+        writer.writerow(['lat', 'lon', 'ref'])
+        writer.writerows(body_overpass_seznam)
 
 
-# vytvoří seznam chbejicich bodu v OSM bez ref
-with open('OSMbodybezref.csv', 'w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['lat', 'lon', 'ref'])
-    # chybejicibody_noref= []
-    chybejicibody_noref = [x[0:2] for x in chybejicibody]
-    writer.writerows(chybejicibody_noref)
+    # vytvoří seznam chybejicich bodu v OSM s ref
+    with open('OSMchybejicibody.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['lat', 'lon'])
+        writer.writerows(chybejicibody)
+    encrypt_file('OSMchybejicibody.csv', key)
 
-# zapise body zachrany, keré jsou v OSM
-with open('OSMBZ.csv', 'w', newline='') as f:
-    writer = csv.writer(f, delimiter=',')
-    writer.writerow(['lat', 'lon', 'ref'])
-    writer.writerows(body_overpass_seznam)
-
-
-# vytvoří seznam chybejicich bodu v OSM s ref
-with open('OSMchybejicibody.csv', 'w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['lat', 'lon'])
-    writer.writerows(chybejicibody)
-encrypt_file('OSMchybejicibody.csv', key)
-
-# vytvori seznam bodu v OSM ale s chybejici hodnotou REF
-# body_les_seznam_bezref
-with open('OSMbodybezref.csv', 'w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['lat', 'lon'])
-    writer.writerows(body_les_seznam_bezref)
+    # vytvori seznam bodu v OSM ale s chybejici hodnotou REF
+    # body_les_seznam_bezref
+    with open('OSMbodybezref.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['lat', 'lon'])
+        writer.writerows(body_les_seznam_bezref)
 
 if os.path.exists('Lesy_CR_komplet.csv'):
     os.remove('Lesy_CR_komplet.csv')
