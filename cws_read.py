@@ -77,13 +77,14 @@ def decrypt_file(efile, klic):
 
 #prevezme klic z Gitu
 key = os.environ['REPO_SECRET']
+# key = ''
 if key == '':
     print('Hodnota KEY není nastavena! Končíme.')
     sys.exit()
-# key = ""
+# key = "SBWYQ3n5h73daVstaWp0gKhQdxE-ZL9nvb-gcv9nMAk="
 # string the key in a file
 # with open('filekey.key', 'wb') as filekey:
-#      filekey.write(key)
+#        filekey.write(key)
 
 #mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
@@ -93,19 +94,22 @@ body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
 chybejicibody_noref= []
-if os.path.exists('Lesy_CR_komplet100.csv'):
-    vstup = 'Lesy_CR_komplet100.csv'
+if os.path.exists('enc-Lesy_CR_komplet100.csv'):
+    vstup = 'enc-Lesy_CR_komplet100.csv'
     oddelovac = ';'
     decrypt_file(vstup, key)
-else:
+elif os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
     vystup = 'enc-OSMchybejicibody_bezref.csv'
     decrypt_file(vstup, key)
-
+else:
+    vstup = 'Lesy_CR_komplet100.csv'
+    oddelovac = ';'
 
 # with open(vstup, encoding='cp852') as csv_file:
-with open(vstup[4:], encoding='cp852') as csv_file:
+# with open(vstup[4:], encoding='cp852') as csv_file:
+with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
