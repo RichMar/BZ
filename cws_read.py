@@ -81,7 +81,7 @@ key = os.environ['REPO_SECRET']
 if key == '':
     print('Hodnota KEY není nastavena! Končíme.')
     sys.exit()
-# key = "SBWYQ3n5h73daVstaWp0gKhQdxE-ZL9nvb-gcv9nMAk="
+# key = ""
 # string the key in a file
 # with open('filekey.key', 'wb') as filekey:
 #        filekey.write(key)
@@ -262,8 +262,17 @@ for y in body_overpass_seznam:
         print(vzdalenost, " ", y[2])
 
         print(f"Processed {line_count} lines.")
+
+#aktualni pocet bodu nalazenych v OSM
+novyseznambodu= len(body_overpass_seznam)
+#pocet bodu nalazenych v OSM pri minulem behu
+with open('OSMBZ.csv', newline='') as csvfile:
+    fileObject = csv.reader(csvfile)
+    puvodniseznambodu = sum(1 for row in fileObject)
+
+
 # vytvoří seznam chbejicich bodu v OSM bez ref
-with open('OSMchybejicibody_bezref.csv', 'w', newline='') as f:
+with open('OSMbodybezref.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['lat', 'lon', 'ref'])
     # chybejicibody_noref= []
