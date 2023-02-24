@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="991615cd-0074-4f0a-b333-e92cfe2200ed" name="Changes" comment="Popisky">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OSMBZ.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OSMBZ.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OSMbodybezref.csv" beforeDir="false" afterPath="$PROJECT_DIR$/OSMbodybezref.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comm_wr.txt" beforeDir="false" afterPath="$PROJECT_DIR$/comm_wr.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cws_read.py" beforeDir="false" afterPath="$PROJECT_DIR$/cws_read.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enc-OSMchybejicibody.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
