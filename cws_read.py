@@ -9,8 +9,8 @@ from multiprocessing.dummy import Pool
 import json
 
 
-def get_distance(lat_1, lng_1, lat_2, lng_2): #vypocet vdalenosti bodu
-    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2]) #prevede uhly na radiany
+def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
+    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2])  # prevede uhly na radiany
     d_lat = lat_2 - lat_1
     d_lng = lng_2 - lng_1
 
@@ -70,16 +70,25 @@ def decrypt_file(efile, klic):
     return
 
 
-#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-#NEMAZAT!!!
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# NEMAZAT!!!
 # key generation
 # key = Fernet.generate_key()
 key = ''
-#prevezme klic z Gitu
+# prevezme klic z Gitu
 try:
     key = os.environ['REPO_SECRET']
 except:
     print("Pristup k REPO_SECRET zamitnut")
+finally:
+    print('jedu dál')
+
+try:
+  with open('filekey.key', 'rb') as f:
+    key = f.read()
+except FileNotFoundError:
+    print("Nemohu nacist filekey.key.")
+
 # key = ''
 if key == '':
     print('Hodnota KEY není nastavena! Končíme.')
@@ -89,14 +98,14 @@ if key == '':
 # with open('filekey.key', 'wb') as filekey:
 #        filekey.write(key)
 
-#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
-#encrypt_file("Lesy_CR_komplet_.csv", key )
+# encrypt_file("Lesy_CR_komplet_.csv", key )
 pocetboducelkem = 0
 body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
-chybejicibody_noref= []
+chybejicibody_noref = []
 if os.path.exists('enc-Lesy_CR_komplet100.csv'):
     vstup = 'enc-Lesy_CR_komplet100.csv'
     oddelovac = ';'
@@ -212,7 +221,7 @@ with open(vstup, encoding='cp852') as csv_file:
                             # osm_bz_resp.writerow(str(rad))
                             # print("Sloupce: " + str(len(x)))
                             bod_overpass = [x[0], x[1], x[2]]
-                            #pokud bod v OSM nema hodntu REF yapise do seznamu bezref
+                            # pokud bod v OSM nema hodntu REF yapise do seznamu bezref
                             if not x[2] == "":
                                 body_overpass_seznam.append(bod_overpass)
                             else:
@@ -266,9 +275,9 @@ for y in body_overpass_seznam:
 
         print(f"Processed {line_count} lines.")
 
-#aktualni pocet bodu nalazenych v OSM
-novyseznambodu= len(body_overpass_seznam)
-#pocet bodu nalazenych v OSM pri minulem behu
+# aktualni pocet bodu nalazenych v OSM
+novyseznambodu = len(body_overpass_seznam)
+# pocet bodu nalazenych v OSM pri minulem behu
 if os.path.exists('OSMBZ.csv'):
     with open('OSMBZ.csv', newline='') as csvfileOSM:
         fileObject = csv.reader(csvfileOSM)
@@ -276,7 +285,7 @@ if os.path.exists('OSMBZ.csv'):
 else:
     puvodniseznambodu = 1
 
-if (puvodniseznambodu-1) < novyseznambodu:
+if (puvodniseznambodu - 1) < novyseznambodu:
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
         writer = csv.writer(f)
@@ -290,7 +299,6 @@ if (puvodniseznambodu-1) < novyseznambodu:
         writer = csv.writer(f, delimiter=',')
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_overpass_seznam)
-
 
     # vytvoří seznam chybejicich bodu v OSM s ref
     with open('OSMchybejicibody.csv', 'w', newline='') as f:
@@ -307,4 +315,5 @@ if (puvodniseznambodu-1) < novyseznambodu:
         writer.writerows(body_les_seznam_bezref)
 
 if os.path.exists('Lesy_CR_komplet.csv'):
+    encrypt_file('Lesy_CR_komplet.csv', key)
     os.remove('Lesy_CR_komplet.csv')
