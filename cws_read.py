@@ -5,6 +5,7 @@ import math
 import os
 from cryptography.fernet import Fernet
 import sys
+from gpx_converter import Converter
 from multiprocessing.dummy import Pool
 import json
 
@@ -288,11 +289,13 @@ else:
 if (puvodniseznambodu - 1) < novyseznambodu:
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, delimiter=',')
         writer.writerow(['lat', 'lon', 'ref'])
         # chybejicibody_noref= []
         chybejicibody_noref = [x[0:2] for x in chybejicibody]
         writer.writerows(chybejicibody_noref)
+        # https: // github.com / nidhaloff / gpx - converter
+        Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
 
     # zapise body zachrany, keré jsou v OSM
     with open('OSMBZ.csv', 'w', newline='') as f:
