@@ -6,6 +6,8 @@ import os
 from cryptography.fernet import Fernet
 import sys
 from gpx_converter import Converter
+import gpxpy
+import gpxpy.gpx
 from multiprocessing.dummy import Pool
 import json
 
@@ -75,6 +77,7 @@ def decrypt_file(efile, klic):
 # NEMAZAT!!!
 # key generation
 # key = Fernet.generate_key()
+
 key = ''
 # prevezme klic z Gitu
 try:
@@ -294,8 +297,27 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         # chybejicibody_noref= []
         chybejicibody_noref = [x[0:2] for x in chybejicibody]
         writer.writerows(chybejicibody_noref)
+
         # https: // github.com / nidhaloff / gpx - converter
-        Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
+    Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
+    # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
+    gpx_file = open('OSMbodybezref.gpx', 'r')
+    gpx = gpxpy.parse(gpx_file)
+    gpxnew = gpxpy.gpx.GPX()
+    # Create first track in our GPX:
+    # gpx_track = gpxpy.gpx.GPXTrack()
+    # gpx_segment = gpxpy.gpx.GPXTrackSegment()
+    # gpx_waypoint = gpxpy.gpx.GPXWaypoint()
+
+    for track in gpx.tracks:
+        for segment in track.segments:
+            for point in segment.points:
+                gpxnew.waypoints.append(point)
+
+    print('Created GPX:', gpxnew.to_xml())
+    fp = open('OSMbodybezref.gpx', 'w')
+    fp.write(gpxnew.to_xml())
+    fp.close()
 
     # zapise body zachrany, keré jsou v OSM
     with open('OSMBZ.csv', 'w', newline='') as f:
