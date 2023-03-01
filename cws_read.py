@@ -125,6 +125,7 @@ else:
 
 # with open(vstup, encoding='cp852') as csv_file:
 # with open(vstup[4:], encoding='cp852') as csv_file:
+print('Vstupni soubor: ' + vstup)
 with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
@@ -300,7 +301,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
 
         # https: // github.com / nidhaloff / gpx - converter
     Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
-    
+
     # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
     gpx_file = open('OSMbodybezref.gpx', 'r')
     gpx = gpxpy.parse(gpx_file)
