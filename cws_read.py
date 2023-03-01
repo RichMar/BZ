@@ -300,6 +300,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
 
         # https: // github.com / nidhaloff / gpx - converter
     Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
+    
     # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
     gpx_file = open('OSMbodybezref.gpx', 'r')
     gpx = gpxpy.parse(gpx_file)
