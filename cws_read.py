@@ -228,7 +228,7 @@ with open(vstup, encoding='cp852') as csv_file:
                             # osm_bz_resp.writerow(str(rad))
                             # print("Sloupce: " + str(len(x)))
                             bod_overpass = [x[0], x[1], x[2]]
-                            # pokud bod v OSM nema hodntu REF yapise do seznamu bezref
+                            # pokud bod v OSM nema hodntu REF zapise do seznamu bezref
                             if not x[2] == "":
                                 body_overpass_seznam.append(bod_overpass)
                             else:
@@ -338,7 +338,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
 
     # vytvori seznam bodu v OSM ale s chybejici hodnotou REF
     # body_les_seznam_bezref
-    with open('OSMbodybezref.csv', 'w', newline='') as f:
+    with open('OSMbodychybejiciref.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['lat', 'lon'])
         writer.writerows(body_les_seznam_bezref)
