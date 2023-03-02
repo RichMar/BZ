@@ -343,6 +343,10 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer.writerow(['lat', 'lon'])
         writer.writerows(body_les_seznam_bezref)
 
+# OSMchybejicibody.csv
+if os.path.exists('OSMchybejicibody.csv'):
+    os.remove('OSMchybejicibody.csv')
+
 if os.path.exists('Lesy_CR_komplet.csv'):
     encrypt_file('Lesy_CR_komplet.csv', key)
     os.remove('Lesy_CR_komplet.csv')
