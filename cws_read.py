@@ -6,10 +6,11 @@ import os
 from cryptography.fernet import Fernet
 import sys
 from gpx_converter import Converter
-import gpxpy
 import gpxpy.gpx
-from multiprocessing.dummy import Pool
-import json
+from datetime import date
+import pandas as pd
+from pandas_geojson import to_geojson
+from pandas_geojson import write_geojson
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
@@ -292,7 +293,24 @@ if os.path.exists('OSMBZ.csv'):
 else:
     puvodniseznambodu = 1
 
+if not os.path.exists('statistika.csv'):
+    with open('statistika.csv', 'w', newline='') as stat:
+        wr = csv.writer(stat, delimiter=',')
+        wr.writerow(['datum', 'narust', 'celkem'])
+
 if (puvodniseznambodu - 1) < novyseznambodu:
+
+    today = date.today()
+    # dd/mm/YY
+    d1 = today.strftime("%d/%m/%Y")
+
+    nar = novyseznambodu - (puvodniseznambodu - 1)
+    # vytvoří statistiku
+    with open('statistika.csv', 'a', newline='') as sta:
+        wri = csv.writer(sta, delimiter=',')
+        wri.writerow([d1, str(nar), novyseznambodu])
+
+
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
         writer = csv.writer(f, delimiter=',')
@@ -301,17 +319,18 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         chybejicibody_noref = [x[0:2] for x in chybejicibody]
         writer.writerows(chybejicibody_noref)
 
-        # https: // github.com / nidhaloff / gpx - converter
+    # https: // github.com / nidhaloff / gpx - converter
     Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
 
     # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
     gpx_file = open('OSMbodybezref.gpx', 'r')
     gpx = gpxpy.parse(gpx_file)
     gpxnew = gpxpy.gpx.GPX()
-    # Create first track in our GPX:
-    # gpx_track = gpxpy.gpx.GPXTrack()
-    # gpx_segment = gpxpy.gpx.GPXTrackSegment()
-    # gpx_waypoint = gpxpy.gpx.GPXWaypoint()
+
+    # PREVOD CSV NA GeoJSON
+    data_csv = pd.read_csv('OSMbodybezref.csv')
+    geo_json = to_geojson(df=data_csv, lat='lat', lon='lon', properties=[])
+    write_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
 
     for track in gpx.tracks:
         for segment in track.segments:
