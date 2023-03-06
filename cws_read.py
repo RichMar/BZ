@@ -5,12 +5,16 @@ import math
 import os
 from cryptography.fernet import Fernet
 import sys
-from multiprocessing.dummy import Pool
-import json
+from gpx_converter import Converter
+import gpxpy.gpx
+from datetime import date
+import pandas as pd
+from pandas_geojson import to_geojson
+from pandas_geojson import write_geojson
 
 
-def get_distance(lat_1, lng_1, lat_2, lng_2): #vypocet vdalenosti bodu
-    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2]) #prevede uhly na radiany
+def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
+    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2])  # prevede uhly na radiany
     d_lat = lat_2 - lat_1
     d_lng = lng_2 - lng_1
 
@@ -70,16 +74,26 @@ def decrypt_file(efile, klic):
     return
 
 
-#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-#NEMAZAT!!!
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# NEMAZAT!!!
 # key generation
 # key = Fernet.generate_key()
+
 key = ''
-#prevezme klic z Gitu
+# prevezme klic z Gitu
 try:
     key = os.environ['REPO_SECRET']
 except:
     print("Pristup k REPO_SECRET zamitnut")
+finally:
+    print('jedu dál')
+
+try:
+  with open('filekey.key', 'rb') as f:
+    key = f.read()
+except FileNotFoundError:
+    print("Nemohu nacist filekey.key.")
+
 # key = ''
 if key == '':
     print('Hodnota KEY není nastavena! Končíme.')
@@ -89,29 +103,32 @@ if key == '':
 # with open('filekey.key', 'wb') as filekey:
 #        filekey.write(key)
 
-#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # json.loads("")
-#encrypt_file("Lesy_CR_komplet_.csv", key )
+# encrypt_file("Lesy_CR_komplet_.csv", key )
 pocetboducelkem = 0
 body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
-chybejicibody_noref= []
+chybejicibody_noref = []
 if os.path.exists('enc-Lesy_CR_komplet100.csv'):
     vstup = 'enc-Lesy_CR_komplet100.csv'
     oddelovac = ';'
     decrypt_file(vstup, key)
+    vstup = 'Lesy_CR_komplet100.csv'
 elif os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
     vystup = 'enc-OSMchybejicibody_bezref.csv'
     decrypt_file(vstup, key)
+    vstup = 'OSMchybejicibody.csv'
 else:
     vstup = 'Lesy_CR_komplet100.csv'
     oddelovac = ';'
 
 # with open(vstup, encoding='cp852') as csv_file:
 # with open(vstup[4:], encoding='cp852') as csv_file:
+print('Vstupni soubor: ' + vstup)
 with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
@@ -212,7 +229,7 @@ with open(vstup, encoding='cp852') as csv_file:
                             # osm_bz_resp.writerow(str(rad))
                             # print("Sloupce: " + str(len(x)))
                             bod_overpass = [x[0], x[1], x[2]]
-                            #pokud bod v OSM nema hodntu REF yapise do seznamu bezref
+                            # pokud bod v OSM nema hodntu REF zapise do seznamu bezref
                             if not x[2] == "":
                                 body_overpass_seznam.append(bod_overpass)
                             else:
@@ -266,9 +283,9 @@ for y in body_overpass_seznam:
 
         print(f"Processed {line_count} lines.")
 
-#aktualni pocet bodu nalazenych v OSM
-novyseznambodu= len(body_overpass_seznam)
-#pocet bodu nalazenych v OSM pri minulem behu
+# aktualni pocet bodu nalazenych v OSM
+novyseznambodu = len(body_overpass_seznam)
+# pocet bodu nalazenych v OSM pri minulem behu
 if os.path.exists('OSMBZ.csv'):
     with open('OSMBZ.csv', newline='') as csvfileOSM:
         fileObject = csv.reader(csvfileOSM)
@@ -276,21 +293,60 @@ if os.path.exists('OSMBZ.csv'):
 else:
     puvodniseznambodu = 1
 
-if (puvodniseznambodu-1) < novyseznambodu:
+if not os.path.exists('statistika.csv'):
+    with open('statistika.csv', 'w', newline='') as stat:
+        wr = csv.writer(stat, delimiter=',')
+        wr.writerow(['datum', 'narust', 'celkem'])
+
+if (puvodniseznambodu - 1) < novyseznambodu:
+
+    today = date.today()
+    # dd/mm/YY
+    d1 = today.strftime("%d/%m/%Y")
+
+    nar = novyseznambodu - (puvodniseznambodu - 1)
+    # vytvoří statistiku
+    with open('statistika.csv', 'a', newline='') as sta:
+        wri = csv.writer(sta, delimiter=',')
+        wri.writerow([d1, str(nar), novyseznambodu])
+
+
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, delimiter=',')
         writer.writerow(['lat', 'lon', 'ref'])
         # chybejicibody_noref= []
         chybejicibody_noref = [x[0:2] for x in chybejicibody]
         writer.writerows(chybejicibody_noref)
+
+    # https: // github.com / nidhaloff / gpx - converter
+    Converter(input_file='OSMbodybezref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodybezref.gpx')
+
+    # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
+    gpx_file = open('OSMbodybezref.gpx', 'r')
+    gpx = gpxpy.parse(gpx_file)
+    gpxnew = gpxpy.gpx.GPX()
+
+    # PREVOD CSV NA GeoJSON
+    data_csv = pd.read_csv('OSMbodybezref.csv')
+    geo_json = to_geojson(df=data_csv, lat='lat', lon='lon', properties=[])
+    write_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
+
+    for track in gpx.tracks:
+        for segment in track.segments:
+            for point in segment.points:
+                gpxnew.waypoints.append(point)
+
+    print('Created GPX:', gpxnew.to_xml())
+    fp = open('OSMbodybezref.gpx', 'w')
+    fp.write(gpxnew.to_xml())
+    fp.close()
 
     # zapise body zachrany, keré jsou v OSM
     with open('OSMBZ.csv', 'w', newline='') as f:
         writer = csv.writer(f, delimiter=',')
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_overpass_seznam)
-
 
     # vytvoří seznam chybejicich bodu v OSM s ref
     with open('OSMchybejicibody.csv', 'w', newline='') as f:
@@ -301,10 +357,15 @@ if (puvodniseznambodu-1) < novyseznambodu:
 
     # vytvori seznam bodu v OSM ale s chybejici hodnotou REF
     # body_les_seznam_bezref
-    with open('OSMbodybezref.csv', 'w', newline='') as f:
+    with open('OSMbodychybejiciref.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['lat', 'lon'])
         writer.writerows(body_les_seznam_bezref)
 
+# OSMchybejicibody.csv
+if os.path.exists('OSMchybejicibody.csv'):
+    os.remove('OSMchybejicibody.csv')
+
 if os.path.exists('Lesy_CR_komplet.csv'):
+    encrypt_file('Lesy_CR_komplet.csv', key)
     os.remove('Lesy_CR_komplet.csv')
