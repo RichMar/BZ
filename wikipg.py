@@ -39,7 +39,4 @@ for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
 
 
 
-
-
-
-print("ahoj")
+print("ahoj wikipg")
