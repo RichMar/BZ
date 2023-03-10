@@ -11,22 +11,25 @@ from datetime import date
 import pandas as pd
 from pandas_geojson import to_geojson
 from pandas_geojson import write_geojson
+from math import radians, cos, sin, asin, sqrt
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
-    lng_1, lat_1, lng_2, lat_2 = map(math.radians, [lng_1, lat_1, lng_2, lat_2])  # prevede uhly na radiany
+    lng_1, lat_1, lng_2, lat_2 = map(radians, [lng_1, lat_1, lng_2, lat_2])  # prevede uhly na radiany
     d_lat = lat_2 - lat_1
     d_lng = lng_2 - lng_1
 
-    temp = (
-            math.sin(d_lat / 2) ** 2
-            + math.cos(lat_1)
-            * math.cos(lat_2)
-            * math.sin(d_lng / 2) ** 2
-    )
-
-    return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
-
+    # temp = (
+    #         math.sin(d_lat / 2) ** 2
+    #         + math.cos(lat_1)
+    #         * math.cos(lat_2)
+    #         * math.sin(d_lng / 2) ** 2
+    # )
+    a = sin(d_lat / 2) ** 2 + cos(lat_1) * cos(lat_2) * sin(d_lng / 2) ** 2
+    c = 2 * asin(sqrt(a))
+    r = 6371
+    # return 6371.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
+    return c * r
 
 def encrypt_file(ofile, klic):
     # using the generated key
@@ -110,6 +113,7 @@ pocetboducelkem = 0
 body_les_seznam = []
 body_overpass_seznam = []
 body_les_seznam_bezref = []
+vymazatz_body_overpass_seznam = []
 chybejicibody_noref = []
 if os.path.exists('enc-Lesy_CR_komplet.csv'):
     vstup = 'enc-Lesy_CR_komplet.csv'
@@ -262,15 +266,17 @@ with open(vstup, encoding='cp852') as csv_file:
         # print(x[2])
     # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     f.write("Vzdalenost bodu nize je vetsi nez 100m:" + "\n")
-    chybejicibody = body_les_seznam
+    chybejicibody = body_les_seznam.copy()
 
 for y in body_overpass_seznam:
     if not "lat" in str(y):
         ref = y[2].replace(" ", "")
         index_les = [(i, element.index(ref)) for i, element in enumerate(body_les_seznam) if ref in element]
-        # y kompletniho seznamu odstrani polozky, ktere jiz v oSM existuji.
+        # z kompletniho seznamu odstrani polozky, ktere jiz v oSM existuji.
         if index_les:
-            del chybejicibody[index_les[0][0]]
+            index_chybejici = [(i, element.index(ref)) for i, element in enumerate(chybejicibody) if ref in element]
+            if index_chybejici:
+                del chybejicibody[index_chybejici[0][0]]
             # chybejicibody.remove(y)
             # print(index_les[0][0], index_les[0][1])
             # overeni vzdalenosti bodu v km se stejnym ref overpass a lesy
@@ -281,14 +287,23 @@ for y in body_overpass_seznam:
             vzdalenost = vzdalenost * 1000
             if vzdalenost > 100:
                 f.write(ref + " " + str(vzdalenost) + "\n")
-            print(vzdalenost, " ", y[2])
+                print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
 
         else:
             body_les_seznam_bezref.append(y)
             # body_overpass_seznam.remove(index_les[0][0])
-            body_overpass_seznam.remove(y)
+            # body_overpass_seznam.remove(y)
+            vymazatz_body_overpass_seznam.append(y)
 
-        print(f"Processed {line_count} lines.")
+
+print(f"Processed {line_count} lines.")
+
+for s in vymazatz_body_overpass_seznam:
+    if not "lat" in str(s):
+        ref = s[2].replace(" ", "")
+        index_body_overpass_seznam = [(i, element.index(ref)) for i, element in enumerate(body_overpass_seznam) if ref in element]
+        if index_body_overpass_seznam:
+            del body_overpass_seznam[index_body_overpass_seznam[0][0]]
 
 # aktualni pocet bodu nalazenych v OSM
 novyseznambodu = len(body_overpass_seznam)
@@ -368,6 +383,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer = csv.writer(f)
         writer.writerow(['lat', 'lon'])
         writer.writerows(body_les_seznam_bezref)
+
 
 # OSMchybejicibody.csv
 if os.path.exists('OSMchybejicibody.csv'):
