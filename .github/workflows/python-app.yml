@@ -3,11 +3,12 @@
 
 name: Python application
 
-on: push
-  #push:
-  #  branches: [ "main" ]
-  #pull_request:
-# BZ
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 2 * * *'
+#on: push
+
 
 jobs:
   build:
