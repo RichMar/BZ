@@ -1,6 +1,6 @@
 import csv
 import os
-
+import fileinput
 
 def import_csv(csvfilemame):
     data = []
@@ -15,20 +15,30 @@ def import_csv(csvfilemame):
                 data.append(columns)
     return data
 
-data= import_csv('statistika.csv')
+data = import_csv('statistika.csv')
 last_row = data[-1]
-
+boduvOSM = data[-1][3]
+chb = 2171-int(boduvOSM)
+b = data[-1][2]
 absolute_path = os.path.dirname(__file__)
 relative_path = "BZ.wiki\Home.md"
 full_path = os.path.join(absolute_path, relative_path)
-with open(full_path, 'r+', encoding="utf-8") as home:
-    for line in home:
-        # print(line)
-        if 'body" : ' in line:
-            a = line.find('body" : ') + 8
-            print(a)
-            print(line[-5:])
-            print(line[a:])
+
+
+for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
+    if 'body" : ' in line:
+        a = line.find('body" : ') + 8
+        x = line.replace(line[a:], str(chb))
+        print('{}'.format(x + '\n'), end='')
+    elif 'v OSM" : ' in line:
+        a = line.find('v OSM" : ') + 9
+        x = line.replace(line[a:], str(b))
+        print('{}'.format(x + '\n'), end='')
+    else:
+        print('{}'.format(line), end='')
+
+
+
 
 
 
