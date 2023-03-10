@@ -37,6 +37,4 @@ for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
     else:
         print('{}'.format(line), end='')
 
-
-
 print("ahoj wikipg")
