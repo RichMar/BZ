@@ -1,6 +1,7 @@
 import csv
 import os
 import fileinput
+from pathlib import Path
 
 def import_csv(csvfilemame):
     data = []
@@ -20,21 +21,31 @@ last_row = data[-1]
 boduvOSM = data[-1][3]
 chb = 2171-int(boduvOSM)
 b = data[-1][2]
-absolute_path = os.path.dirname(__file__)
-relative_path = "BZ.wiki\Home.md"
-full_path = os.path.join(absolute_path, relative_path)
+# absolute_path = os.path.dirname(__file__)
+# relative_path = "BZ.wiki\Home.md"
+# full_path = os.path.join(absolute_path, relative_path)
+# print(absolute_path)
+# print(full_path)
 
-
-for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
-    if 'body" : ' in line:
-        a = line.find('body" : ') + 8
-        x = line.replace(line[a:], str(chb))
-        print('{}'.format(x + '\n'), end='')
-    elif 'v OSM" : ' in line:
-        a = line.find('v OSM" : ') + 9
-        x = line.replace(line[a:], str(b))
-        print('{}'.format(x + '\n'), end='')
-    else:
-        print('{}'.format(line), end='')
+print(Path.cwd())
+for root, dirs, files in os.walk(Path.cwd()):
+    for name in files:
+        if name.endswith((".md")):
+            full_path = os.path.join(root, name)
+            # print(root)
+            # print(dirs)
+            # print(files)
+            print(full_path)
+            for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
+                if 'body" : ' in line:
+                    a = line.find('body" : ') + 8
+                    x = line.replace(line[a:], str(chb))
+                    print('{}'.format(x + '\n'), end='')
+                elif 'v OSM" : ' in line:
+                    a = line.find('v OSM" : ') + 9
+                    x = line.replace(line[a:], str(b))
+                    print('{}'.format(x + '\n'), end='')
+                else:
+                    print('{}'.format(line), end='')
 
 print("ahoj wikipg")
