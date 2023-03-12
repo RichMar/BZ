@@ -384,7 +384,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer.writerow(['lat', 'lon'])
         writer.writerows(body_les_seznam_bezref)
 
-    import wikipg
+import wikipg
 
 # OSMchybejicibody.csv
 if os.path.exists('OSMchybejicibody.csv'):
