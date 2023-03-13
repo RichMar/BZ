@@ -24,12 +24,5 @@ V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou př�
 Pozor je třeba dávat u zadávání bodů v Osmadu, kde při zadávání *highway=emergency_access_point* je přednastavena poze hodnota *NAME*.
 
 **Visualizace**
-Pro názornost jsou body, které chybí v OSM znázorněni na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to 
-```diff
-- červenou 
-``` 
-barvou. Body, které již v OSM exitují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
-```diff
-+ this text is highlighted in green
-- this text is highlighted in red
-```
+Pro názornost jsou body, které chybí v OSM znázorněni na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM exitují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
+
