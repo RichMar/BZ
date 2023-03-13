@@ -24,5 +24,10 @@ V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou př�
 Pozor je třeba dávat u zadávání bodů v Osmadu, kde při zadávání *highway=emergency_access_point* je přednastavena poze hodnota *NAME*.
 
 **Visualizace**
+
 Pro názornost jsou body, které chybí v OSM znázorněni na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM exitují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
+
+**Statistika**
+
+Script vytváří soubor statistika.csv, kam se ukládájí hodnoty: datum, celkový počet bodů v OSM a přírůstek. Do tohoto souboru je hodnota zapsána jen pokud se počet bodů v OSM zvýšil.  Hodnoty jsou také zpracovány pomocí [koláčového diagramu](https://github.com/RichMar/BZ/wiki), kde je stav BZ znázorněn v procentech a ve [sloupcovém grafu](https://github.com/RichMar/BZ/wiki/Prirustky-bodu-zachrany-do-OSM) kde jsou znázorněny přírústky v jednotlivých dnech.
 
