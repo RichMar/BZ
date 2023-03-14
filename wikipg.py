@@ -27,11 +27,16 @@ data = import_csv('statistika.csv')
 r = data[1]
 if r == 1:
     last_row = data[0][-1]
+    datum = last_row[1]
+    datum_str = str(datum)
+    datum_cr = datum_str.replace('/','.')
     bodyvOSM = data[0][-1][3]
     chb = 2171 - int(bodyvOSM)
-    b = data[0][-1][2]
+    prir = data[0][-1][2]
+
 data1 = import_csv('OSMbodychybejiciref.csv')
 proble = len(data1[0]) -1
+
 # absolute_path = os.path.dirname(__file__)
 # relative_path = "BZ.wiki\Home.md"
 # full_path = os.path.join(absolute_path, relative_path)
@@ -43,6 +48,7 @@ for root, dirs, files in os.walk(Path.cwd()):
     for name in files:
         if name.endswith(("Home.md")):
             full_path = os.path.join(root, name)
+
             # print(root)
             # print(dirs)
             # print(files)
@@ -60,6 +66,22 @@ for root, dirs, files in os.walk(Path.cwd()):
                     a = line.find('otou" : ') + 8
                     x = line.replace(line[a:], str(proble))
                     print('{}'.format(x + '\n'), end='')
+                else:
+                    print('{}'.format(line), end='')
+
+        if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
+            full_path = os.path.join(root, name)
+            print(full_path)
+            with fileinput.input(full_path) as f:
+                for line in f:
+                    lineno = fileinput.lineno()
+            print(str(lineno))
+            for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
+                if '```' in line and not 'mermaid' in line:
+                    x = ''
+                    print('{}'.format(x), end='')
+                    y = '    section ' + datum_cr + '\n' + '    ' + str(prir) + '    : 0, ' + str(prir) + '\n\n' + '```'
+                    print('{}'.format(y + '\n'), end='')
                 else:
                     print('{}'.format(line), end='')
 
