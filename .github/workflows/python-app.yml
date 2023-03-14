@@ -16,7 +16,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: check main repo content
+      run: |
+          ls -al
+    - name: Checkout wiki code
+      uses: actions/checkout@v3
+      with:
+          repository: ${{github.repository}}.wiki    # specify the wiki repo name here.
+          path: markdown
+    - name: check wiki repo content
+      run: |
+          ls -al          
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -35,12 +47,14 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
-        git commit -m "crongenerated"
-        git push
+        git diff-index --quiet HEAD || git commit -m "Add changes" && git push
         
-      #env:
-        #ENV_SECRET: ${{ env.AHOJ }} 
-        #REPO_SECRET: ${{ secrets.KEYOSMBZ }}
+      # git commit -m "crongenerated"
+      # git push
+        
+      # env:
+        # ENV_SECRET: ${{ env.AHOJ }} 
+        # REPO_SECRET: ${{ secrets.KEYOSMBZ }}
 
     #- name: Lint with flake8
      # run: |
