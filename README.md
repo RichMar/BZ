@@ -9,7 +9,7 @@ Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.o
 **Popis funkce**
 
 V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv. Skrip po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany a to:
-- [highway=emergency_access_point](highway=emergency_access_point)
+- [highway=emergency_access_point](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point)
 - [emergency=access_point](https://wiki.openstreetmap.org/wiki/Cs:Tag:emergency%3Daccess_point)
  
 Pro jeden bod se tedy odesílají dva dotazi. Jelikož délka jednoho dotazu je omezená jeden dotaz obsahuje maximálně 20 bodů. Dotaz je proveden tak, že server vrátí všechny body záchrany v okruhu 100 m od zadanné souřadnice. Seznam odeslaných dotazů se ukládá do souboru [comm_wr.txt](comm_wr.txt).
