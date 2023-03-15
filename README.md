@@ -8,14 +8,14 @@ Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.o
 
 **Popis funkce**
 
-V seznamu je obsaženo 2171 bodů ve formátu csv. Skrip po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany a to:
+V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv. Skrip po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany a to:
 - [highway=emergency_access_point](highway=emergency_access_point)
 - [emergency=access_point](https://wiki.openstreetmap.org/wiki/Cs:Tag:emergency%3Daccess_point)
  
-Pro jeden bod se tedy odesílají dva dotazi. Jelikož délka jednoho dotazu je omezená jeden dotaz obsahuje maximálně 20 bodů. Dotaz je proveden tak, že server vrátí všechny body záchrany v okruhu 100 m od zadanné souřadnice. Seznam odeslaných doztazů se ukládád do souboru [comm_wr.txt](comm_wr.txt).
+Pro jeden bod se tedy odesílají dva dotazi. Jelikož délka jednoho dotazu je omezená jeden dotaz obsahuje maximálně 20 bodů. Dotaz je proveden tak, že server vrátí všechny body záchrany v okruhu 100 m od zadanné souřadnice. Seznam odeslaných dotazů se ukládá do souboru [comm_wr.txt](comm_wr.txt).
 - Všechny nalezené body se ukládají do souboru [OSMBZ.csv](OSMBZ.csv).
-- Nalezené body, které mají problém s hodnotou *REF* (např hodnota chybí nebo nodpovídá seznamu LČR) jsou uloženy do souboru [OSMbodychybejiciref.csv](OSMbodychybejiciref.csv)
-- Body, které je potřeba do OSM doplnit se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnot převedeny na formát [gpx](OSMbodybezref.gpx) a [geojson ](OSMbodybezref.geojson).
+- Nalezené body, které mají problém s hodnotou *REF* (např hodnota chybí nebo neodpovídá seznamu LČR) jsou uloženy do souboru [OSMbodychybejiciref.csv](OSMbodychybejiciref.csv)
+- Body, které je potřeba do OSM doplnit se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnost převedeny na formát [gpx](OSMbodybezref.gpx) a [geojson ](OSMbodybezref.geojson).
 Script se spouští každých 24 hodin.
 
 **Zdávání bodů záchrany**
@@ -25,7 +25,7 @@ Pozor je třeba dávat u zadávání bodů v Osmadu, kde při zadávání *highw
 
 **Visualizace**
 
-Pro názornost jsou body, které chybí v OSM znázorněni na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM exitují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
+Pro názornost jsou body, které chybí v OSM znázorněny na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM exitují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
 
 **Statistika**
 
