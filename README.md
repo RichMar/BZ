@@ -12,6 +12,9 @@ Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.o
   <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
 </h1>
 
+**Visualizace**
+
+Pro názornost jsou body, které chybí v OSM znázorněny na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
 
 **Popis funkce**
 
@@ -29,10 +32,6 @@ Script se spouští každých 24 hodin.
 
 V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou případech je potřeba vyplnit hodnotu *REF* viz příklad [zde](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point). Hodnota *REF* by se měla vyplňovat bez mezer a prázdných znaků.
 Pozor je třeba dávat u zadávání bodů v Osmadu, kde při zadávání *highway=emergency_access_point* je přednastavena pouze hodnota *NAME*.
-
-**Visualizace**
-
-Pro názornost jsou body, které chybí v OSM znázorněny na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
 
 **Statistika**
 
