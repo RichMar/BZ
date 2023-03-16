@@ -15,9 +15,8 @@ V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv. Skript po nač
 Pro jeden bod se tedy odesílají dva dotazy. Jelikož délka jednoho dotazu je omezená jeden dotaz obsahuje maximálně 20 bodů. Dotaz je proveden tak, že server vrátí všechny body záchrany v okruhu 100 m od zadané souřadnice. Seznam odeslaných dotazů se ukládá do souboru [comm_wr.txt](comm_wr.txt).
 - Všechny nalezené body se ukládají do souboru [OSMBZ.csv](OSMBZ.csv).
 - Nalezené body, které mají problém s hodnotou *REF* (např hodnota chybí nebo neodpovídá seznamu LČR) jsou uloženy do souboru [OSMbodychybejiciref.csv](OSMbodychybejiciref.csv)
-- Body, které je potřeba do OSM doplnit se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnost převedeny na formát [gpx](OSMbodybezref.gpx) a [geojson ](OSMbodybezref.geojson).
+- Body, které je potřeba do OSM doplnit se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnost převedeny na formát [gpx](OSMbodybezref.gpx) ([stáhnout gpx](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx)) a [geojson ](OSMbodybezref.geojson).
 Script se spouští každých 24 hodin.
-[kuk](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx)
 
 **Zdávání bodů záchrany**
 
