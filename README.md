@@ -5,8 +5,6 @@
 Tento skript jsem vytvořil jako pomůcku při zadávání bodů záchrany na území ČR do [Openstreetmap](https://www.openstreetmap.org/#map=8/49.368/15.087).
 Před lety jsem původně od Lesů ČR (jako zřizovatele bodů) obdržel kompletní seznam bodů záchrany po celé ČR.
 Jelikož licence, kterou mi k tomu poskytli nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
-Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) s jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955), za inspiraci a cenné rady.
-
 
 <h1 align="center">
   <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
@@ -37,3 +35,6 @@ Pozor je třeba dávat u zadávání bodů v Osmadu, kde při zadávání *highw
 
 Skript vytváří soubor statistika.csv, kam se ukládají hodnoty: datum, celkový počet bodů v OSM a přírůstek. Do tohoto souboru je hodnota zapsána jen pokud se počet bodů v OSM zvýšil.  Hodnoty jsou také zpracovány pomocí [koláčového diagramu](https://github.com/RichMar/BZ/wiki), kde je stav BZ znázorněn v procentech a ve [sloupcovém grafu](https://github.com/RichMar/BZ/wiki/Prirustky-bodu-zachrany-do-OSM) kde jsou znázorněny přírůstky v jednotlivých dnech.
 
+**Poděkování**
+
+Chci poděkovat uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) s jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955), za inspiraci a cenné rady.
