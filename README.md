@@ -14,7 +14,7 @@ Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.o
 
 **Visualizace**
 
-Pro názornost jsou body, které chybí v OSM znázorněny na mapě [uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746) a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
+Pro názornost jsou body, které chybí v OSM znázorněny na mapě **[uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746)** a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
 
 **Popis funkce**
 
