@@ -6,6 +6,8 @@ Před lety jsem původně od Lesů ČR (jako zřizovatele bodů) obdržel komple
 Jelikož licence, kterou mi k tomu poskytli nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) s jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955), za inspiraci a cenné rady.
 
+[![uMap](link to image on GH)](link to your URL)
+
 **Popis funkce**
 
 V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv. Skript po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany a to:
