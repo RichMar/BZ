@@ -51,6 +51,14 @@ jobs:
         git config user.email github-actions@github.com
         git commit -a -m "Add changes"
         git status
+        
+    - name: Upload Documentation to Wiki
+      uses: SwiftDocOrg/github-wiki-publish-action@v1
+      with:
+          path: "markdown"
+      env:
+            GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+            
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
