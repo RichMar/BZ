@@ -78,15 +78,16 @@ jobs:
         git add -A
         git commit -a -m "Added my project markdown"
         git push origin master
-        cd ..
-        ls -al
-        git status
-        git show-ref
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add -A
-        git commit -a -m "Added my project bz"
-        git push origin master
+        
+    #    cd ..
+    #    ls -al
+    #    git status
+    #    git show-ref
+    #    git config user.name github-actions
+    #    git config user.email github-actions@github.com
+    #    git add -A
+    #    git commit -a -m "Added my project bz"
+    #    git push origin master
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
