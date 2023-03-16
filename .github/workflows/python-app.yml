@@ -53,11 +53,10 @@ jobs:
         git status
         
     - name: Upload Documentation to Wiki
-      uses: SwiftDocOrg/github-wiki-publish-action@v1
+      uses: OrlovM/Wiki-Action@v1
       with:
           path: "markdown"
-      env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
                  
     - name: Push changes
       uses: ad-m/github-push-action@master
