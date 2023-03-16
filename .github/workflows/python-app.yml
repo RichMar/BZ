@@ -79,8 +79,9 @@ jobs:
         cd ..
         ls -al
         git status
+        git add -A
         git commit -m "Added my project bz"
-        git push -u origin main
+        git push origin main
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
