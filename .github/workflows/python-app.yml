@@ -51,6 +51,7 @@ jobs:
         git fetch origin master:tmp
         git rebase tmp
         git diff-index --quiet HEAD || git commit -m "Add changes" && git push origin HEAD:master
+        git branch -D tmp
    
       #   cd markdown 
       #   git config user.name github-actions
