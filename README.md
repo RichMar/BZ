@@ -17,7 +17,7 @@ Pro jeden bod se tedy odesílají dva dotazy. Jelikož délka jednoho dotazu je 
 - Nalezené body, které mají problém s hodnotou *REF* (např hodnota chybí nebo neodpovídá seznamu LČR) jsou uloženy do souboru [OSMbodychybejiciref.csv](OSMbodychybejiciref.csv)
 - Body, které je potřeba do OSM doplnit se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnost převedeny na formát [gpx](OSMbodybezref.gpx) a [geojson ](OSMbodybezref.geojson).
 Script se spouští každých 24 hodin.
-[kuk](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/RichMar/BZ/blob/03327f8b9d3f404d34315b748bbfbeb519b9a87d/OSMbodybezref.gpx)
+[kuk](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx)
 
 **Zdávání bodů záchrany**
 
