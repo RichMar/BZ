@@ -67,12 +67,18 @@ jobs:
         
     - name: Check git
       run: |
-        ls -al
-        git status
         cd markdown
         ls -al
         git status
-
+        git add -A
+        git commit -m "Added my project markdown"
+        git push -u origin main
+        cd ..
+        ls -al
+        git status
+        git commit -m "Added my project bz"
+        git push -u origin main
+        
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #   cd markdown 
