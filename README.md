@@ -6,23 +6,11 @@ Před lety jsem původně od Lesů ČR (jako zřizovatele bodů) obdržel komple
 Jelikož licence, kterou mi k tomu poskytli nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) s jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955), za inspiraci a cenné rady.
 
-[![uMap](obr/uMappr.jpg)](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158)
-<div style="text-align:center"><source media="(max-width: 65px)"><img src="obr/uMappr.jpg" /></div>
-[<img alt="alt_text" width="140px" src="obr/uMappr.jpg">](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
-<p align="center">
-[![koko](<img alt="alt_text" width="200px" src="obr/uMappr.jpg" />)(https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
-
-
-[<img align="center" width="200" src="obr/uMappr.jpg">](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
 
 <h1 align="center">
-  Hits</br>
-  <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="200px"></a>
-  <a href="https://status.hits.sh"><img alt="Uptime Robot ratio (30 days)" src="https://img.shields.io/uptimerobot/ratio/m788691469-6cb5e6a1ce844e9f64a4b046"></a>
+  <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
 </h1>
-<h3 align="center">
-  <a href="https://hits.sh"><img src=".images/hits-readme.png"/></a>
-</h3>
+
 
 **Popis funkce**
 
