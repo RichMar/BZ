@@ -52,6 +52,9 @@ jobs:
         cd markdown
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Act
+        git pull
+        git fetch
+        git merge
         git add .
         git diff-index --quiet HEAD || git commit -m "Add changes" && git push
         
