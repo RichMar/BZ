@@ -64,7 +64,7 @@ jobs:
         branch: ${{ github.ref }}
 
      #    env:
-     #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.RichMa }}
+     #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #   cd markdown 
         #   git config user.name github-actions
         #   git config user.email github-actions@github.com
