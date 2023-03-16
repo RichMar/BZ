@@ -49,14 +49,12 @@ jobs:
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git commit -a -m "Add changes"
+        git add.
+        git status
+        git diff-index --cached HEAD || git commit -m "Add changes" && git push
         git status
         
-    - name: Upload Documentation to Wiki
-      uses: OrlovM/Wiki-Action@v1
-      with:
-          path: "markdown"
-          token: ${{ secrets.GITHUB_TOKEN }}
+
                  
     - name: Push changes
       uses: ad-m/github-push-action@master
