@@ -47,9 +47,10 @@ jobs:
         cd markdown 
         git config user.name github-actions
         git config user.email github-actions@github.com
+        git status -s
         git add .
         git fetch origin master:tmp
-        git rebase tmp
+        git rebase tmp --autostash
         git diff-index --quiet HEAD || git commit -m "Add changes" && git push origin HEAD:master
         git branch -D tmp
    
