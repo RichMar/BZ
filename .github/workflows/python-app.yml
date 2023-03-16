@@ -49,7 +49,7 @@ jobs:
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git add.
+        git add .
         git status
         git diff-index --cached HEAD || git commit -m "Add changes" && git push
         git status
