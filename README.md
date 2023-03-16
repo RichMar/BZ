@@ -6,7 +6,14 @@ Před lety jsem původně od Lesů ČR (jako zřizovatele bodů) obdržel komple
 Jelikož licence, kterou mi k tomu poskytli nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 Tímto bych chtěl poděkovat uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) s jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955), za inspiraci a cenné rady.
 
-[![uMap](link to image on GH)](link to your URL)
+[![uMap](obr/uMappr.jpg)](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158)
+<div style="text-align:center"><source media="(max-width: 65px)"><img src="obr/uMappr.jpg" /></div>
+[<img alt="alt_text" width="140px" src="obr/uMappr.jpg">](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
+<p align="center">
+[![koko](<img alt="alt_text" width="200px" src="obr/uMappr.jpg" />)(https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
+</p>
+
+[<img width="200" src="obr/uMappr.jpg">](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/)
 
 **Popis funkce**
 
