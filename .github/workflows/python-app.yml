@@ -45,10 +45,10 @@ jobs:
         python3 -m pip install pandas-geojson
         
     - name: Run python
-      Run: |
+      run: |
          python cws_read.py
     - name: Commit files
-      Run: |
+      run: |
         cd markdown
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Act
