@@ -56,6 +56,8 @@ jobs:
       uses: SwiftDocOrg/github-wiki-publish-action@v1
       with:
           path: "markdown"
+      env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                  
     - name: Push changes
       uses: ad-m/github-push-action@master
