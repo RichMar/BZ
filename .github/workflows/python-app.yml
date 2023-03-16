@@ -81,9 +81,10 @@ jobs:
         cd ..
         ls -al
         git status
+        git show-ref
         git add -A
         git commit -m "Added my project bz"
-        git push origin main
+        git push origin master
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
