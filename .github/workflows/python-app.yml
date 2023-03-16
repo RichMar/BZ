@@ -43,13 +43,20 @@ jobs:
         python3 -m pip install cryptography
         python3 -m pip install -U gpx-converter
         python3 -m pip install pandas-geojson
-        python cws_read.py
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git fetch --all
-        git pull
+        
+    - name: Run python
+      Run: |
+         python cws_read.py
+    - name: Commit files
+      Run: |
+        cd markdown
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Act
         git add .
         git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+        
+      #   git config user.name github-actions
+      #   git config user.email github-actions@github.com
         
       # git commit -m "crongenerated"
       # git push
