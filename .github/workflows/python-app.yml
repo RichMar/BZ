@@ -44,7 +44,7 @@ jobs:
         python3 -m pip install -U gpx-converter
         python3 -m pip install pandas-geojson
         
-    - name: Run python
+    - name: Run skript
       run: |
          python cws_read.py
     - name: Commit files
