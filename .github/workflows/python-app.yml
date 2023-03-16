@@ -43,13 +43,11 @@ jobs:
         python3 -m pip install cryptography
         python3 -m pip install -U gpx-converter
         python3 -m pip install pandas-geojson
+        python cws_read.py
         
-    - name: Run skript
-      run: |
-         python cws_read.py
     - name: Commit files
       run: |
-        
+        cd markdown 
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Act
         git add .
