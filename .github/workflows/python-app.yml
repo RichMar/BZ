@@ -56,15 +56,15 @@ jobs:
       uses: SwiftDocOrg/github-wiki-publish-action@v1
       with:
           path: "markdown"
-      env:
-            GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-            
+                 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
+     #    env:
+     #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
         #   cd markdown 
         #   git config user.name github-actions
         #   git config user.email github-actions@github.com
