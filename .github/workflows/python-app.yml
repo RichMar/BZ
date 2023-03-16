@@ -70,9 +70,10 @@ jobs:
         cd markdown
         ls -al
         git status
+        git show-ref
         git add -A
         git commit -m "Added my project markdown"
-        git push -u origin main
+        git push origin HEAD:main
         cd ..
         ls -al
         git status
