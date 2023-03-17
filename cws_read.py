@@ -288,7 +288,7 @@ for y in body_overpass_seznam:
             if vzdalenost > 100:
                 f.write(ref + " " + str(vzdalenost) + "\n")
                 print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
-
+                body_les_seznam_bezref.append(y)
         else:
             body_les_seznam_bezref.append(y)
             # body_overpass_seznam.remove(index_les[0][0])
@@ -321,7 +321,6 @@ if not os.path.exists('statistika.csv'):
         wr.writerow(['datum', 'narust', 'celkem'])
 
 if (puvodniseznambodu - 1) < novyseznambodu:
-
     today = date.today()
     # dd/mm/YY
     d1 = today.strftime("%d/%m/%Y")
@@ -336,7 +335,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
         writer = csv.writer(f, delimiter=',')
-        writer.writerow(['lat', 'lon', 'ref'])
+        writer.writerow(['lat', 'lon'])
         # chybejicibody_noref= []
         chybejicibody_noref = [x[0:2] for x in chybejicibody]
         writer.writerows(chybejicibody_noref)
@@ -377,11 +376,11 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer.writerows(chybejicibody)
     encrypt_file('OSMchybejicibody.csv', key)
 
-    # vytvori seznam bodu v OSM ale s chybejici hodnotou REF
+    # vytvori seznam bodu v OSM ale s chybejici nebo chybnou hodnotou REF
     # body_les_seznam_bezref
     with open('OSMbodychybejiciref.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['lat', 'lon'])
+        writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_les_seznam_bezref)
 
 import wikipg
