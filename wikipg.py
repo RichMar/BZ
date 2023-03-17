@@ -54,16 +54,16 @@ for root, dirs, files in os.walk(Path.cwd()):
             # print(files)
             print(full_path)
             for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
-                if 'body" : ' in line and r == 1:
-                    a = line.find('body" : ') + 8
+                if 'Chy' in line and r == 1:
+                    a = line.find(':') + 2
                     x = line.replace(line[a:], str(chb))
                     print('{}'.format(x + '\n'), end='')
-                elif 'v OSM" : ' in line and r == 1:
-                    a = line.find('v OSM" : ') + 9
+                elif 'OSM' in line and r == 1:
+                    a = line.find(':') + 2
                     x = line.replace(line[a:], str(bodyvOSM))
                     print('{}'.format(x + '\n'), end='')
-                elif 'otou" : ' in line:
-                    a = line.find('otou" : ') + 8
+                elif 'REF' in line:
+                    a = line.find(':') + 2
                     x = line.replace(line[a:], str(proble))
                     print('{}'.format(x + '\n'), end='')
                 else:
