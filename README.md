@@ -32,7 +32,7 @@ Script se spouští každých 24 hodin.
 V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou případech je potřeba vyplnit hodnotu *REF* viz příklad [zde](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point). Hodnota *REF* by se měla vyplňovat bez mezer a prázdných znaků.
 Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde při zadávání *highway=emergency_access_point* je přednastavena pouze hodnota *NAME*.
 
-V ideálním případě by bylo dobré pořídit fotografii bodu a nahrá do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznam. Ale uvidíme, třeba jsem zbytečně paranoidní.
+V ideálním případě by bylo dobré pořídit fotografii bodu a nahrá do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu. Ale uvidíme, třeba jsem zbytečně paranoidní.
 
 **Statistika**
 
