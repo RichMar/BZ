@@ -5,15 +5,15 @@
 
 Tento skript jsem vytvořil jako pomůcku při zadávání bodů záchrany na území ČR do [Openstreetmap](https://www.openstreetmap.org/#map=8/49.368/15.087).
 Před lety jsem původně od Lesů ČR (jako zřizovatele bodů) obdržel kompletní seznam bodů záchrany po celé ČR.
-Jelikož licence, kterou mi k tomu poskytli nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
+Jelikož licence, kterou mi k tomu poskytli, nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 
 <h1 align="center">
   <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
 </h1>
 
-**Visualizace**
+**Vizualizace**
 
-Pro názornost jsou body, které chybí v OSM znázorněny na mapě **[uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746)** a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
+Pro názornost jsou body, které chybí v OSM, znázorněny pomocí služby **[uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746)** a to červenou barvou. Body, které již v OSM existují jsou vykresleny světle modrou. Problémové body jsou tmavě modrou barvou.
 
 **Popis funkce**
 
