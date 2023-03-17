@@ -17,7 +17,7 @@ Pro názornost jsou body, které chybí v OSM, zobrazeny pomocí služby **[uMAP
 
 **Popis funkce**
 
-V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv. Skript po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany, a to:
+V seznamu LČR je obsaženo 2171 bodů záchrany ve formátu csv (stav je z roku 2020). Skript po načtení seznamu začne generovat dotazy, které odesílá na službu [Overpass turbo](https://overpass-turbo.eu). V OSM existují dva způsoby značení bodů záchrany, a to:
 - [highway=emergency_access_point](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point)
 - [emergency=access_point](https://wiki.openstreetmap.org/wiki/Cs:Tag:emergency%3Daccess_point)
  
