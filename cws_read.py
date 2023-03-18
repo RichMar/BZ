@@ -12,6 +12,7 @@ import pandas as pd
 from pandas_geojson import to_geojson
 from pandas_geojson import write_geojson
 from math import radians, cos, sin, asin, sqrt
+import shutil
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
@@ -364,6 +365,10 @@ if (puvodniseznambodu - 1) < novyseznambodu:
     fp.close()
 
     # zapise body zachrany, keré jsou v OSM
+    if os.path.exists('OSMBZ.csv'):
+        src = 'OSMBZ.csv'
+        dst = './archiv/OSMBZ' + str(today) + '.csv'
+        shutil.copy(src, dst)
     with open('OSMBZ.csv', 'w', newline='') as f:
         writer = csv.writer(f, delimiter=',')
         writer.writerow(['lat', 'lon', 'ref'])
@@ -383,7 +388,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_les_seznam_bezref)
 
-import wikipg
+    import wikipg
 
 # OSMchybejicibody.csv
 if os.path.exists('OSMchybejicibody.csv'):
