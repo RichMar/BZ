@@ -58,7 +58,7 @@ for root, dirs, files in os.walk(Path.cwd()):
                     a = line.find(':') + 2
                     x = line.replace(line[a:], str(chb))
                     print('{}'.format(x + '\n'), end='')
-                elif 'OSM' in line and r == 1:
+                elif 'OSM' in line and 'pie' not in line and r == 1:
                     a = line.find(':') + 2
                     x = line.replace(line[a:], str(bodyvOSM))
                     print('{}'.format(x + '\n'), end='')
