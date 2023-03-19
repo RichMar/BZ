@@ -59,10 +59,12 @@ jobs:
             git show-ref
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git add -A
+            git rm --cached markdown
             git commit -a -m "Added my project bz1"
             git add archiv/
             git commit -a -m "Added my project bz2"
+            git add .
+            git commit -a -m "Added my project bz3"
             git push origin main
             
             cd markdown
