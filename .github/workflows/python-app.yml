@@ -3,11 +3,11 @@
 
 name: Python application
 
-on:
-  schedule:
+#on:
+#  schedule:
     # * is a special character in YAML so you have to quote this string
-     - cron:  '30 2 * * *'
-# on: push
+#     - cron:  '30 2 * * *'
+on: push
 
 
 jobs:
@@ -46,13 +46,13 @@ jobs:
         python cws_read.py
 
                  
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+   # - name: Push changes
+   #   uses: ad-m/github-push-action@master
+   #   with:
+   #     github_token: ${{ secrets.GITHUB_TOKEN }}
+   #     branch: ${{ github.ref }}
         
-    - name: Check git
+    - name: Push changes
       run: |
         cd markdown
         ls -al
@@ -66,15 +66,15 @@ jobs:
         git commit -a -m "Added my project markdown"
         git push origin master
         
-    #    cd ..
-    #    ls -al
-    #    git status
-    #    git show-ref
-    #    git config user.name github-actions
-    #    git config user.email github-actions@github.com
-    #    git add -A
-    #    git commit -a -m "Added my project bz"
-    #    git push origin master
+        cd ..
+        ls -al
+        git status
+        git show-ref
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add -A
+        git commit -a -m "Added my project bz"
+        git push origin master
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
