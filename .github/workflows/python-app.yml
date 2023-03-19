@@ -59,8 +59,8 @@ jobs:
             git show-ref
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git rm --cached markdown
-            git commit -a -m "Added my project bz1"
+
+            git commit -m "Added my project bz1"
             git add archiv/
             git commit -a -m "Added my project bz2"
             git add .
@@ -100,7 +100,7 @@ jobs:
   # git commit -m "Add folder"
   # git push
   
-
+# git rm --cached markdown
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
