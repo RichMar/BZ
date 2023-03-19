@@ -54,7 +54,7 @@ jobs:
         
     - name: Push changes
       run: |
-            git rm --cached markdown
+            git rm --cached markdown/
             git commit -m "remove cached repo"
             git add archiv/
             git add markdown/
