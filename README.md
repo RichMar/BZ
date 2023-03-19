@@ -7,9 +7,9 @@ Tento [projekt](https://github.com/RichMar/BZ) jsem vytvořil jako pomůcku při
 Před lety jsem původně od Lesů ČR (jako zřizovatele bodů, v dnešní době spravuje body záchrany [HZS ČR](https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx)) obdržel kompletní seznam bodů záchrany po celé ČR.
 Jelikož licence, kterou mi k tomu poskytli, nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 
-<h1 align="center">
-  <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
-</h1>
+<p align="center">
+  <a href="https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.491/15.158/" title="include.title"><img alt="Uptime Robot status" src="obr/uMappr.jpg" width="500px"></a>
+</p>
 
 **Vizualizace**
 
@@ -35,6 +35,10 @@ Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde p
 V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu. Ale uvidíme, třeba jsem zbytečně paranoidní.
 
 V případě, že v reálu se na zadané souřadnici nenachází bod záchrany, polšte jejich souřadnice [mě](https://www.openstreetmap.org/user/Spratek). Předpokládám, že by takových bodů nemělo být moc.
+
+<p align="center">
+<a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="/obr/VZOR.png" alt="Logo" title="Značení bodu záchrany" width="50%" height="50%">
+</p>
 
 **Statistika**
 
