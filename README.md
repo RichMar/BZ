@@ -34,6 +34,8 @@ Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde p
 
 V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu. Ale uvidíme, třeba jsem zbytečně paranoidní.
 
+V případě, že v reálu se na zadané souřadnici nenachází bod záchrany, polšte https://www.openstreetmap.org/user/Spratek jjít
+
 **Statistika**
 
 Skript vytváří soubor statistika.csv, kam se ukládají tyto hodnoty: datum, celkový počet bodů v OSM a přírůstek. Do tohoto souboru je hodnota zapsána jen pokud se počet bodů v OSM zvýšil.  Tyto hodnoty jsou také zpracovány pomocí [koláčového diagramu](https://github.com/RichMar/BZ/wiki), kde je stav BZ znázorněn v procentech a ve [sloupcovém grafu](https://github.com/RichMar/BZ/wiki/Prirustky-bodu-zachrany-do-OSM) kde jsou znázorněny přírůstky v jednotlivých dnech.
