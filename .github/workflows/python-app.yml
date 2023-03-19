@@ -54,30 +54,38 @@ jobs:
         
     - name: Push changes
       run: |
-        cd markdown
-        ls -al
-        git status
-        git show-ref
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git fetch origin master
-        git pull origin master
-        git add -A
-        git commit -a -m "Added my project markdown"
-        git push origin master
+        #cd markdown
+        #ls -al
+        #git status
+        #git show-ref
+        #git config user.name github-actions
+        #git config user.email github-actions@github.com
+        #git fetch origin master
+        #git pull origin master
+        #git add -A
+        #git commit -a -m "Added my project markdown"
+        #git push origin master
         
-        cd ..
-        ls -al
-        git status
-        git show-ref
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        # cd ..
+        # ls -al
+        # git status
+        # git show-ref
+        # git config user.name github-actions
+        # git config user.email github-actions@github.com
         # git checkout -b master
-        git add -A
-        git commit -a -m "Added my project bz1"
+        # git add -A
+        # git commit -a -m "Added my project bz1"
+        # git add archiv/
+        # git commit -a -m "Added my project bz2"
+        # git push origin main
+        
+        git rm --cached markdown
+        git commit -m "remove cached repo"
         git add archiv/
-        git commit -a -m "Added my project bz2"
-        git push origin main
+        git add markdown/
+        git add -A
+        git commit -m "Add folder"
+        git push
         
      #    env:
      #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
