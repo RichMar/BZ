@@ -37,7 +37,7 @@ V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji d
 V případě, že v reálu se na zadané souřadnici nenachází bod záchrany, polšte jejich souřadnice [mě](https://www.openstreetmap.org/user/Spratek). Předpokládám, že by takových bodů nemělo být moc.
 
 <p align="center">
-<a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="/obr/VZOR.png" alt="Logo" title="Značení bodu záchrany" width="50%" height="50%">
+<a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="/obr/VZOR_s.jpg" alt="Logo" title="Značení bodu záchrany" width="50%" height="50%">
 </p>
 
 **Statistika**
