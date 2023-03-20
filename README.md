@@ -32,13 +32,20 @@ Script se spouští každých 24 hodin.
 Pro práci offline lze [stáhnout gpx soubor](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx) s body, které je třeba do OSM doplnit. V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou případech je potřeba vyplnit hodnotu *REF* viz příklad [zde](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point). Hodnota *REF* by se měla vyplňovat bez mezer a prázdných znaků. Naopak nuly je třeba zapsat všechny.
 Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde při zadávání *highway=emergency_access_point* je přednastavena pouze hodnota *NAME*.
 
-V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu. Ale uvidíme, třeba jsem zbytečně paranoidní.
+V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu.
 
-V případě, že v reálu se na zadané souřadnici nenachází bod záchrany, polšte jejich souřadnice [mě](https://www.openstreetmap.org/user/Spratek). Předpokládám, že by takových bodů nemělo být moc.
+V případě, že v se reálu na zadané souřadnici bod záchrany nenachází, pošlete jeho souřadnice [mě](https://www.openstreetmap.org/user/Spratek) (případně do sekce [issues](https://github.com/RichMar/BZ/issues)). Předpokládám, že by takových bodů nemělo být moc.
 
 <p align="center">
-<a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="/obr/VZOR.png" alt="Logo" title="Značení bodu záchrany" width="50%" height="50%">
+<a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="obr/VZOR_s.jpg" alt="Logo" title="Značení bodu záchrany" width="500px"></a>
 </p>
+<p align="center">
+    <em>Značení bodú záchrany v terénu</em>
+</p>
+
+Na sereveru openstreetmap.org se standartně body záchrany nevykreslují - [ukázka](https://www.openstreetmap.org/node/10741601102).
+
+Server openstreetmap.cz bod záchrany vekresluje v případě, že je nahraná jeho fotografie ve Fody - [ukázka](https://openstreetmap.cz/#map=19/49.70533/16.58033&layers=dG).
 
 **Statistika**
 
