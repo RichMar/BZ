@@ -34,7 +34,7 @@ Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde p
 
 V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu.
 
-V případě, že v se reálu na zadané souřadnici bod záchrany nenachází, pošlete jeho souřadnice [mě](https://www.openstreetmap.org/user/Spratek) případně do sekce [issues](https://github.com/RichMar/BZ/issues). Předpokládám, že by takových bodů nemělo být moc.
+V případě, že v se reálu na zadané souřadnici bod záchrany nenachází, pošlete jeho souřadnice [mě](https://www.openstreetmap.org/user/Spratek) (případně do sekce [issues](https://github.com/RichMar/BZ/issues)). Předpokládám, že by takových bodů nemělo být moc.
 
 <p align="center">
 <a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="obr/VZOR_s.jpg" alt="Logo" title="Značení bodu záchrany" width="500px"></a>
