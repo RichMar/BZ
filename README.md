@@ -29,7 +29,7 @@ Script se spouští každých 24 hodin.
 
 **Zdávání bodů záchrany**
 
-Pro práci offline lze [stáhnout gpx soubor](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx) s body, které je třeba do OSM doplnit. V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou případech je potřeba vyplnit hodnotu *REF* viz příklad [zde](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point). Hodnota *REF* by se měla vyplňovat bez mezer a prázdných znaků. Naopak nuly je třeba zapsat všechny.
+Pro práci offline lze [stáhnout gpx soubor](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx) s body, které je třeba do OSM doplnit. V OSM existují dva způsoby zadávání bodů záchrany viz výše. V obou případech je potřeba vyplnit hodnotu *REF* viz příklad [zde](https://wiki.openstreetmap.org/wiki/Cs:Tag:highway%3Demergency_access_point). Hodnota *REF* se vždy skládá ze dvou písmen a tří číslic a měla by se vyplňovat bez mezer a prázdných znaků. Naopak nuly je třeba zapsat všechny.
 Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde při zadávání *highway=emergency_access_point* je přednastavena pouze hodnota *NAME*.
 
 V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu.
