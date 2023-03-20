@@ -47,6 +47,8 @@ Na sereveru openstreetmap.org se standartně body záchrany nevykreslují - [uk�
 
 Server openstreetmap.cz bod záchrany vekresluje v případě, že je nahraná jeho fotografie ve Fody - [ukázka](https://openstreetmap.cz/#map=19/49.70533/16.58033&layers=dG).
 
+Aplikace Osmand body záchrany vykresluje standardně - [ukázka](obr/osmand-bz.jpg)
+
 **Statistika**
 
 Skript vytváří soubor statistika.csv, kam se ukládají tyto hodnoty: datum, celkový počet bodů v OSM a přírůstek. Do tohoto souboru je hodnota zapsána jen pokud se počet bodů v OSM zvýšil.  Tyto hodnoty jsou také zpracovány pomocí [koláčového diagramu](https://github.com/RichMar/BZ/wiki), kde je stav BZ znázorněn v procentech a ve [sloupcovém grafu](https://github.com/RichMar/BZ/wiki/Prirustky-bodu-zachrany-do-OSM) kde jsou znázorněny přírůstky v jednotlivých dnech.
