@@ -34,11 +34,18 @@ Pozor je třeba dávat u zadávání bodů v [Osmandu](https://osmand.cz), kde p
 
 V ideálním případě by bylo vhodné pořídit fotografii bodu a nahrát ji do **[Fody](https://openstreetmap.cz/fody)**, protože LČR nemá v těch bodech úplný pořádek, takže by se mohlo stát, že číslo bodu v reálu bude jiné než to na seznamu. Ale uvidíme, třeba jsem zbytečně paranoidní.
 
-V případě, že v reálu se na zadané souřadnici nenachází bod záchrany, polšte jejich souřadnice [mě](https://www.openstreetmap.org/user/Spratek). Předpokládám, že by takových bodů nemělo být moc.
+V případě, že v se reálu na zadané souřadnici bod záchrany nenachází, pošlete jeho souřadnice [mě](https://www.openstreetmap.org/user/Spratek). Předpokládám, že by takových bodů nemělo být moc.
 
 <p align="center">
 <a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="/obr/VZOR_s.jpg" alt="Logo" title="Značení bodu záchrany" width="50%" height="50%">
 </p>
+ <p align="center">
+    <em>Značení bodú záchrany v terénu</em>
+</p>
+
+Na sereveru openstreetmap.org se standartně body záchrany nevykreslují - [ukázka](https://www.openstreetmap.org/node/10741601102).
+
+Server openstreetmap.cz bod záchrany vekresluje v případě, že je nahraná jeho fotografie ve Fody - [ukázka](https://openstreetmap.cz/#map=19/49.70533/16.58033&layers=dG).
 
 **Statistika**
 
