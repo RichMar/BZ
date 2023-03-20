@@ -39,6 +39,7 @@ V případě, že v se reálu na zadané souřadnici bod záchrany nenachází, 
 <p align="center">
 <a href="https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx"><img src="obr/VZOR_s.jpg" alt="Logo" title="Značení bodu záchrany" width="500px"></a>
 </p>
+
 <p align="center">
     <em>Značení bodú záchrany v terénu</em>
 </p>
