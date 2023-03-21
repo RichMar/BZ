@@ -9632,28 +9632,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.13201467,
-                    50.23883486
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    12.12736917,
-                    50.268063
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.16044739,
                     50.26545147
                 ]
