@@ -60,9 +60,7 @@ jobs:
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add .
-            git commit -am "Added my project bz1"
-            git add archiv/
-            git commit -a -m "Added my project bz2"
+            git commit -a "Added my project bz1"
             git push origin main
             
             cd markdown
