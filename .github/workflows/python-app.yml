@@ -60,7 +60,7 @@ jobs:
             git config user.name github-actions
             git config user.email github-actions@github.com
             git add .
-            git commit -a "Added my project bz1"
+            git commit -m 'Added my project bz1'
             git push origin main
             
             cd markdown
@@ -72,7 +72,7 @@ jobs:
             git fetch origin master
             git pull origin master
             git add -A
-            git commit -a -m "Added my project markdown"
+            git commit -a -m 'Added my project markdown'
             git push origin master
         
 # cd ..
