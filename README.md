@@ -1,5 +1,5 @@
  <head>
- <link rel="icon" href="obr/favicon.ico">
+ <link rel="icon" href="/favicon.ico">
  </head>
  
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ&count_bg=%2379C83D&title_bg=%23555555&icon=riseup.svg&icon_color=%23E7E7E7&title=zobrazen%C3%AD+%28dnes+%2F+celkem%29&edge_flat=false)](https://hits.seeyoufarm.com)
