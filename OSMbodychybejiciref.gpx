@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
+  <wpt lat="48.9252518" lon="15.9089026">
+  </wpt>
+  <wpt lat="49.9654732" lon="17.1274361">
+  </wpt>
+  <wpt lat="49.7464138" lon="17.3798823">
+  </wpt>
+  <wpt lat="50.502222" lon="15.2358859">
+  </wpt>
+  <wpt lat="50.645445" lon="15.1847161">
+  </wpt>
+  <wpt lat="48.616881" lon="14.0695215">
+  </wpt>
+  <wpt lat="49.1236718" lon="14.429825">
+  </wpt>
+  <wpt lat="49.4037402" lon="18.317899">
+  </wpt>
+  <wpt lat="49.2544397" lon="13.3919039">
+  </wpt>
+  <wpt lat="50.5289861" lon="14.022068">
+  </wpt>
+  <wpt lat="50.5740471" lon="13.2446791">
+  </wpt>
+  <wpt lat="50.6993964" lon="13.7171308">
+  </wpt>
+  <wpt lat="48.8837308" lon="17.0008805">
+  </wpt>
+</gpx>
