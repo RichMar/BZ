@@ -9,7 +9,7 @@
 # Body záchrany v OSM
 **Úvod**
 
-Tento [projekt](https://github.com/RichMar/BZ) jsem vytvořil jako pomůcku při zadávání bodů záchrany (BZ) na území ČR do [Openstreetmap](https://www.openstreetmap.org/#map=8/49.368/15.087) (OSM).
+Tento [projekt](https://github.com/RichMar/BZ) jsem vytvořil jako pomůcku při zadávání [bodů záchrany (BZ)](https://cs.wikipedia.org/wiki/Bod_z%C3%A1chrany) na území ČR do [Openstreetmap](https://www.openstreetmap.org/#map=8/49.368/15.087) (OSM).
 Před lety jsem původně od Lesů ČR (jako zřizovatele bodů, v dnešní době spravuje body záchrany [HZS ČR](https://www.hzscr.cz/clanek/body-zachrany-na-uzemi-cr.aspx)) obdržel kompletní seznam bodů záchrany po celé ČR.
 Jelikož licence, kterou mi k tomu poskytli, nesplňuje požadavky pro přímé zadání do OSM, rozhodl jsem se, že na to půjdu od lesa.
 
