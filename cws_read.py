@@ -78,6 +78,20 @@ def decrypt_file(efile, klic):
     return
 
 
+def gpxtrcktoway(efile):
+    dgpx_file = open(efile, 'r')
+    dgpx = gpxpy.parse(dgpx_file)
+    dgpxnew = gpxpy.gpx.GPX()
+    for track in dgpx.tracks:
+        for segment in track.segments:
+            for point in segment.points:
+                dgpxnew.waypoints.append(point)
+
+   # print('Created GPX:', gpxnew.to_xml())
+    dfp = open(efile, 'w')
+    dfp.write(dgpxnew.to_xml())
+    dfp.close()
+    return
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # NEMAZAT!!!
 # key generation
@@ -394,13 +408,10 @@ if (puvodniseznambodu - 1) < novyseznambodu:
     # https: // github.com / nidhaloff / gpx - converter
     Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon',
                                                                output_file='OSMbodychybejiciref.gpx')
+    gpxtrcktoway('OSMbodychybejiciref.gpx')
 
-    # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
-    gpx_file = open('OSMbodychybejiciref.gpx', 'r')
-    gpx = gpxpy.parse(gpx_file)
-    gpxnew = gpxpy.gpx.GPX()
 
-    #sousti wikipg.py
+    # sousti wikipg.py
     import wikipg
 
 # OSMchybejicibody.csv
