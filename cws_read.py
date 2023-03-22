@@ -134,13 +134,14 @@ else:
 # with open(vstup, encoding='cp852') as csv_file:
 # with open(vstup[4:], encoding='cp852') as csv_file:
 print('Vstupni soubor: ' + vstup)
+f = open("comm_wr.txt", "w")
 with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
     overpass_url = "http://overpass-api.de/api/interpreter"
     overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
     overpass_end = "\n ); \n out; \n out count; \n"
-    f = open("comm_wr.txt", "w")
+   # f = open("comm_wr.txt", "w")
     c = 1
     prvni = 0
     rad = 1
@@ -287,7 +288,9 @@ for y in body_overpass_seznam:
             # prevod na metry
             vzdalenost = vzdalenost * 1000
             if vzdalenost > 100:
-                f.write(ref + " " + str(vzdalenost) + "\n")
+                with open('comm_wr.txt', 'a'):
+                    f.write(ref + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
+                            + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
                 print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
                 body_les_seznam_bezref.append(y)
         else:
@@ -298,7 +301,7 @@ for y in body_overpass_seznam:
 
 
 print(f"Processed {line_count} lines.")
-
+f.close()
 for s in vymazatz_body_overpass_seznam:
     if not "lat" in str(s):
         ref = s[2].replace(" ", "")
@@ -388,6 +391,16 @@ if (puvodniseznambodu - 1) < novyseznambodu:
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_les_seznam_bezref)
 
+    # https: // github.com / nidhaloff / gpx - converter
+    Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon',
+                                                               output_file='OSMbodychybejiciref.gpx')
+
+    # uprava gpx souboru na jednotlivé body (body jsou převedeny na waypoint)
+    gpx_file = open('OSMbodychybejiciref.gpx', 'r')
+    gpx = gpxpy.parse(gpx_file)
+    gpxnew = gpxpy.gpx.GPX()
+
+    #sousti wikipg.py
     import wikipg
 
 # OSMchybejicibody.csv
