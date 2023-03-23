@@ -315,7 +315,7 @@ for y in body_overpass_seznam:
 
 
 print(f"Processed {line_count} lines.")
-f.close()
+# f.close()
 for s in vymazatz_body_overpass_seznam:
     if not "lat" in str(s):
         ref = s[2].replace(" ", "")
@@ -376,7 +376,7 @@ if (puvodniseznambodu - 1) < novyseznambodu:
             for point in segment.points:
                 gpxnew.waypoints.append(point)
 
-    print('Created GPX:', gpxnew.to_xml())
+    # print('Created GPX:', gpxnew.to_xml())
     fp = open('OSMbodybezref.gpx', 'w')
     fp.write(gpxnew.to_xml())
     fp.close()
