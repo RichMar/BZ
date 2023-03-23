@@ -59,6 +59,14 @@ Aplikace Osmand body záchrany vykresluje standardně - [ukázka](obr/osmand-bz.
 
 Skript vytváří soubor statistika.csv, kam se ukládají tyto hodnoty: datum, celkový počet bodů v OSM a přírůstek. Do tohoto souboru je hodnota zapsána jen pokud se počet bodů v OSM zvýšil.  Tyto hodnoty jsou také zpracovány pomocí [koláčového diagramu](https://github.com/RichMar/BZ/wiki), kde je stav BZ znázorněn v procentech a ve [sloupcovém grafu](https://github.com/RichMar/BZ/wiki/Prirustky-bodu-zachrany-do-OSM) kde jsou znázorněny přírůstky v jednotlivých dnech.
 
+
+**Stahování souborů**
+
+GPX soubory:
+
+ - Body záchrany chybějící v OSM: [OSMbezref.gpx](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx)
+ - Problémové body záchrany: (OSMbodychybejiciref.gpx)
+
 **Poděkování**
 
 Rád bych poděkoval uživateli [mahdi1234](https://www.openstreetmap.org/user/mahdi1234) za inspiraci jeho projektem na [tříděný odpad](https://umap.openstreetmap.fr/en/map/odpad_bez_urceni_cr_553696#8/49.398/15.955) a za jeho cenné rady.
