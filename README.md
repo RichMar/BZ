@@ -65,7 +65,7 @@ Skript vytváří soubor statistika.csv, kam se ukládají tyto hodnoty: datum, 
 GPX soubory:
 
  - Body záchrany chybějící v OSM: [OSMbezref.gpx](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx)
- - Problémové body záchrany: (OSMbodychybejiciref.gpx)
+ - Problémové body záchrany: [OSMbodychybejiciref.gpx](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2Fmain%2FOSMbodychybejiciref.gpx)
 
 **Poděkování**
 
