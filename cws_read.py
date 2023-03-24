@@ -130,17 +130,19 @@ body_overpass_seznam = []
 body_les_seznam_bezref = []
 vymazatz_body_overpass_seznam = []
 chybejicibody_noref = []
-if os.path.exists('enc-Lesy_CR_komplet.csv'):
-    vstup = 'enc-Lesy_CR_komplet.csv'
-    oddelovac = ';'
-    decrypt_file(vstup, key)
-    vstup = 'Lesy_CR_komplet.csv'
-elif os.path.exists('enc-OSMchybejicibody.csv'):
+
+
+if os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
     vystup = 'enc-OSMchybejicibody_bezref.csv'
     decrypt_file(vstup, key)
     vstup = 'OSMchybejicibody.csv'
+elif os.path.exists('enc-Lesy_CR_komplet.csv'):
+    vstup = 'enc-Lesy_CR_komplet.csv'
+    oddelovac = ';'
+    decrypt_file(vstup, key)
+    vstup = 'Lesy_CR_komplet.csv'
 else:
     vstup = 'Lesy_CR_komplet.csv'
     oddelovac = ';'
