@@ -15,7 +15,7 @@ from math import radians, cos, sin, asin, sqrt
 import shutil
 
 
-def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
+def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vzdalenosti bodu
     lng_1, lat_1, lng_2, lat_2 = map(radians, [lng_1, lat_1, lng_2, lat_2])  # prevede uhly na radiany
     d_lat = lat_2 - lat_1
     d_lng = lng_2 - lng_1
