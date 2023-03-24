@@ -32,6 +32,7 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):  # vypocet vdalenosti bodu
     # return 6371.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
     return c * r
 
+
 def encrypt_file(ofile, klic):
     # using the generated key
     fernet = Fernet(klic)
