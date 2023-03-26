@@ -59,8 +59,8 @@ jobs:
             git show-ref
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git add .
-            git commit -m 'Added my project bz1'
+            git add -A
+            git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
             git push origin main
             
             cd markdown
@@ -75,6 +75,7 @@ jobs:
             git diff-index --quiet HEAD || git commit -m 'Added my project markdown'
             git push origin master
             
+# git commit -m 'Added my project bz1'            
 # git commit -a -m 'Added my project markdown'        
 # cd ..
 # ls -al
