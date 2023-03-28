@@ -340,7 +340,7 @@ if not os.path.exists('statistika.csv'):
     with open('statistika.csv', 'w', newline='') as stat:
         wr = csv.writer(stat, delimiter=',')
         wr.writerow(['datum', 'narust', 'celkem'])
-
+print('Původní počet bodů:' + str(puvodniseznambodu - 1) + "\n" + "Nový počet bodů: " + str(novyseznambodu))
 if (puvodniseznambodu - 1) < novyseznambodu:
     today = date.today()
     # dd/mm/YY
