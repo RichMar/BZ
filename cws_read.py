@@ -136,7 +136,6 @@ chybejicibody_noref = []
 if os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
-    vystup = 'enc-OSMchybejicibody_bezref.csv'
     decrypt_file(vstup, key)
     vstup = 'OSMchybejicibody.csv'
 elif os.path.exists('enc-Lesy_CR_komplet.csv'):
@@ -341,16 +340,20 @@ if not os.path.exists('statistika.csv'):
         wr = csv.writer(stat, delimiter=',')
         wr.writerow(['datum', 'narust', 'celkem'])
 print('Původní počet bodů:' + str(puvodniseznambodu - 1) + "\n" + "Nový počet bodů: " + str(novyseznambodu))
-if (puvodniseznambodu - 1) < novyseznambodu:
+if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv') or (novyseznambodu > 0 and vstup == 'OSMchybejicibody.csv'):
     today = date.today()
     # dd/mm/YY
     d1 = today.strftime("%d/%m/%Y")
-
-    nar = novyseznambodu - (puvodniseznambodu - 1)
+    if vstup == 'Lesy_CR_komplet.csv':
+        nar = novyseznambodu - (puvodniseznambodu - 1)
+        celk = novyseznambodu
+    else:
+        nar = novyseznambodu
+        celk = puvodniseznambodu + nar
     # vytvoří statistiku
     with open('statistika.csv', 'a', newline='') as sta:
         wri = csv.writer(sta, delimiter=',')
-        wri.writerow([d1, str(nar), novyseznambodu])
+        wri.writerow([d1, str(nar), celk])
 
 
     # vytvoří seznam chbejicich bodu v OSM bez ref
@@ -385,19 +388,24 @@ if (puvodniseznambodu - 1) < novyseznambodu:
     fp.close()
 
     # zapise body zachrany, keré jsou v OSM
+    if vstup == 'Lesy_CR_komplet.csv':
+        zap = 'w'
+    else:
+        zap = 'a'
     if os.path.exists('OSMBZ.csv'):
         src = 'OSMBZ.csv'
         dst = './archiv/OSMBZ' + str(today) + '.csv'
         shutil.copy(src, dst)
-    with open('OSMBZ.csv', 'w', newline='') as f:
+    with open('OSMBZ.csv', zap, newline='') as f:
         writer = csv.writer(f, delimiter=',')
-        writer.writerow(['lat', 'lon', 'ref'])
+        if zap == 'w':
+            writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_overpass_seznam)
 
     # vytvoří seznam chybejicich bodu v OSM s ref
     with open('OSMchybejicibody.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['lat', 'lon'])
+        writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(chybejicibody)
     encrypt_file('OSMchybejicibody.csv', key)
 
