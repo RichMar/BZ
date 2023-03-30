@@ -309,6 +309,8 @@ for y in body_overpass_seznam:
                             + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
                 print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
                 body_les_seznam_bezref.append(y)
+                if vstup == 'OSMchybejicibody.csv':
+                    vymazatz_body_overpass_seznam.append(y)
         else:
             body_les_seznam_bezref.append(y)
             # body_overpass_seznam.remove(index_les[0][0])
