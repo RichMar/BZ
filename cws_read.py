@@ -138,11 +138,13 @@ if os.path.exists('enc-OSMchybejicibody.csv'):
     oddelovac = ','
     decrypt_file(vstup, key)
     vstup = 'OSMchybejicibody.csv'
+    zapis = 'a'
 elif os.path.exists('enc-Lesy_CR_komplet.csv'):
     vstup = 'enc-Lesy_CR_komplet.csv'
     oddelovac = ';'
     decrypt_file(vstup, key)
     vstup = 'Lesy_CR_komplet.csv'
+    zapis = 'w'
 else:
     vstup = 'Lesy_CR_komplet.csv'
     oddelovac = ';'
@@ -304,7 +306,7 @@ for y in body_overpass_seznam:
             # prevod na metry
             vzdalenost = vzdalenost * 1000
             if vzdalenost > 100:
-                with open('comm_wr.txt', 'a'):
+                with open('dist.txt', 'a'):
                     f.write(ref + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
                             + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
                 print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
@@ -321,8 +323,9 @@ for y in body_overpass_seznam:
 print(f"Processed {line_count} lines.")
 # f.close()
 for s in vymazatz_body_overpass_seznam:
-    if not "lat" in str(s):
-        ref = s[2].replace(" ", "")
+    if "lat" not in str(s):
+        # ref = s[2].replace(" ", "")
+        ref = s[2]
         index_body_overpass_seznam = [(i, element.index(ref)) for i, element in enumerate(body_overpass_seznam) if ref in element]
         if index_body_overpass_seznam:
             del body_overpass_seznam[index_body_overpass_seznam[0][0]]
@@ -390,17 +393,13 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     fp.close()
 
     # zapise body zachrany, keré jsou v OSM
-    if vstup == 'Lesy_CR_komplet.csv':
-        zap = 'w'
-    else:
-        zap = 'a'
     if os.path.exists('OSMBZ.csv'):
         src = 'OSMBZ.csv'
         dst = './archiv/OSMBZ' + str(today) + '.csv'
         shutil.copy(src, dst)
-    with open('OSMBZ.csv', zap, newline='') as f:
+    with open('OSMBZ.csv', zapis, newline='') as f:
         writer = csv.writer(f, delimiter=',')
-        if zap == 'w':
+        if zapis == 'w':
             writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_overpass_seznam)
 
