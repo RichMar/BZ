@@ -9082,17 +9082,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.13457817,
-                    48.98585786
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.12896719,
                     48.94841319
                 ]
