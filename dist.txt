@@ -6,3 +6,4 @@ BO001 29950.391023024997|LCR:49.00869406,16.63757297|OSM:48.8837308,17.0008805
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
+Vzdalenost bodu nize je vetsi nez 100m:
