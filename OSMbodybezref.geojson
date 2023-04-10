@@ -8290,17 +8290,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.36554081,
-                    49.22256908
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.27120906,
                     49.24670647
                 ]
