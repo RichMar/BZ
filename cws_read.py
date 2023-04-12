@@ -346,6 +346,23 @@ if not os.path.exists('statistika.csv'):
         wr = csv.writer(stat, delimiter=',')
         wr.writerow(['datum', 'narust', 'celkem'])
 print('Původní počet bodů:' + str(puvodniseznambodu - 1) + "\n" + "Nový počet bodů: " + str(novyseznambodu))
+
+# vymaze bod ktery je v BZneni.csv z Chybejicbody (OSMchybejicibody.csv)
+neni = open("BZneni.csv", "r")
+csv_reader_neni = csv.reader(neni, delimiter=",")
+line_count = 0
+for row in csv_reader_neni:
+    if line_count == 0:
+        line_count += 1
+    else:
+        for rr in chybejicibody:
+            vzd = get_distance(float(rr[0]), float(rr[1]), float(row[0]), float(row[1]))
+            vzd = vzd * 1000
+            if vzd < 100:
+                chybejicibody.remove(rr)
+                print("Bod " + str(rr) + "byl vymazan z chybejicibody.")
+
+
 if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv') or (novyseznambodu > 0 and vstup == 'OSMchybejicibody.csv'):
     today = date.today()
     # dd/mm/YY
@@ -360,7 +377,6 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     with open('statistika.csv', 'a', newline='') as sta:
         wri = csv.writer(sta, delimiter=',')
         wri.writerow([d1, str(nar), celk])
-
 
     # vytvoří seznam chbejicich bodu v OSM bez ref
     with open('OSMbodybezref.csv', 'w', newline='') as f:
