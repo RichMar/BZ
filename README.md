@@ -19,7 +19,7 @@ Jelikož licence, kterou mi k tomu poskytli, nesplňuje požadavky pro přímé 
 
 **Vizualizace**
 
-Pro názornost jsou body, které chybí v OSM, zobrazeny pomocí služby **[uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746)**  červenou barvou. Body, které již v OSM existují, jsou vykresleny světle modrou. Problémové body jsou zobrazeny tmavě modrou barvou. Černou barvou jsou znázorněny body, které se nepodařilo v teréhu dohledat.
+Pro názornost jsou body, které chybí v OSM, zobrazeny pomocí služby **[uMAP](https://umap.openstreetmap.fr/cs-cz/map/body-zachrany_554926#8/49.434/14.746)**  červenou barvou. Body, které již v OSM existují, jsou vykresleny světle modrou. Problémové body jsou zobrazeny tmavě modrou barvou. Černou barvou jsou znázorněny body, které se nepodařilo v terénu dohledat.
 
 **Popis funkce**
 
