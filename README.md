@@ -31,6 +31,7 @@ Pro jeden bod se tedy odesílají dva dotazy. Jelikož délka jednoho dotazu je 
 - Všechny nalezené body se ukládají do souboru [OSMBZ.csv](OSMBZ.csv).
 - Nalezené body, které mají problém s hodnotou *REF* (např. hodnota chybí nebo neodpovídá seznamu LČR), jsou uloženy do souboru [OSMbodychybejiciref.csv](OSMbodychybejiciref.csv). Co jsem zatím zjistil, tak většina chbějících *REF* se nachází pod hodnotou *NAME*, takže to se dá opravit od stolu. Dále jsou zde body se vzdáleností větší než 100 m od souřadnice převzaté od LČR. Pro zajímavost je vypočtená vzdálenost těchto bodů uložena do souboru [dist.txt](dist.txt) (uvedené vzdálenosti jsou v metrech).
 - Body, které je potřeba do OSM doplnit, se ukládají primárně do [OSMbodybezref.csv](OSMbodybezref.csv) bez hodnoty *REF*. Následně jsou pro lepší přenositelnost převedeny do formátu **[gpx](OSMbodybezref.gpx)** ***([stáhnout gpx](https://git-link.vercel.app/api/download?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ%2Fblob%2F0368fa9a0a769373ffd126d98a59e0269fdc14f1%2FOSMbodybezref.gpx))*** a [geojson ](OSMbodybezref.geojson).
+- Body, které se nepodaří v terénu dohledat, se zapisují do souboru [BZneni.csv](BZneni.csv). Snad jich nebude moc. 
 Script se spouští každých 24 hodin.
 
 **Zdávání bodů záchrany**
