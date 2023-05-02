@@ -132,7 +132,7 @@ body_les_seznam_bezref = []
 vymazatz_body_overpass_seznam = []
 chybejicibody_noref = []
 
-
+import removedbz
 if os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
