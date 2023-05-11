@@ -8554,17 +8554,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.91354094,
-                    49.09453878
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.86177439,
                     49.05749428
                 ]
