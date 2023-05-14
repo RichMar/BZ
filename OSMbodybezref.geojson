@@ -12129,30 +12129,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.52520039,
-                    50.06022128
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.58481722,
                     50.07612044
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.56393317,
-                    50.03688219
                 ]
             }
         },
