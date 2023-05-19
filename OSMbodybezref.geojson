@@ -480,17 +480,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    14.27215525,
-                    50.20846772
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     13.89095692,
                     50.28292778
                 ]
