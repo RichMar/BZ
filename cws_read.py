@@ -98,6 +98,8 @@ def gpxtrcktoway(efile):
 # key generation
 # key = Fernet.generate_key()
 
+
+
 key = ''
 # prevezme klic z Gitu
 try:
@@ -137,8 +139,12 @@ if os.path.exists('enc-OSMchybejicibody.csv'):
     vstup = 'enc-OSMchybejicibody.csv'
     oddelovac = ','
     decrypt_file(vstup, key)
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    # encrypt_file('OSMchybejicibody.csv', key)
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     vstup = 'OSMchybejicibody.csv'
     zapis = 'a'
+
 elif os.path.exists('enc-Lesy_CR_komplet.csv'):
     vstup = 'enc-Lesy_CR_komplet.csv'
     oddelovac = ';'
