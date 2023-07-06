@@ -15836,17 +15836,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.57718497,
-                    50.18752147
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     13.32331003,
                     50.17670658
                 ]
