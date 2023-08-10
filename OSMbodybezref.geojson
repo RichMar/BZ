@@ -9753,28 +9753,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.64138964,
-                    50.31247081
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    12.65157447,
-                    50.30220681
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.57963392,
                     50.27182217
                 ]
@@ -9929,17 +9907,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    12.64844472,
-                    50.33682675
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     12.64840217,
                     50.26567608
                 ]
@@ -9997,17 +9964,6 @@
                 "coordinates": [
                     12.61791003,
                     50.35002844
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    12.643148,
-                    50.34186211
                 ]
             }
         },
@@ -17521,17 +17477,6 @@
                 "coordinates": [
                     16.48209597,
                     50.19833692
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.50978311,
-                    50.1887895
                 ]
             }
         },
