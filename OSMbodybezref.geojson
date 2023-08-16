@@ -8433,28 +8433,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.10309428,
-                    48.91717183
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    16.11802208,
-                    48.87963739
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.17115294,
                     49.0029185
                 ]
