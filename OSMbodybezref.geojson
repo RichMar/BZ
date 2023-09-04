@@ -7872,17 +7872,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    17.32128492,
-                    48.93138061
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     17.55524808,
                     48.87360225
                 ]
@@ -11768,17 +11757,6 @@
                 "coordinates": [
                     13.65942911,
                     49.16496119
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.66954278,
-                    49.18837658
                 ]
             }
         },
