@@ -8070,17 +8070,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    16.12896719,
-                    48.94841319
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     16.31019978,
                     48.82443292
                 ]
