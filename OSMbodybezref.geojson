@@ -326,17 +326,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.83980961,
-                    49.96458461
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     13.85264086,
                     49.91999956
                 ]
@@ -1296,39 +1285,6 @@
                 "coordinates": [
                     13.93367475,
                     50.00614322
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.90979306,
-                    49.98777411
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.88337922,
-                    50.00420081
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.80504172,
-                    49.94526294
                 ]
             }
         },
