@@ -2405,28 +2405,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    17.29608628,
-                    50.02839886
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    17.27279186,
-                    50.05266142
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     17.25437953,
                     49.99069736
                 ]
