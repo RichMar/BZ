@@ -351,3 +351,6 @@ Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
+Vzdalenost bodu nize je vetsi nez 100m:
+BE001 2602.948119486416|LCR:49.82943694,13.8148935|OSM:49.8065841,13.8227541
+BE002 2597.481281817134|LCR:49.80671614,13.82238853|OSM:49.8295664,13.8148686
