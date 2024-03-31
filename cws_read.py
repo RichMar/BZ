@@ -10,7 +10,7 @@ import gpxpy.gpx
 from datetime import date
 import pandas as pd
 import pandas_geojson as pdg
-from pandas_geojson import to_geojson
+# from pandas_geojson import to_geojson
 from pandas_geojson import write_geojson
 from math import radians, cos, sin, asin, sqrt
 import shutil
