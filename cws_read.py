@@ -9,6 +9,8 @@ from gpx_converter import Converter
 import gpxpy.gpx
 from datetime import date
 import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point
 import pandas_geojson as pdg
 # Original
 # from pandas_geojson import to_geojson
@@ -406,12 +408,18 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     data_csv = pd.read_csv('OSMbodybezref.csv')
     # Orig
     # geo_json = to_geojson(df=data_csv, lat='lat', lon='lon', properties=[])
-    # 1.4.2024 oprava 
-    geo_json = pdg.GeoJSON.from_dataframe(df=data_csv, lat='lat', lon='lon', properties=[])
+    # 1.4.2024 oprava
+    # geo_json = pdg.GeoJSON.from_dataframe(df=data_csv, lat='lat', lon='lon', properties=[])
+
     # Orig
     # write_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
     # 1.4.2024 oprava 
-    pdg.save_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
+    # pdg.save_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
+    # 2.4.2024 oprava
+    df = data_csv
+    df['geometry'] = df.apply(lambda row: Point(float(row['lon']), float(row['lat'])), axis=1)
+    gdf = gpd.GeoDataFrame(df, geometry='geometry')
+    gdf.to_file('OSMbodybezref.geojson', driver='GeoJSON')
 
     for track in gpx.tracks:
         for segment in track.segments:
