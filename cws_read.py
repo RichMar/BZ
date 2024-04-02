@@ -12,7 +12,7 @@ import pandas as pd
 import pandas_geojson as pdg
 # Original
 # from pandas_geojson import to_geojson
-from pandas_geojson import write_geojson
+# from pandas_geojson import write_geojson
 from math import radians, cos, sin, asin, sqrt
 import shutil
 
@@ -408,7 +408,10 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     # geo_json = to_geojson(df=data_csv, lat='lat', lon='lon', properties=[])
     # 1.4.2024 oprava 
     geo_json = pdg.GeoJSON.from_dataframe(df=data_csv, lat='lat', lon='lon', properties=[])
-    write_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
+    # Orig
+    # write_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
+    # 1.4.2024 oprava 
+    pdg.save_geojson(geo_json, filename='OSMbodybezref.geojson', indent=4)
 
     for track in gpx.tracks:
         for segment in track.segments:
