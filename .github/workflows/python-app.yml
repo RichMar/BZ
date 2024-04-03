@@ -44,6 +44,8 @@ jobs:
         python3 -m pip install cryptography
         python3 -m pip install -U gpx-converter
         python3 -m pip install pandas-geojson
+        python3 -m pip install geopandas
+        python3 -m pip install shapely
         python cws_read.py
 
                  
