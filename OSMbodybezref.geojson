@@ -486,7 +486,6 @@
 { "type": "Feature", "properties": { "lat": 49.447959, "lon": 14.87195536 }, "geometry": { "type": "Point", "coordinates": [ 14.87195536, 49.447959 ] } },
 { "type": "Feature", "properties": { "lat": 49.41899497, "lon": 14.73701853 }, "geometry": { "type": "Point", "coordinates": [ 14.73701853, 49.41899497 ] } },
 { "type": "Feature", "properties": { "lat": 48.69160856, "lon": 14.03329175 }, "geometry": { "type": "Point", "coordinates": [ 14.03329175, 48.69160856 ] } },
-{ "type": "Feature", "properties": { "lat": 48.97992175, "lon": 15.19394636 }, "geometry": { "type": "Point", "coordinates": [ 15.19394636, 48.97992175 ] } },
 { "type": "Feature", "properties": { "lat": 48.61732869, "lon": 14.21279119 }, "geometry": { "type": "Point", "coordinates": [ 14.21279119, 48.61732869 ] } },
 { "type": "Feature", "properties": { "lat": 48.64346275, "lon": 14.27391197 }, "geometry": { "type": "Point", "coordinates": [ 14.27391197, 48.64346275 ] } },
 { "type": "Feature", "properties": { "lat": 48.64534189, "lon": 14.04903997 }, "geometry": { "type": "Point", "coordinates": [ 14.04903997, 48.64534189 ] } },
