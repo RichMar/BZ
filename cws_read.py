@@ -11,7 +11,7 @@ from datetime import date
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
-import pandas_geojson as pdg
+# import pandas_geojson as pdg
 # Original
 # from pandas_geojson import to_geojson
 # from pandas_geojson import write_geojson
