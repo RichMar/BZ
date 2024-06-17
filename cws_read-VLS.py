@@ -296,7 +296,7 @@ with open(vstup, encoding='cp852') as csv_file:
         # print(type(e))
         # print(x[2])
     # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-    dist = open('dist.txt', 'a')
+    dist = open('dis-VLSt.txt', 'a')
     dist.write("Vzdalenost bodu nize je vetsi nez 100m:" + "\n")
     chybejicibody = body_les_seznam.copy()
 
@@ -318,7 +318,7 @@ for y in body_overpass_seznam:
             # prevod na metry
             vzdalenost = vzdalenost * 1000
             if vzdalenost > 100:
-                dist.write(ref + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
+                dist.write(ref + " " + str(vzdalenost) + '|VLS:' + str(body_les_seznam[index_les[0][0]][0]) + ','
                             + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
                 print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
                 body_les_seznam_bezref.append(y)
