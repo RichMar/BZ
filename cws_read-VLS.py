@@ -263,9 +263,9 @@ with open(vstup, encoding='cp852') as csv_file:
                         if not str(x) == "" and len(x) == 5 and x[4] == "":
                             # osm_bz_resp.writerow(str(rad))
                             # print("Sloupce: " + str(len(x)))
-                            bod_overpass = [x[0], x[1], x[2]]
+                            bod_overpass = [x[0], x[1], x[2], x[3]]
                             # pokud bod v OSM nema hodntu REF zapise do seznamu bezref
-                            if not x[2] == "":
+                            if not x[2] == "" or not x[3] == "" :
                                 body_overpass_seznam.append(bod_overpass)
                             else:
                                 body_les_seznam_bezref.append(bod_overpass)
