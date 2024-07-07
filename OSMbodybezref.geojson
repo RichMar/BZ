@@ -1,5 +1,6 @@
 {
 "type": "FeatureCollection",
+"name": "OSMbodybezref",
 "features": [
 { "type": "Feature", "properties": { "lat": 49.71921964, "lon": 14.49896031 }, "geometry": { "type": "Point", "coordinates": [ 14.49896031, 49.71921964 ] } },
 { "type": "Feature", "properties": { "lat": 49.77523919, "lon": 14.65355717 }, "geometry": { "type": "Point", "coordinates": [ 14.65355717, 49.77523919 ] } },
@@ -1275,7 +1276,6 @@
 { "type": "Feature", "properties": { "lat": 50.10614172, "lon": 13.35658731 }, "geometry": { "type": "Point", "coordinates": [ 13.35658731, 50.10614172 ] } },
 { "type": "Feature", "properties": { "lat": 50.11089561, "lon": 13.36146325 }, "geometry": { "type": "Point", "coordinates": [ 13.36146325, 50.11089561 ] } },
 { "type": "Feature", "properties": { "lat": 49.24563625, "lon": 17.70602625 }, "geometry": { "type": "Point", "coordinates": [ 17.70602625, 49.24563625 ] } },
-{ "type": "Feature", "properties": { "lat": 50.15216264, "lon": 13.47048906 }, "geometry": { "type": "Point", "coordinates": [ 13.47048906, 50.15216264 ] } },
 { "type": "Feature", "properties": { "lat": 50.10315578, "lon": 13.30067542 }, "geometry": { "type": "Point", "coordinates": [ 13.30067542, 50.10315578 ] } },
 { "type": "Feature", "properties": { "lat": 50.36836725, "lon": 13.98141203 }, "geometry": { "type": "Point", "coordinates": [ 13.98141203, 50.36836725 ] } },
 { "type": "Feature", "properties": { "lat": 50.34770983, "lon": 13.9567335 }, "geometry": { "type": "Point", "coordinates": [ 13.9567335, 50.34770983 ] } },
