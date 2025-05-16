@@ -755,3 +755,4 @@ Vzdalenost bodu nize je vetsi nez 100m:
 LN014 631.4367478324439|LCR:50.11089561,13.36146325|OSM:50.1061850,13.3565184
 LN012 648.7017183211331|LCR:50.10614172,13.35658731|OSM:50.1110148,13.3615885
 Vzdalenost bodu nize je vetsi nez 100m:
+Vzdalenost bodu nize je vetsi nez 100m:
