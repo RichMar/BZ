@@ -1302,8 +1302,7 @@ node[highway=emergency_access_point](around:100,49.83536481, 12.84859922);
                             node[emergency=access_point](around:100,49.92644458, 12.90095756);node[highway=emergency_access_point](around:100,49.90534511, 12.89412569);
                             node[emergency=access_point](around:100,49.90534511, 12.89412569);node[highway=emergency_access_point](around:100,49.92768872, 12.96495264);
                             node[emergency=access_point](around:100,49.92768872, 12.96495264);node[highway=emergency_access_point](around:100,49.795178, 12.85861558);
-                            node[emergency=access_point](around:100,49.795178, 12.85861558);node[highway=emergency_access_point](around:100,49.78762975, 12.85660186);
-                            node[emergency=access_point](around:100,49.78762975, 12.85660186);node[highway=emergency_access_point](around:100,49.77891044, 12.85466628);
+                            node[emergency=access_point](around:100,49.795178, 12.85861558);node[highway=emergency_access_point](around:100,49.77891044, 12.85466628);
                             node[emergency=access_point](around:100,49.77891044, 12.85466628);node[highway=emergency_access_point](around:100,49.60298008, 12.67186092);
                             node[emergency=access_point](around:100,49.60298008, 12.67186092);node[highway=emergency_access_point](around:100,49.72387031, 12.61671367);
                             node[emergency=access_point](around:100,49.72387031, 12.61671367);node[highway=emergency_access_point](around:100,49.71745211, 12.60498097);
@@ -1315,15 +1314,15 @@ node[highway=emergency_access_point](around:100,49.83536481, 12.84859922);
                             node[emergency=access_point](around:100,49.73796219, 12.49565689);node[highway=emergency_access_point](around:100,49.70474858, 12.49238417);
                             node[emergency=access_point](around:100,49.70474858, 12.49238417);node[highway=emergency_access_point](around:100,49.73274103, 12.52586211);
                             node[emergency=access_point](around:100,49.73274103, 12.52586211);node[highway=emergency_access_point](around:100,49.78119006, 12.52568233);
-                            node[emergency=access_point](around:100,49.78119006, 12.52568233);
+                            node[emergency=access_point](around:100,49.78119006, 12.52568233);node[highway=emergency_access_point](around:100,49.76319214, 12.50710503);
+                            node[emergency=access_point](around:100,49.76319214, 12.50710503);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,49.76319214, 12.50710503);
-                            node[emergency=access_point](around:100,49.76319214, 12.50710503);node[highway=emergency_access_point](around:100,49.80900375, 12.50019142);
+node[highway=emergency_access_point](around:100,49.80900375, 12.50019142);
                             node[emergency=access_point](around:100,49.80900375, 12.50019142);node[highway=emergency_access_point](around:100,49.86990814, 12.53216789);
                             node[emergency=access_point](around:100,49.86990814, 12.53216789);node[highway=emergency_access_point](around:100,49.86190228, 12.56956689);
                             node[emergency=access_point](around:100,49.86190228, 12.56956689);node[highway=emergency_access_point](around:100,49.65627928, 12.80733764);
@@ -1342,15 +1341,15 @@ node[highway=emergency_access_point](around:100,49.76319214, 12.50710503);
                             node[emergency=access_point](around:100,49.83961314, 12.65777053);node[highway=emergency_access_point](around:100,49.74341833, 12.78092978);
                             node[emergency=access_point](around:100,49.74341833, 12.78092978);node[highway=emergency_access_point](around:100,49.79801103, 12.80374142);
                             node[emergency=access_point](around:100,49.79801103, 12.80374142);node[highway=emergency_access_point](around:100,49.76592172, 12.78895025);
-                            node[emergency=access_point](around:100,49.76592172, 12.78895025);
+                            node[emergency=access_point](around:100,49.76592172, 12.78895025);node[highway=emergency_access_point](around:100,49.71580947, 12.68488356);
+                            node[emergency=access_point](around:100,49.71580947, 12.68488356);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,49.71580947, 12.68488356);
-                            node[emergency=access_point](around:100,49.71580947, 12.68488356);node[highway=emergency_access_point](around:100,49.65100025, 12.75551525);
+node[highway=emergency_access_point](around:100,49.65100025, 12.75551525);
                             node[emergency=access_point](around:100,49.65100025, 12.75551525);node[highway=emergency_access_point](around:100,49.63355411, 12.67193478);
                             node[emergency=access_point](around:100,49.63355411, 12.67193478);node[highway=emergency_access_point](around:100,49.70734686, 12.54066514);
                             node[emergency=access_point](around:100,49.70734686, 12.54066514);node[highway=emergency_access_point](around:100,49.68806139, 12.65175175);
@@ -1369,15 +1368,15 @@ node[highway=emergency_access_point](around:100,49.71580947, 12.68488356);
                             node[emergency=access_point](around:100,50.83407225, 14.15634053);node[highway=emergency_access_point](around:100,50.83856903, 14.17963961);
                             node[emergency=access_point](around:100,50.83856903, 14.17963961);node[highway=emergency_access_point](around:100,50.81598481, 14.15112975);
                             node[emergency=access_point](around:100,50.81598481, 14.15112975);node[highway=emergency_access_point](around:100,50.81427319, 14.16980778);
-                            node[emergency=access_point](around:100,50.81427319, 14.16980778);
+                            node[emergency=access_point](around:100,50.81427319, 14.16980778);node[highway=emergency_access_point](around:100,50.81830144, 14.10100792);
+                            node[emergency=access_point](around:100,50.81830144, 14.10100792);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.81830144, 14.10100792);
-                            node[emergency=access_point](around:100,50.81830144, 14.10100792);node[highway=emergency_access_point](around:100,50.79445231, 14.09851303);
+node[highway=emergency_access_point](around:100,50.79445231, 14.09851303);
                             node[emergency=access_point](around:100,50.79445231, 14.09851303);node[highway=emergency_access_point](around:100,50.79234397, 14.13309442);
                             node[emergency=access_point](around:100,50.79234397, 14.13309442);node[highway=emergency_access_point](around:100,50.77665269, 14.10907481);
                             node[emergency=access_point](around:100,50.77665269, 14.10907481);node[highway=emergency_access_point](around:100,50.74926503, 14.08337161);
@@ -1396,15 +1395,15 @@ node[highway=emergency_access_point](around:100,50.81830144, 14.10100792);
                             node[emergency=access_point](around:100,50.83319953, 14.40042639);node[highway=emergency_access_point](around:100,50.85129828, 14.44575872);
                             node[emergency=access_point](around:100,50.85129828, 14.44575872);node[highway=emergency_access_point](around:100,51.01879203, 14.5207005);
                             node[emergency=access_point](around:100,51.01879203, 14.5207005);node[highway=emergency_access_point](around:100,50.98273239, 14.52769219);
-                            node[emergency=access_point](around:100,50.98273239, 14.52769219);
+                            node[emergency=access_point](around:100,50.98273239, 14.52769219);node[highway=emergency_access_point](around:100,50.9796475, 14.46219875);
+                            node[emergency=access_point](around:100,50.9796475, 14.46219875);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.9796475, 14.46219875);
-                            node[emergency=access_point](around:100,50.9796475, 14.46219875);node[highway=emergency_access_point](around:100,50.98690728, 14.47498736);
+node[highway=emergency_access_point](around:100,50.98690728, 14.47498736);
                             node[emergency=access_point](around:100,50.98690728, 14.47498736);node[highway=emergency_access_point](around:100,50.96823106, 14.32659328);
                             node[emergency=access_point](around:100,50.96823106, 14.32659328);node[highway=emergency_access_point](around:100,50.96368089, 14.32844561);
                             node[emergency=access_point](around:100,50.96368089, 14.32844561);node[highway=emergency_access_point](around:100,50.92498975, 14.64733067);
@@ -1423,15 +1422,15 @@ node[highway=emergency_access_point](around:100,50.9796475, 14.46219875);
                             node[emergency=access_point](around:100,50.41432256, 12.96370444);node[highway=emergency_access_point](around:100,50.40220122, 12.97393789);
                             node[emergency=access_point](around:100,50.40220122, 12.97393789);node[highway=emergency_access_point](around:100,50.40395153, 12.983999);
                             node[emergency=access_point](around:100,50.40395153, 12.983999);node[highway=emergency_access_point](around:100,50.43080125, 13.03922606);
-                            node[emergency=access_point](around:100,50.43080125, 13.03922606);
+                            node[emergency=access_point](around:100,50.43080125, 13.03922606);node[highway=emergency_access_point](around:100,50.48460136, 13.21017431);
+                            node[emergency=access_point](around:100,50.48460136, 13.21017431);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.48460136, 13.21017431);
-                            node[emergency=access_point](around:100,50.48460136, 13.21017431);node[highway=emergency_access_point](around:100,50.47088392, 13.22836881);
+node[highway=emergency_access_point](around:100,50.47088392, 13.22836881);
                             node[emergency=access_point](around:100,50.47088392, 13.22836881);node[highway=emergency_access_point](around:100,50.49982864, 13.05560011);
                             node[emergency=access_point](around:100,50.49982864, 13.05560011);node[highway=emergency_access_point](around:100,50.49004664, 13.06504075);
                             node[emergency=access_point](around:100,50.49004664, 13.06504075);node[highway=emergency_access_point](around:100,50.48231956, 13.06998475);
@@ -1450,15 +1449,15 @@ node[highway=emergency_access_point](around:100,50.48460136, 13.21017431);
                             node[emergency=access_point](around:100,50.44602369, 13.25661275);node[highway=emergency_access_point](around:100,50.44260294, 13.27159442);
                             node[emergency=access_point](around:100,50.44260294, 13.27159442);node[highway=emergency_access_point](around:100,50.45843381, 13.31795367);
                             node[emergency=access_point](around:100,50.45843381, 13.31795367);node[highway=emergency_access_point](around:100,50.45147392, 13.31543683);
-                            node[emergency=access_point](around:100,50.45147392, 13.31543683);
+                            node[emergency=access_point](around:100,50.45147392, 13.31543683);node[highway=emergency_access_point](around:100,50.45639325, 13.33197783);
+                            node[emergency=access_point](around:100,50.45639325, 13.33197783);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.45639325, 13.33197783);
-                            node[emergency=access_point](around:100,50.45639325, 13.33197783);node[highway=emergency_access_point](around:100,50.45917314, 13.36038831);
+node[highway=emergency_access_point](around:100,50.45917314, 13.36038831);
                             node[emergency=access_point](around:100,50.45917314, 13.36038831);node[highway=emergency_access_point](around:100,50.39883011, 13.17563622);
                             node[emergency=access_point](around:100,50.39883011, 13.17563622);node[highway=emergency_access_point](around:100,50.40780858, 13.19376222);
                             node[emergency=access_point](around:100,50.40780858, 13.19376222);node[highway=emergency_access_point](around:100,50.47422761, 13.08074472);
@@ -1477,15 +1476,15 @@ node[highway=emergency_access_point](around:100,50.45639325, 13.33197783);
                             node[emergency=access_point](around:100,50.44874344, 13.20410047);node[highway=emergency_access_point](around:100,50.44341778, 13.19795594);
                             node[emergency=access_point](around:100,50.44341778, 13.19795594);node[highway=emergency_access_point](around:100,50.4172845, 13.20622931);
                             node[emergency=access_point](around:100,50.4172845, 13.20622931);node[highway=emergency_access_point](around:100,50.43415567, 13.241296);
-                            node[emergency=access_point](around:100,50.43415567, 13.241296);
+                            node[emergency=access_point](around:100,50.43415567, 13.241296);node[highway=emergency_access_point](around:100,50.57896697, 13.32917486);
+                            node[emergency=access_point](around:100,50.57896697, 13.32917486);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.57896697, 13.32917486);
-                            node[emergency=access_point](around:100,50.57896697, 13.32917486);node[highway=emergency_access_point](around:100,50.58351997, 13.35248806);
+node[highway=emergency_access_point](around:100,50.58351997, 13.35248806);
                             node[emergency=access_point](around:100,50.58351997, 13.35248806);node[highway=emergency_access_point](around:100,50.56905053, 13.36994047);
                             node[emergency=access_point](around:100,50.56905053, 13.36994047);node[highway=emergency_access_point](around:100,50.53517969, 13.43110892);
                             node[emergency=access_point](around:100,50.53517969, 13.43110892);node[highway=emergency_access_point](around:100,50.55317067, 13.44319736);
@@ -1504,15 +1503,15 @@ node[highway=emergency_access_point](around:100,50.57896697, 13.32917486);
                             node[emergency=access_point](around:100,50.53508369, 14.02508631);node[highway=emergency_access_point](around:100,50.51338997, 14.00578153);
                             node[emergency=access_point](around:100,50.51338997, 14.00578153);node[highway=emergency_access_point](around:100,50.56405925, 13.95277125);
                             node[emergency=access_point](around:100,50.56405925, 13.95277125);node[highway=emergency_access_point](around:100,50.55347203, 13.93999928);
-                            node[emergency=access_point](around:100,50.55347203, 13.93999928);
+                            node[emergency=access_point](around:100,50.55347203, 13.93999928);node[highway=emergency_access_point](around:100,50.56707683, 13.98329886);
+                            node[emergency=access_point](around:100,50.56707683, 13.98329886);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.56707683, 13.98329886);
-                            node[emergency=access_point](around:100,50.56707683, 13.98329886);node[highway=emergency_access_point](around:100,50.38534053, 13.99357633);
+node[highway=emergency_access_point](around:100,50.38534053, 13.99357633);
                             node[emergency=access_point](around:100,50.38534053, 13.99357633);node[highway=emergency_access_point](around:100,50.39378378, 14.01401542);
                             node[emergency=access_point](around:100,50.39378378, 14.01401542);node[highway=emergency_access_point](around:100,50.39591097, 14.07417589);
                             node[emergency=access_point](around:100,50.39591097, 14.07417589);node[highway=emergency_access_point](around:100,50.41440886, 14.1273665);
@@ -1531,15 +1530,15 @@ node[highway=emergency_access_point](around:100,50.56707683, 13.98329886);
                             node[emergency=access_point](around:100,50.59339661, 14.25223117);node[highway=emergency_access_point](around:100,50.58179664, 14.24725936);
                             node[emergency=access_point](around:100,50.58179664, 14.24725936);node[highway=emergency_access_point](around:100,50.55983783, 14.32012933);
                             node[emergency=access_point](around:100,50.55983783, 14.32012933);node[highway=emergency_access_point](around:100,50.59145186, 14.37045781);
-                            node[emergency=access_point](around:100,50.59145186, 14.37045781);
+                            node[emergency=access_point](around:100,50.59145186, 14.37045781);node[highway=emergency_access_point](around:100,50.57914494, 14.37163428);
+                            node[emergency=access_point](around:100,50.57914494, 14.37163428);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.57914494, 14.37163428);
-                            node[emergency=access_point](around:100,50.57914494, 14.37163428);node[highway=emergency_access_point](around:100,50.56212203, 14.35319714);
+node[highway=emergency_access_point](around:100,50.56212203, 14.35319714);
                             node[emergency=access_point](around:100,50.56212203, 14.35319714);node[highway=emergency_access_point](around:100,50.58888525, 14.39203444);
                             node[emergency=access_point](around:100,50.58888525, 14.39203444);node[highway=emergency_access_point](around:100,50.40503028, 14.11295711);
                             node[emergency=access_point](around:100,50.40503028, 14.11295711);node[highway=emergency_access_point](around:100,50.42447372, 14.14444339);
@@ -1558,15 +1557,15 @@ node[highway=emergency_access_point](around:100,50.57914494, 14.37163428);
                             node[emergency=access_point](around:100,50.51792364, 13.54014817);node[highway=emergency_access_point](around:100,50.53319047, 13.59299461);
                             node[emergency=access_point](around:100,50.53319047, 13.59299461);node[highway=emergency_access_point](around:100,50.662334, 13.54522381);
                             node[emergency=access_point](around:100,50.662334, 13.54522381);node[highway=emergency_access_point](around:100,50.62749192, 13.57290983);
-                            node[emergency=access_point](around:100,50.62749192, 13.57290983);
+                            node[emergency=access_point](around:100,50.62749192, 13.57290983);node[highway=emergency_access_point](around:100,50.61950256, 13.57906244);
+                            node[emergency=access_point](around:100,50.61950256, 13.57906244);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.61950256, 13.57906244);
-                            node[emergency=access_point](around:100,50.61950256, 13.57906244);node[highway=emergency_access_point](around:100,50.63314267, 13.57407689);
+node[highway=emergency_access_point](around:100,50.63314267, 13.57407689);
                             node[emergency=access_point](around:100,50.63314267, 13.57407689);node[highway=emergency_access_point](around:100,50.63598547, 13.58347114);
                             node[emergency=access_point](around:100,50.63598547, 13.58347114);node[highway=emergency_access_point](around:100,50.629766, 13.61397111);
                             node[emergency=access_point](around:100,50.629766, 13.61397111);node[highway=emergency_access_point](around:100,50.64703494, 13.62256714);
@@ -1585,15 +1584,15 @@ node[highway=emergency_access_point](around:100,50.61950256, 13.57906244);
                             node[emergency=access_point](around:100,50.67773997, 13.68782089);node[highway=emergency_access_point](around:100,50.69796447, 13.72895472);
                             node[emergency=access_point](around:100,50.69796447, 13.72895472);node[highway=emergency_access_point](around:100,50.68871364, 13.75192581);
                             node[emergency=access_point](around:100,50.68871364, 13.75192581);node[highway=emergency_access_point](around:100,50.67224339, 13.76860025);
-                            node[emergency=access_point](around:100,50.67224339, 13.76860025);
+                            node[emergency=access_point](around:100,50.67224339, 13.76860025);node[highway=emergency_access_point](around:100,50.65072828, 13.74339514);
+                            node[emergency=access_point](around:100,50.65072828, 13.74339514);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.65072828, 13.74339514);
-                            node[emergency=access_point](around:100,50.65072828, 13.74339514);node[highway=emergency_access_point](around:100,50.54312847, 13.89335564);
+node[highway=emergency_access_point](around:100,50.54312847, 13.89335564);
                             node[emergency=access_point](around:100,50.54312847, 13.89335564);node[highway=emergency_access_point](around:100,50.55711464, 13.90293714);
                             node[emergency=access_point](around:100,50.55711464, 13.90293714);node[highway=emergency_access_point](around:100,50.69831022, 13.800655);
                             node[emergency=access_point](around:100,50.69831022, 13.800655);node[highway=emergency_access_point](around:100,50.71242242, 13.904231);
@@ -1612,15 +1611,15 @@ node[highway=emergency_access_point](around:100,50.65072828, 13.74339514);
                             node[emergency=access_point](around:100,50.79084311, 13.94305511);node[highway=emergency_access_point](around:100,50.74820225, 13.94857222);
                             node[emergency=access_point](around:100,50.74820225, 13.94857222);node[highway=emergency_access_point](around:100,50.75711597, 14.01132394);
                             node[emergency=access_point](around:100,50.75711597, 14.01132394);node[highway=emergency_access_point](around:100,50.79426481, 14.01339658);
-                            node[emergency=access_point](around:100,50.79426481, 14.01339658);
+                            node[emergency=access_point](around:100,50.79426481, 14.01339658);node[highway=emergency_access_point](around:100,50.68728483, 14.08421808);
+                            node[emergency=access_point](around:100,50.68728483, 14.08421808);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.68728483, 14.08421808);
-                            node[emergency=access_point](around:100,50.68728483, 14.08421808);node[highway=emergency_access_point](around:100,50.69437372, 14.14448675);
+node[highway=emergency_access_point](around:100,50.69437372, 14.14448675);
                             node[emergency=access_point](around:100,50.69437372, 14.14448675);node[highway=emergency_access_point](around:100,50.69409053, 14.17179683);
                             node[emergency=access_point](around:100,50.69409053, 14.17179683);node[highway=emergency_access_point](around:100,49.18617719, 17.32054969);
                             node[emergency=access_point](around:100,49.18617719, 17.32054969);node[highway=emergency_access_point](around:100,49.08675903, 17.17403956);
@@ -1639,15 +1638,15 @@ node[highway=emergency_access_point](around:100,50.68728483, 14.08421808);
                             node[emergency=access_point](around:100,49.11891581, 17.81839586);node[highway=emergency_access_point](around:100,49.25355486, 17.86468303);
                             node[emergency=access_point](around:100,49.25355486, 17.86468303);node[highway=emergency_access_point](around:100,49.7163435, 15.24081133);
                             node[emergency=access_point](around:100,49.7163435, 15.24081133);node[highway=emergency_access_point](around:100,49.69404556, 15.38895283);
-                            node[emergency=access_point](around:100,49.69404556, 15.38895283);
+                            node[emergency=access_point](around:100,49.69404556, 15.38895283);node[highway=emergency_access_point](around:100,49.71392872, 15.33950567);
+                            node[emergency=access_point](around:100,49.71392872, 15.33950567);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,49.71392872, 15.33950567);
-                            node[emergency=access_point](around:100,49.71392872, 15.33950567);node[highway=emergency_access_point](around:100,49.73309925, 15.26546422);
+node[highway=emergency_access_point](around:100,49.73309925, 15.26546422);
                             node[emergency=access_point](around:100,49.73309925, 15.26546422);node[highway=emergency_access_point](around:100,49.52053353, 15.40879978);
                             node[emergency=access_point](around:100,49.52053353, 15.40879978);node[highway=emergency_access_point](around:100,49.29660456, 15.70405267);
                             node[emergency=access_point](around:100,49.29660456, 15.70405267);node[highway=emergency_access_point](around:100,49.25389536, 15.42598211);
@@ -1666,15 +1665,15 @@ node[highway=emergency_access_point](around:100,49.71392872, 15.33950567);
                             node[emergency=access_point](around:100,49.55422733, 15.39910664);node[highway=emergency_access_point](around:100,49.53075083, 15.29602492);
                             node[emergency=access_point](around:100,49.53075083, 15.29602492);node[highway=emergency_access_point](around:100,49.25143531, 16.22384967);
                             node[emergency=access_point](around:100,49.25143531, 16.22384967);node[highway=emergency_access_point](around:100,49.23676453, 16.21530583);
-                            node[emergency=access_point](around:100,49.23676453, 16.21530583);
+                            node[emergency=access_point](around:100,49.23676453, 16.21530583);node[highway=emergency_access_point](around:100,49.24503822, 16.02958397);
+                            node[emergency=access_point](around:100,49.24503822, 16.02958397);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,49.24503822, 16.02958397);
-                            node[emergency=access_point](around:100,49.24503822, 16.02958397);node[highway=emergency_access_point](around:100,49.22908744, 16.07287178);
+node[highway=emergency_access_point](around:100,49.22908744, 16.07287178);
                             node[emergency=access_point](around:100,49.22908744, 16.07287178);node[highway=emergency_access_point](around:100,49.20674925, 16.19735272);
                             node[emergency=access_point](around:100,49.20674925, 16.19735272);node[highway=emergency_access_point](around:100,49.16795247, 16.15375839);
                             node[emergency=access_point](around:100,49.16795247, 16.15375839);node[highway=emergency_access_point](around:100,49.16618786, 16.17846431);
@@ -1693,15 +1692,15 @@ node[highway=emergency_access_point](around:100,49.24503822, 16.02958397);
                             node[emergency=access_point](around:100,49.26416869, 16.20909414);node[highway=emergency_access_point](around:100,49.445271, 16.26286433);
                             node[emergency=access_point](around:100,49.445271, 16.26286433);node[highway=emergency_access_point](around:100,49.49900567, 15.84005981);
                             node[emergency=access_point](around:100,49.49900567, 15.84005981);node[highway=emergency_access_point](around:100,49.46356286, 15.86500053);
-                            node[emergency=access_point](around:100,49.46356286, 15.86500053);
+                            node[emergency=access_point](around:100,49.46356286, 15.86500053);node[highway=emergency_access_point](around:100,49.39567758, 15.816156);
+                            node[emergency=access_point](around:100,49.39567758, 15.816156);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,49.39567758, 15.816156);
-                            node[emergency=access_point](around:100,49.39567758, 15.816156);node[highway=emergency_access_point](around:100,49.59300194, 16.16377167);
+node[highway=emergency_access_point](around:100,49.59300194, 16.16377167);
                             node[emergency=access_point](around:100,49.59300194, 16.16377167);node[highway=emergency_access_point](around:100,49.58466383, 16.14072425);
                             node[emergency=access_point](around:100,49.58466383, 16.14072425);node[highway=emergency_access_point](around:100,49.64087653, 16.016202);
                             node[emergency=access_point](around:100,49.64087653, 16.016202);node[highway=emergency_access_point](around:100,49.67980719, 15.94195275);
@@ -1720,15 +1719,15 @@ node[highway=emergency_access_point](around:100,49.39567758, 15.816156);
                             node[emergency=access_point](around:100,50.47532817, 15.42420594);node[highway=emergency_access_point](around:100,50.45797, 15.46030744);
                             node[emergency=access_point](around:100,50.45797, 15.46030744);node[highway=emergency_access_point](around:100,50.45506578, 15.50110244);
                             node[emergency=access_point](around:100,50.45506578, 15.50110244);node[highway=emergency_access_point](around:100,50.39798225, 15.52680656);
-                            node[emergency=access_point](around:100,50.39798225, 15.52680656);
+                            node[emergency=access_point](around:100,50.39798225, 15.52680656);node[highway=emergency_access_point](around:100,50.39656083, 15.56771428);
+                            node[emergency=access_point](around:100,50.39656083, 15.56771428);
  ); 
  out; 
  out count; 
 
 [out:csv(::lat, ::lon, "ref", name, ::count)]; 
  ( 
-node[highway=emergency_access_point](around:100,50.39656083, 15.56771428);
-                            node[emergency=access_point](around:100,50.39656083, 15.56771428);node[highway=emergency_access_point](around:100,50.38518025, 15.65607336);
+node[highway=emergency_access_point](around:100,50.38518025, 15.65607336);
                             node[emergency=access_point](around:100,50.38518025, 15.65607336);node[highway=emergency_access_point](around:100,50.48986147, 15.56006519);
                             node[emergency=access_point](around:100,50.48986147, 15.56006519);node[highway=emergency_access_point](around:100,50.31198414, 15.58898297);
                             node[emergency=access_point](around:100,50.31198414, 15.58898297);node[highway=emergency_access_point](around:100,50.40775511, 15.44975269);
@@ -1747,7 +1746,8 @@ node[highway=emergency_access_point](around:100,50.39656083, 15.56771428);
                             node[emergency=access_point](around:100,50.35324342, 15.76899947);node[highway=emergency_access_point](around:100,50.50519431, 15.78021858);
                             node[emergency=access_point](around:100,50.50519431, 15.78021858);node[highway=emergency_access_point](around:100,50.50938542, 15.82484928);
                             node[emergency=access_point](around:100,50.50938542, 15.82484928);node[highway=emergency_access_point](around:100,50.50599922, 15.89448958);
-                            node[emergency=access_point](around:100,50.50599922, 15.89448958);
+                            node[emergency=access_point](around:100,50.50599922, 15.89448958);node[highway=emergency_access_point](around:100,50.43607319, 15.8717455);
+                            node[emergency=access_point](around:100,50.43607319, 15.8717455);
  ); 
  out; 
  out count; 
