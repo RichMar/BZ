@@ -167,7 +167,7 @@ f = open("comm_wr.txt", "w")
 with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
-    overpass_url = "http://overpass-api.de/api/interpreter"
+    overpass_url = "https://overpass-api.de/api/interpreter"
     overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
     overpass_end = "\n ); \n out; \n out count; \n"
    # f = open("comm_wr.txt", "w")
@@ -216,7 +216,25 @@ with open(vstup, encoding='cp852') as csv_file:
                 # response = r.get()
                 # print("Blabla" + future.get())
 
-                response = requests.get(overpass_url, params={'data': overpass_query})
+                headers = {
+                            'User-Agent': 'RichMar-BZ/1.0'
+                          }
+ 
+                response = requests.get(
+                overpass_url,
+                params={'data': overpass_query},
+                headers=headers,
+                timeout=120
+                )
+                #response = requests.get(overpass_url, params={'data': overpass_query})
+
+                print("HTTP status: " + str(response.status_code))
+ 
+                if response.status_code != 200:
+                print("CHYBA Overpass API:")
+                print(response.text)
+                sys.exit(1)
+                    
                 # print(type(response))
                 print("encoding :" + response.encoding)
                 # response.encoding = 'cp852'
