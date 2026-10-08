@@ -211,20 +211,17 @@ with open(vstup, encoding='cp852') as csv_file:
                 print("Overpass_query_ja:" + overpass_query)
                 print(line_count)
                 # posle dotaz na overpass
-
                 # print(future.get())
                 # response = r.get()
                 # print("Blabla" + future.get())
-
                 headers = {
                             'User-Agent': 'RichMar-BZ/1.0'
-                          }
- 
+                }
                 response = requests.get(
-                overpass_url,
-                params={'data': overpass_query},
-                headers=headers,
-                timeout=120
+                    overpass_url,
+                    params={'data': overpass_query},
+                    headers=headers,
+                    timeout=120
                 )
                 #response = requests.get(overpass_url, params={'data': overpass_query})
 
