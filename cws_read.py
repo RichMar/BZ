@@ -224,14 +224,11 @@ with open(vstup, encoding='cp852') as csv_file:
                     timeout=120
                 )
                 #response = requests.get(overpass_url, params={'data': overpass_query})
-
                 print("HTTP status: " + str(response.status_code))
- 
                 if response.status_code != 200:
                 print("CHYBA Overpass API:")
                 print(response.text)
-                sys.exit(1)
-                    
+                sys.exit(1) 
                 # print(type(response))
                 print("encoding :" + response.encoding)
                 # response.encoding = 'cp852'
