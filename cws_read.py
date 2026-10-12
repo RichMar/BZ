@@ -225,6 +225,9 @@ with open(vstup, encoding='cp852') as csv_file:
                 )
                 #response = requests.get(overpass_url, params={'data': overpass_query})
                 print("HTTP status: " + str(response.status_code))
+                print(response.text[:1000])
+                data = [row.split('\t') for row in response.text.split('\n')]
+                print("DATA LEN:", len(data))
                 if response.status_code != 200:
                     print("CHYBA Overpass API:")
                 print(response.text)
@@ -259,6 +262,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 # osm_bz_resp.writerow(str(c*50))
 
                 for x in data[:m]:
+                    print("DEBUG X:", x)
                     try:
                         if x[2] == "NJ014" in str(x):
                             print("ref")
