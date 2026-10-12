@@ -167,7 +167,8 @@ f = open("comm_wr.txt", "w")
 with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
-    overpass_url = "https://overpass-api.de/api/interpreter"
+    # overpass_url = "https://overpass-api.de/api/interpreter"
+    overpass_url = "https://lz4.overpass-api.de/api/interpreter"
     overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
     overpass_end = "\n ); \n out; \n out count; \n"
    # f = open("comm_wr.txt", "w")
@@ -218,12 +219,20 @@ with open(vstup, encoding='cp852') as csv_file:
                 headers = {
                             'User-Agent': 'RichMar-BZ/1.0'
                 }
-                response = requests.post(
-                    overpass_url,
-                    params={'data': overpass_query},
-                    headers=headers,
-                    timeout=120
-                )
+                for pokus in range(5):
+                    try:
+                        response = requests.post(
+                            overpass_url,
+                            data={'data': overpass_query},
+                            headers=headers,
+                            timeout=120
+                        )
+                        break
+                    except requests.exceptions.RequestException as e:
+                        print("Chyba spojení:", e)
+                        time.sleep(30)
+                else:
+                    sys.exit(1)
                 #response = requests.get(overpass_url, params={'data': overpass_query})
                 print("HTTP status: " + str(response.status_code))
                 print(response.text[:1000])
