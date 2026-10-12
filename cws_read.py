@@ -192,8 +192,10 @@ with open(vstup, encoding='cp852') as csv_file:
             row[2] = row[2].replace("\t", "")
             row[2] = row[2].replace(" ", "")
             # dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
-            dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);
+            # dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);
                             node[emergency=access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
+            dotaz_body = """node(around:100,""" + row[0] + """, """ + row[1] + """)["highway"="emergency_access_point"];
+                node(around:100,""" + row[0] + """, """ + row[1] + """)["emergency"="access_point"];"""
             overpass_query = overpass_query + dotaz_body
             # overpass_query = overpass_query + overpass_end
             print(f'x={row[0]}; y= {row[1]}; {row[2]}.')
