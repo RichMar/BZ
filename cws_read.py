@@ -169,7 +169,8 @@ with open(vstup, encoding='cp852') as csv_file:
     line_count = 0
     # overpass_url = "https://overpass-api.de/api/interpreter"
     overpass_url = "https://lz4.overpass-api.de/api/interpreter"
-    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
+    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:180][maxsize:1073741824]; \n ( \n"""
+    print(overpass_url)
     overpass_end = "\n ); \n out; \n out count; \n"
    # f = open("comm_wr.txt", "w")
     c = 1
@@ -205,7 +206,7 @@ with open(vstup, encoding='cp852') as csv_file:
             print(line_count)
             # c*xx - hodnta xx nastaví počet bodů v jednom požadavku na overpass
             # původně nastaveno 20 (změna 12.10.2026 5)
-            if line_count == c * 5:
+            if line_count == c * 2:
                 overpass_query = overpass_query + overpass_end
                 c = c + 1
                 # zapise prikaz api overpaass do souboru txt }
@@ -221,6 +222,9 @@ with open(vstup, encoding='cp852') as csv_file:
                 }
                 for pokus in range(5):
                     try:
+                        print("SERVER:", overpass_url)
+                        print("DOTAZ:")
+                        print(overpass_query)
                         response = requests.post(
                             overpass_url,
                             data={'data': overpass_query},
@@ -267,7 +271,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 # cp852
                 # vymaže dotaz
                 overpass_query = ""
-                overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:180]; \n ( \n"""
+                overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:180][maxsize:1073741824]; \n ( \n"""
                 # prvni = 3
                 # osm_bz_resp.writerow(str(c*50))
 
