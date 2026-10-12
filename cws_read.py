@@ -203,7 +203,8 @@ with open(vstup, encoding='cp852') as csv_file:
             line_count += 1
             print(line_count)
             # c*xx - hodnta xx nastaví počet bodů v jednom požadavku na overpass
-            if line_count == c * 20:
+            # původně nastaveno 20 (změna 12.10.2026 5)
+            if line_count == c * 5:
                 overpass_query = overpass_query + overpass_end
                 c = c + 1
                 # zapise prikaz api overpaass do souboru txt }
@@ -217,7 +218,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 headers = {
                             'User-Agent': 'RichMar-BZ/1.0'
                 }
-                response = requests.get(
+                response = requests.post(
                     overpass_url,
                     params={'data': overpass_query},
                     headers=headers,
@@ -257,7 +258,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 # cp852
                 # vymaže dotaz
                 overpass_query = ""
-                overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)]; \n ( \n"""
+                overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:180]; \n ( \n"""
                 # prvni = 3
                 # osm_bz_resp.writerow(str(c*50))
 
