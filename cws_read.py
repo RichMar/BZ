@@ -189,17 +189,20 @@ print(f"Staženo řádků z Overpass: {len(data)}")
 
 # Zpracování stažených dat z Overpass
 for x in data:
-    if len(x) >= 3 and x[0] != '@lat' and x[0].strip() != '':
+    # Ošetříme, aby řádek nebyl prázdný a nebyl to záhlaví (@lat)
+    if len(x) >= 2 and x[0].strip() != '' and not "lat" in str(x) and not "<" in str(x):
         lat = x[0].replace(",", ".")
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
-        name = x[3].strip() if len(x) > 3 else ""
         
         bod_overpass = [lat, lon, ref]
+        
+        # Pokud má bod v OSM hodnotu REF, uloží se do overpass seznamu, jinak do bezref
         if ref != "":
             body_overpass_seznam.append(bod_overpass)
         else:
             body_les_seznam_bezref.append(bod_overpass)
+            
         pocetboducelkem += 1
 
 print(f"Pocet nalezenych bodu v OSM: {pocetboducelkem}")
