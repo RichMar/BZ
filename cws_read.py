@@ -126,14 +126,20 @@ with open(vstup, encoding='cp852') as csv_file:
 print("Načteno {len(body_les_seznam)} bodů ze vstupního souboru.")
 
 # 2. Stažení všech bodů z Overpass API najednou (pro celé Česko)
-overpass_url = "https://overpass-api.de/api/interpreter"
+# Seznam ověřených Overpass endpointů (zrcadel)
+overpass_urls = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.openstreetmap.fr/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+]
+
 overpass_query = """
 [out:csv(::lat, ::lon, "ref", name)][timeout:90];
 area[name="Česko"]->.searchArea;
 (
   node(area.searchArea)["highway"="emergency_access_point"];
   node(area.searchArea)["emergency"="access_point"];
-);
+];
 out body;
 """
 
@@ -143,22 +149,38 @@ headers = {
 
 print("Stahuji všechny body z Overpass API pro celé Česko...")
 response = None
-for pokus in range(5):
-    try:
-        response = requests.post(
-            overpass_url,
-            data={'data': overpass_query},
-            headers=headers,
-            timeout=120
-        )
-        if response.status_code == 200:
-            break
-        print(f"Server vrátil status {response.status_code}, opakuji pokus...")
-    except requests.exceptions.RequestException as e:
-        print("Chyba spojení:", e)
-        time.sleep(30)
-else:
-    print("Nepodařilo se získat data z Overpass API.")
+uspech = False
+
+# Procházíme jednotlivá zrcadla v seznamu
+for overpass_url in overpass_urls:
+    print(f"Zkouším server: {overpass_url}")
+    for pokus in range(3): # 3 pokusy na jedno zrcadlo
+        try:
+            response = requests.post(
+                overpass_url,
+                data={'data': overpass_query},
+                headers=headers,
+                timeout=120
+            )
+            if response.status_code == 200:
+                print(f"Úspěšně staženo z {overpass_url}")
+                uspech = True
+                break
+            else:
+                print(f"  Server vrátil status {response.status_code}, opakuji...")
+                time.sleep(5)
+        except requests.exceptions.RequestException as e:
+            print(f"  Chyba spojení ({e}), opakuji...")
+            time.sleep(10)
+    
+    if uspech:
+        break
+    else:
+        print(f"Server {overpass_url} selhal, zkouším další zrcadlo...")
+
+# Pokud selhaly všechny servery, skript ukončíme
+if not uspech:
+    print("Nepodařilo se získat data z žádného Overpass API serveru.")
     sys.exit(1)
 
 response.encoding = 'windows-1250'
