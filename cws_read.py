@@ -224,16 +224,24 @@ for y in body_overpass_seznam:
             float(y[0]), float(y[1])
         ) * 1000  # převod na metry
         
+        # Pokud je bod v OSM dál než 100m od bodu v LČR, má pravděpodobně špatnou pozici nebo ref
         if vzdalenost > 100:
             dist.write(ref + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
                         + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
             print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
+            # Tady patří body, které se liší pozicí/nesedí
             body_les_seznam_bezref.append(y)
             if vstup == 'OSMchybejicibody.csv':
                 vymazatz_body_overpass_seznam.append(y)
     else:
+        # Pokud ref z OSM vůbec není v LČR seznamu (nebo má chybějící ref)
         body_les_seznam_bezref.append(y)
         vymazatz_body_overpass_seznam.append(y)
+
+# Přidáme sem i ty body z Overpassu, které už v surovém stahování neměly vyplněný ref
+for y_noref in body_overpass_seznam_bezref if 'body_overpass_seznam_bezref' in locals() else []:
+    if y_noref not in body_les_seznam_bezref:
+        body_les_seznam_bezref.append(y_noref)
 
 for s in vymazatz_body_overpass_seznam:
     ref = s[2]
