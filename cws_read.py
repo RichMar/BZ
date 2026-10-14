@@ -123,7 +123,7 @@ with open(vstup, encoding='cp852') as csv_file:
             body_les_seznam.append(bod_les)
             line_count += 1
 
-print(Načteno {len(body_les_seznam)} bodů ze vstupního souboru.)
+print("Načteno {len(body_les_seznam)} bodů ze vstupního souboru.")
 
 # 2. Stažení všech bodů z Overpass API najednou (pro celé Česko)
 overpass_url = "https://overpass-api.de/api/interpreter"
