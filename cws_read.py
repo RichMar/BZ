@@ -212,7 +212,7 @@ with open(vstup, encoding='cp852') as csv_file:
             print(line_count)
             # c*xx - hodnta xx nastaví počet bodů v jednom požadavku na overpass
             # původně nastaveno 20 (změna 12.10.2026 5)
-            if line_count == c * 20:
+            if line_count == c * 2:
                 overpass_query = overpass_query + overpass_end
                 c = c + 1
                 # zapise prikaz api overpaass do souboru txt }
@@ -224,7 +224,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 # response = r.get()
                 # print("Blabla" + future.get())
                 headers = {
-                            'User-Agent': 'RichMar-BZ-Bot/1.0 (richard.marik@gmail.com'
+                            'User-Agent': 'RichMar-BZ-Bot/1.0 (richard.marik@gmail.com)'
                 }
                 for pokus in range(5):
                     try:
@@ -235,7 +235,7 @@ with open(vstup, encoding='cp852') as csv_file:
                             overpass_url,
                             data={'data': overpass_query},
                             headers=headers,
-                            timeout=120
+                            timeout=30
                         )
                         time.sleep(2) #Pauza mezi dotazy
                         break
