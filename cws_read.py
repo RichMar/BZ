@@ -169,7 +169,8 @@ with open(vstup, encoding='cp852') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=oddelovac)
     line_count = 0
     # overpass_url = "https://overpass-api.de/api/interpreter"
-    overpass_url = "https://lz4.overpass-api.de/api/interpreter"
+    # overpass_url = "https://lz4.overpass-api.de/api/interpreter"
+    overpass_url = "https://overpass.kumi.systems/api/interpreter"
     # overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:30]; \n ( \n"""
     overpass_query = """[out:csv(::lat, ::lon, "ref", name)][timeout:30]; \n ( \n"""
     print(overpass_url)
@@ -211,7 +212,7 @@ with open(vstup, encoding='cp852') as csv_file:
             print(line_count)
             # c*xx - hodnta xx nastaví počet bodů v jednom požadavku na overpass
             # původně nastaveno 20 (změna 12.10.2026 5)
-            if line_count == c * 2:
+            if line_count == c * 20:
                 overpass_query = overpass_query + overpass_end
                 c = c + 1
                 # zapise prikaz api overpaass do souboru txt }
@@ -223,7 +224,7 @@ with open(vstup, encoding='cp852') as csv_file:
                 # response = r.get()
                 # print("Blabla" + future.get())
                 headers = {
-                            'User-Agent': 'RichMar-BZ/1.0'
+                            'User-Agent': 'RichMar-BZ-Bot/1.0 (richard.marik@gmail.com'
                 }
                 for pokus in range(5):
                     try:
@@ -236,6 +237,7 @@ with open(vstup, encoding='cp852') as csv_file:
                             headers=headers,
                             timeout=120
                         )
+                        time.sleep(2) #Pauza mezi dotazy
                         break
                     except requests.exceptions.RequestException as e:
                         print("Chyba spojení:", e)
