@@ -257,21 +257,27 @@ if not os.path.exists('statistika.csv'):
 
 print('Původní počet bodů:' + str(puvodniseznambodu - 1) + "\n" + "Nový počet bodů: " + str(novyseznambodu))
 
-# Vymazání bodů, které jsou v BZneni.csv
+# vymaze bod ktery je v BZneni.csv z Chybejicbody (OSMchybejicibody.csv)
 if os.path.exists("BZneni.csv"):
-    with open("BZneni.csv", "r") as neni:
-        csv_reader_neni = csv.reader(neni, delimiter=",")
-        line_count_neni = 0
-        for row in csv_reader_neni:
-            if line_count_neni == 0:
-                line_count_neni += 1
-            else:
-                for rr in list(chybejicibody):
-                    vzd = get_distance(float(rr[0]), float(rr[1]), float(row[0]), float(row[1])) * 1000
-                    if vzd < 100:
-                        if rr in chybejicibody:
-                            chybejicibody.remove(rr)
-                            print("Bod " + str(rr) + " byl vymazan z chybejicibody.")
+    with open("BZneni.csv", "r", encoding="utf-8") as neni_file:
+        csv_reader_neni = csv.reader(neni_file, delimiter=",")
+        header_skipped = False
+        for row_neni in csv_reader_neni:
+            if not header_skipped:
+                header_skipped = True
+                continue
+            if len(row_neni) >= 2 and row_neni[0].strip():
+                try:
+                    r_lat = float(row_neni[0].replace(",", "."))
+                    r_lon = float(row_neni[1].replace(",", "."))
+                    for rr in list(chybejicibody):
+                        vzd = get_distance(float(rr[0]), float(rr[1]), r_lat, r_lon) * 1000
+                        if vzd < 100:
+                            if rr in chybejicibody:
+                                chybejicibody.remove(rr)
+                                print(f"Bod {rr} byl vymazan z chybejicibody.")
+                except ValueError:
+                    continue # Kdyby řádek nebyl číslo, bezpečně ho přeskočíme
 
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
