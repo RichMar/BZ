@@ -139,7 +139,7 @@ area[name="Česko"]->.searchArea;
 (
   node(area.searchArea)["highway"="emergency_access_point"];
   node(area.searchArea)["emergency"="access_point"];
-];
+);
 out body;
 """
 
