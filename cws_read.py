@@ -170,9 +170,10 @@ with open(vstup, encoding='cp852') as csv_file:
     line_count = 0
     # overpass_url = "https://overpass-api.de/api/interpreter"
     overpass_url = "https://lz4.overpass-api.de/api/interpreter"
-    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:180][maxsize:1073741824]; \n ( \n"""
+    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:30]; \n ( \n"""
     print(overpass_url)
-    overpass_end = "\n ); \n out; \n out count; \n"
+   # overpass_end = "\n ); \n out; \n out count; \n"
+    overpass_end = "\n ); \n out body; \n"
    # f = open("comm_wr.txt", "w")
     c = 1
     prvni = 0
