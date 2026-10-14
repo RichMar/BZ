@@ -170,7 +170,8 @@ with open(vstup, encoding='cp852') as csv_file:
     line_count = 0
     # overpass_url = "https://overpass-api.de/api/interpreter"
     overpass_url = "https://lz4.overpass-api.de/api/interpreter"
-    overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:30]; \n ( \n"""
+    # overpass_query = """[out:csv(::lat, ::lon, "ref", name, ::count)][timeout:30]; \n ( \n"""
+    overpass_query = """[out:csv(::lat, ::lon, "ref", name)][timeout:30]; \n ( \n"""
     print(overpass_url)
    # overpass_end = "\n ); \n out; \n out count; \n"
     overpass_end = "\n ); \n out body; \n"
@@ -197,7 +198,7 @@ with open(vstup, encoding='cp852') as csv_file:
             # dotaz_body = """node[highway=emergency_access_point](around:100,""" + row[0] + """, """ + row[1] + """);
             #                node[emergency=access_point](around:100,""" + row[0] + """, """ + row[1] + """);"""
             dotaz_body = """node(around:100,""" + row[0] + """, """ + row[1] + """)["highway"="emergency_access_point"];
-               node(around:100,""" + row[0] + """, """ + row[1] + """)["emergency"="access_point"];"""
+            node(around:100,""" + row[0] + """, """ + row[1] + """)["emergency"="access_point"];"""
             overpass_query = overpass_query + dotaz_body
             # overpass_query = overpass_query + overpass_end
             print(f'x={row[0]}; y= {row[1]}; {row[2]}.')
