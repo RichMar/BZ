@@ -81,8 +81,6 @@ for root, dirs, files in os.walk(Path.cwd()):
                         print('{}'.format(x + '\n'), end='')
                 else:
                     print('{}'.format(line), end='')
-if not found_home:
-    print("VAROVÁNÍ: Soubor Home.md nebyl v prohledávaných složkách nalezen!")
     
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
             full_path = os.path.join(root, name)
@@ -99,5 +97,8 @@ if not found_home:
                     print('{}'.format(y + '\n'), end='')
                 else:
                     print('{}'.format(line), end='')
+
+if not found_home:
+    print("VAROVÁNÍ: Soubor Home.md nebyl v prohledávaných složkách nalezen!")
 
 print("ahoj wikipg")
