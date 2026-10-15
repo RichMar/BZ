@@ -134,8 +134,18 @@ overpass_urls = [
     "https://overpass.kumi.systems/api/interpreter"
 ]
 
+# overpass_query = """
+# [out:csv(::lat, ::lon, "ref", name)][timeout:90];
+# area[name="Česko"]->.searchArea;
+# (
+#   node(area.searchArea)["highway"="emergency_access_point"];
+#   node(area.searchArea)["emergency"="access_point"];
+# );
+# out body;
+# """
+
 overpass_query = """
-[out:csv(::lat, ::lon, "ref", name)][timeout:90];
+[out:csv(::lat, ::lon, "ref", name, ::user)][timeout:90];
 area[name="Česko"]->.searchArea;
 (
   node(area.searchArea)["highway"="emergency_access_point"];
@@ -189,16 +199,24 @@ data = [row.split('\t') for row in response.text.split('\n')]
 print(f"Staženo řádků z Overpass: {len(data)}")
 
 # Zpracování stažených dat z Overpass
+from collections import Counter
+
+uzivatele_counter = Counter()
+
+# Zpracování stažených dat z Overpass
 for x in data:
-    # Ošetříme, aby řádek nebyl prázdný a nebyl to záhlaví (@lat)
     if len(x) >= 2 and x[0].strip() != '' and not "lat" in str(x) and not "<" in str(x):
         lat = x[0].replace(",", ".")
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
         
+        # Získání uživatele z 5. sloupce (index 4), pokud existuje
+        uzivatel = x[4].strip() if len(x) > 4 and x[4].strip() != '' else "Anonymní / Neznámý"
+        if uzivatel:
+            uzivatele_counter[uzivatel] += 1
+        
         bod_overpass = [lat, lon, ref]
         
-        # Pokud má bod v OSM hodnotu REF, uloží se do overpass seznamu, jinak do bezref
         if ref != "":
             body_overpass_seznam.append(bod_overpass)
         else:
@@ -355,6 +373,14 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
         writer = csv.writer(f)
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_les_seznam_bezref)
+
+    # Uložení žebříčku uživatelů pro Wiki
+    with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Uzivatel', 'Pocet_bodu'])
+        # Seřadíme od největšího počtu po nejmenší
+        for uzivatel, pocet in uzivatele_counter.most_common():
+            writer.writerow([uzivatel, pocet])
 
     Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodychybejiciref.gpx')
     gpxtrcktoway('OSMbodychybejiciref.gpx')
