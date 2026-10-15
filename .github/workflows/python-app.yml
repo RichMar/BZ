@@ -47,26 +47,29 @@ jobs:
         python3 -m pip install pandas-geojson
         python3 -m pip install geopandas
         python3 -m pip install shapely
+        
+        # 0. Úklid případného poškozeného gitmodulu (odstraní chybu 128)
+        git rm -f .gitmodules || true
+        rm -rf markdown || true
 
-        # 1. Spuštění hlavního skriptu
+        # 1. Nejdříve si naklonujeme Wiki, aby v ní mohl python upravit Home.md
+        git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git wiki_folder
+
+        # 2. Spuštění hlavního skriptu
         python cws_read.py
 
-        # 2. Commit a push změn v hlavním repozitáři
+        # 3. Commit a push změn v hlavním repozitáři
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add -A
         git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
         git push origin main
-        
-        # 3. Stažení, úprava a push Wiki přes čistý git clone (bez akce checkout)
-        git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git wiki_folder
-        
-        # Zkopírujeme vygenerované soubory zpět do wiki, pokud je potřeba, 
-        # nebo spoléháme na to, že wikipg.py upravil Home.md přímo uvnitř klonu.
-        # (Pokud wikipg.py upravuje soubor Home.md v aktuálním adr., zkopírujeme ho do wiki_folder):
-        if [ -f "Home.md" ]; then cp Home.md wiki_folder/; fi
-
+      
+        # 4. Commit a push změn ve Wiki složce
         cd wiki_folder
+        ls -al
+        git status
+        git show-ref
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add -A
