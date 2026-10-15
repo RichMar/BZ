@@ -149,17 +149,20 @@ if os.path.exists(uzivatele_csv):
                         zf.write(f"| {idx} | {user} | {count} |\n")
                 print(f"Stránka žebříčku uživatelů byla aktualizována: {zeb_path}")
 
-    # Pokud soubor v repozitáři ještě neexistuje, vytvoříme ho
-    if not found_zebricek and os.path.exists('wiki_folder'):
-        new_zeb_path = os.path.join(Path.cwd(), 'wiki_folder', 'Zebricek-uzivatelu.md')
-        with open(new_zeb_path, 'w', encoding='utf-8') as zf:
-            zf.write("# Žebříček přispěvatelů do OSM\n\n")
-            zf.write("Tento žebříček automaticky sleduje uživatele, kteří do OpenStreetMap přidali body záchrany ČR.\n\n")
-            zf.write("| Pořadí | Uživatelské jméno / Editor | Počet bodů |\n")
-            zf.write("| :--- | :--- | ---: |\n")
-            
-            for idx, (user, count) in enumerate(rows_uzivatele, 1):
-                zf.write(f"| {idx} | {user} | {count} |\n")
-        print(f"Byl vytvořen nový soubor žebříčku: {new_zeb_path}")
+    # Pokud soubor v repozitáři ještě neexistuje, prohledáme wiki_folder a vytvoříme ho tam
+    if not found_zebricek:
+        for root, dirs, files in os.walk(Path.cwd()):
+            if os.path.basename(root) == "wiki_folder":
+                new_zeb_path = os.path.join(root, "Zebricek-uzivatelu.md")
+                with open(new_zeb_path, 'w', encoding='utf-8') as zf:
+                    zf.write("# Žebříček přispěvatelů do OSM\n\n")
+                    zf.write("Tento žebříček automaticky sleduje uživatele, kteří do OpenStreetMap přidali body záchrany ČR.\n\n")
+                    zf.write("| Pořadí | Uživatelské jméno / Editor | Počet bodů |\n")
+                    zf.write("| :--- | :--- | ---: |\n")
+                    
+                    for idx, (user, count) in enumerate(rows_uzivatele, 1):
+                        zf.write(f"| {idx} | {user} | {count} |\n")
+                print(f"Byl vytvořen nový soubor žebříčku: {new_zeb_path}")
+                break
 
-print("ahoj wikipg")
+print("Konec wikipg")
