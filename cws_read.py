@@ -3,6 +3,7 @@ import requests
 import time
 import math
 import os
+import importlib
 from cryptography.fernet import Fernet
 import sys
 from gpx_converter import Converter
@@ -358,7 +359,8 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodychybejiciref.gpx')
     gpxtrcktoway('OSMbodychybejiciref.gpx')
 
-    import wikipg
+import wikipg
+importlib.reload(wikipg)
 
 if os.path.exists('OSMchybejicibody.csv'):
     os.remove('OSMchybejicibody.csv')
