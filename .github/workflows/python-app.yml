@@ -13,9 +13,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+# Povolení zápisu pro token, aby mohl pushovat i do Wiki
+    permissions:
+      contents: write
     steps:
     - name: Checkout
       uses: actions/checkout@v6
