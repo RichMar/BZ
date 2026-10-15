@@ -80,18 +80,25 @@ for root, dirs, files in os.walk(Path.cwd()):
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
             full_path = os.path.join(root, name)
             print(f"Nalezen soubor přírůstků: {full_path}")
-            with fileinput.input(full_path) as f:
-                for line in f:
-                    lineno = fileinput.lineno()
-            print(str(lineno))
-            for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
-                if '```' in line and not 'mermaid' in line:
-                    x = ''
-                    print('{}'.format(x), end='')
-                    y = '    section ' + datum_cr + '\n' + '    ' + str(prir) + '    : 0, ' + str(prir) + '\n\n' + '```'
-                    print('{}'.format(y + '\n'), end='')
-                else:
-                    print('{}'.format(line), end='')
+            
+            # Nejdříve načteme celý obsah a zkontrolujeme, zda dnešní datum už v grafu není
+            with open(full_path, 'r', encoding='utf-8') as f:
+                obsah = f.read()
+            
+            # Pokud už dnešní datum v souboru je, přírůstek nepřidáváme znova
+            if f"section {datum_cr}" in obsah:
+                print(f"Záznam pro dnešní datum ({datum_cr}) už v grafu existuje, přeskakuji zápis.")
+            else:
+                with fileinput.input(full_path, inplace=True, encoding="utf-8") as f:
+                    for line in f:
+                        if '```' in line and not 'mermaid' in line:
+                            x = ''
+                            print('{}'.format(x), end='')
+                            y = '    section ' + datum_cr + '\n' + '    ' + str(prir) + '    : 0, ' + str(prir) + '\n\n' + '```'
+                            print('{}'.format(y + '\n'), end='')
+                        else:
+                            print('{}'.format(line), end='')
+                print(f"Přidán nový záznam do sloupcového grafu pro datum: {datum_cr}")
 
 if not found_home:
     print("VAROVÁNÍ: Soubor Home.md nebyl v prohledávaných složkách nalezen!")
