@@ -68,16 +68,22 @@ jobs:
             git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
             git push origin main
             
+    - name: Push changes to Wiki
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
             cd markdown
             ls -al
             git status
             git show-ref
             git config user.name github-actions
             git config user.email github-actions@github.com
-            git fetch origin master
-            git pull origin master
+            # git fetch origin master
+            # git pull origin master
             git add -A
-            git diff-index --quiet HEAD || git commit -m 'Added my project markdown'
+            git diff-index --quiet HEAD || git commit -m 'Automatic wiki update by script'
+            # Bezpečný push do wiki pomocí GitHub tokenu
+            git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git
             git push origin master
             
 # git commit -m 'Added my project bz1'            
