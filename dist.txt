@@ -1100,3 +1100,4 @@ SU028 114365.36291543186|LCR:50.09250861,17.19603331|OSM:49.0643882,17.1522399
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
 Vzdalenost bodu nize je vetsi nez 100m:
+Vzdalenost bodu nize je vetsi nez 100m:
