@@ -54,20 +54,28 @@ for root, dirs, files in os.walk(Path.cwd()):
             # print(files)
             print(full_path)
             for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
-                if 'Chy' in line and r == 1:
-                    a = line.find(':') + 2
-                    x = line.replace(line[a:], str(chb))
-                    print('{}'.format(x + '\n'), end='')
-                elif 'OSM' in line and 'pie' not in line and r == 1:
-                    a = line.find(':') + 2
-                    x = line.replace(line[a:], str(bodyvOSM))
-                    print('{}'.format(x + '\n'), end='')
-                elif 'REF' in line:
+            if 'Chy' in line and r == 1:
+                a = line.find(':') + 2
+                x = line.replace(line[a:], str(chb))
+                print('{}'.format(x + '\n'), end='')
+            elif 'OSM' in line and 'pie' not in line and r == 1:
+                a = line.find(':') + 2
+                x = line.replace(line[a:], str(bodyvOSM))
+                print('{}'.format(x + '\n'), end='')
+            elif 'REF' in line:
+                # Ošetříme jak textový řádek, tak řádek v Mermaid grafu v úvozovkách
+                if '"Body s problémovou REF hodnotou"' in line or '"Body s problémov' in line:
+                    # Řádek v mermaid grafu vypadá např:    "Body s problémovou REF hodnotou" : 1808
+                    parts = line.split(':')
+                    x = parts[0] + ': ' + str(proble)
+                    print('{}'.format(x), end='')
+                else:
+                    # Běžný textový řádek dole
                     a = line.find(':') + 2
                     x = line.replace(line[a:], str(proble))
                     print('{}'.format(x + '\n'), end='')
-                else:
-                    print('{}'.format(line), end='')
+            else:
+                print('{}'.format(line), end='')
 
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
             full_path = os.path.join(root, name)
