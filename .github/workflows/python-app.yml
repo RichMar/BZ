@@ -23,11 +23,11 @@ jobs:
     - name: check main repo content
       run: |
           ls -al
-    - name: Checkout wiki code
-      uses: actions/checkout@v6
-      with:
-          repository: ${{github.repository}}.wiki    # specify the wiki repo name here.
-          path: markdown
+    # - name: Checkout wiki code
+    #   uses: actions/checkout@v6
+    #   with:
+    #       repository: ${{github.repository}}.wiki    # specify the wiki repo name here.
+    #       path: markdown
     - name: check wiki repo content
       run: |
           ls -al          
@@ -35,11 +35,10 @@ jobs:
       uses: actions/setup-python@v7
       with:
         python-version: "3.10"
-    - name: Install dependencies
-    
+    - name: Install dependencies and run script
       env:
         REPO_SECRET: ${{ secrets.KEYOSMBZ }}
-    
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install requests
@@ -48,108 +47,58 @@ jobs:
         python3 -m pip install pandas-geojson
         python3 -m pip install geopandas
         python3 -m pip install shapely
+
+        # 1. Spuštění hlavního skriptu
         python cws_read.py
 
-                 
-   # - name: Push changes
-   #   uses: ad-m/github-push-action@master
-   #   with:
-   #     github_token: ${{ secrets.GITHUB_TOKEN }}
-   #     branch: ${{ github.ref }}
+        # 2. Commit a push změn v hlavním repozitáři
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add -A
+        git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
+        git push origin main
         
-    - name: Push changes
-      run: |
-            ls -al
-            git status
-            git show-ref
-            git config user.name github-actions
-            git config user.email github-actions@github.com
-            git add -A
-            git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
-            git push origin main
-            
-    - name: Push changes to Wiki
-      env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-            cd markdown
-            ls -al
-            git status
-            git show-ref
-            git config user.name github-actions
-            git config user.email github-actions@github.com
-            # git fetch origin master
-            # git pull origin master
-            git add -A
-            git diff-index --quiet HEAD || git commit -m 'Automatic wiki update by script'
-            # Bezpečný push do wiki pomocí GitHub tokenu
-            git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git
-            git push origin master
-            
-# git commit -m 'Added my project bz1'            
-# git commit -a -m 'Added my project markdown'        
-# cd ..
-# ls -al
-# git status
-# git show-ref
-# git config user.name github-actions
-# git config user.email github-actions@github.com
-# git checkout -b master
-# git add -A
-# git commit -a -m "Added my project bz1"
-# git add archiv/
-# git commit -a -m "Added my project bz2"
-# git push origin main
+        # 3. Stažení, úprava a push Wiki přes čistý git clone (bez akce checkout)
+        git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git wiki_folder
+        
+        # Zkopírujeme vygenerované soubory zpět do wiki, pokud je potřeba, 
+        # nebo spoléháme na to, že wikipg.py upravil Home.md přímo uvnitř klonu.
+        # (Pokud wikipg.py upravuje soubor Home.md v aktuálním adr., zkopírujeme ho do wiki_folder):
+        if [ -f "Home.md" ]; then cp Home.md wiki_folder/; fi
 
-  # git rm --cached markdown/
-  # git commit -m "remove cached repo"
-  # git add archiv/
-  # git add markdown/
-  # git add -A
-  # git commit -m "Add folder"
-  # git push
-  
-# git rm --cached markdown
+        cd wiki_folder
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add -A
+        git diff-index --quiet HEAD || git commit -m 'Automatic wiki update by script'
+        git push origin master
         
-     #    env:
-     #          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #   cd markdown 
-        #   git config user.name github-actions
-        #   git config user.email github-actions@github.com
-        #   git status -s
-        #   git add .
-        #   git fetch origin master:tmp
-        #   git rebase tmp --autostash
-        #   git diff-index --quiet HEAD || git commit -m "Add changes" && git push origin HEAD:master
-        #   git branch -D tmp
-   
-      #   cd markdown 
-      #   git config user.name github-actions
-      #   git config user.email github-actions@github.com
+    # - name: Push changes
+      # run: |
+       #      ls -al
+         #    git status
+           #  git show-ref
+            # git config user.name github-actions
+            # git config user.email github-actions@github.com
+            # git add -A
+            # git diff-index --quiet --cached HEAD || git commit -m 'Added my project bz1'
+            # git push origin main  
         
-      # git commit -m "crongenerated"
-      # git push
-        
-      # env:
-        # ENV_SECRET: ${{ env.AHOJ }} 
-        # REPO_SECRET: ${{ secrets.KEYOSMBZ }}
-
-    #- name: Lint with flake8
-     # run: |
-        # stop the build if there are Python syntax errors or undefined names
-      #  flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-       #flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    #- name: Test with pytest
-    #  run: |
-       # pytest
-       
-       #__________________________________________________________________________________
-        #python -m idlelib
-        #pip3 install -r requirements.txt
-        #pip3 install requests
-        
-        
-               #python -m pip install --upgrade pip
-        #pip install flake8 pytest
-        #if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # - name: Push changes to Wiki
+    #   env:
+    #     TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: |
+    #         cd markdown
+    #         ls -al
+    #         git status
+    #         git show-ref
+    #         git config user.name github-actions
+    #         git config user.email github-actions@github.com
+             # git fetch origin master
+             # git pull origin master
+    #         git add -A
+    #         git diff-index --quiet HEAD || git commit -m 'Automatic wiki update by script'
+             # Bezpečný push do wiki pomocí GitHub tokenu
+    #         git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git
+    #         git push origin master
+            
