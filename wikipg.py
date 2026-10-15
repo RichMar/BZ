@@ -52,7 +52,8 @@ for root, dirs, files in os.walk(Path.cwd()):
             # print(root)
             # print(dirs)
             # print(files)
-            print(full_path)
+            print(f"Nalezen soubor: {full_path}")
+            print(f"Aktuální hodnota 'proble' pro zápis: {proble}")
             for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
                 if 'Chy' in line and r == 1:
                     a = line.find(':') + 2
@@ -63,11 +64,15 @@ for root, dirs, files in os.walk(Path.cwd()):
                     x = line.replace(line[a:], str(bodyvOSM))
                     print('{}'.format(x + '\n'), end='')
                 elif 'REF' in line:
+                    # Diagnostický výpis do konzole GitHub Actions (zobrazí se v logu)
+                    print(f"DEBUG NALEZEN REF ŘÁDEK: {line.strip()}")
+                    
                     # Ošetříme jak textový řádek, tak řádek v Mermaid grafu v úvozovkách
                     if '"Body s problémovou REF hodnotou"' in line or '"Body s problémov' in line:
                         # Řádek v mermaid grafu vypadá např:    "Body s problémovou REF hodnotou" : 1808
                         parts = line.split(':')
-                        x = parts[0] + ': ' + str(proble)
+                        # Přidáme zpět odřádkování \n, aby se nerozhodila struktura souboru
+                        x = parts[0] + ': ' + str(proble) + '\n'
                         print('{}'.format(x), end='')
                     else:
                         # Běžný textový řádek dole
@@ -76,7 +81,9 @@ for root, dirs, files in os.walk(Path.cwd()):
                         print('{}'.format(x + '\n'), end='')
                 else:
                     print('{}'.format(line), end='')
-
+if not found_home:
+    print("VAROVÁNÍ: Soubor Home.md nebyl v prohledávaných složkách nalezen!")
+    
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
             full_path = os.path.join(root, name)
             print(full_path)
