@@ -57,24 +57,39 @@ for root, dirs, files in os.walk(Path.cwd()):
             
             for line in fileinput.input(full_path, inplace=True, encoding="utf-8"):
                 if 'Chy' in line and r == 1:
-                    a = line.find(':') + 2
-                    x = line.replace(line[a:], str(chb))
-                    print('{}'.format(x + '\n'), end='')
-                elif 'OSM' in line and 'pie' not in line and r == 1:
-                    a = line.find(':') + 2
-                    x = line.replace(line[a:], str(bodyvOSM))
-                    print('{}'.format(x + '\n'), end='')
-                elif 'REF' in line:
-                    # Ošetříme jak textový řádek, tak řádek v Mermaid grafu v úvozovkách
-                    if '"Body s problémovou REF hodnotou"' in line or '"Body s problémov' in line:
-                        parts = line.split(':')
-                        x = parts[0] + ': ' + str(proble)
-                        print('{}'.format(x), end='')
+                    # Pokud jde o textový řádek dole (ne v grafu)
+                    if not line.strip().startswith('"'):
+                        a = line.find(':') + 2
+                        x = line.replace(line[a:], str(chb))
+                        print('{}'.format(x + '\n'), end='')
                     else:
+                        # Řádek v mermaid grafu: "Chybějící body" : 1305
+                        parts = line.split(':')
+                        x = parts[0].strip() + ' : ' + str(chb)
+                        print('    {}'.format(x), end='\n')
+                elif 'OSM' in line and 'pie' not in line and r == 1:
+                    if not line.strip().startswith('"'):
+                        a = line.find(':') + 2
+                        x = line.replace(line[a:], str(bodyvOSM))
+                        print('{}'.format(x + '\n'), end='')
+                    else:
+                        # Řádek v mermaid grafu: "Body záchrany v OSM" : 866
+                        parts = line.split(':')
+                        x = parts[0].strip() + ' : ' + str(bodyvOSM)
+                        print('    {}'.format(x), end='\n')
+                elif 'REF' in line:
+                    if not line.strip().startswith('"'):
+                        # Běžný textový řádek dole: Body s problémovou REF hodnotou : 19
                         a = line.find(':') + 2
                         x = line.replace(line[a:], str(proble))
                         print('{}'.format(x + '\n'), end='')
+                    else:
+                        # Řádek v mermaid grafu: "Body s problémovou REF hodnotou" : 19
+                        parts = line.split(':')
+                        x = parts[0].strip() + ' : ' + str(proble)
+                        print('    {}'.format(x), end='\n')
                 else:
+                    # Všechny ostatní řádky (včetně ```mermaid a ```) necháme naprosto netknuté!
                     print('{}'.format(line), end='')
 
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
