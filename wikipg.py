@@ -55,7 +55,7 @@ for root, dirs, files in os.walk(Path.cwd()):
             print(f"Nalezen soubor: {full_path}")
             print(f"Aktuální hodnota 'proble' pro zápis: {proble}")
             
-            for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
+            for line in fileinput.input(full_path, inplace=True, encoding="utf-8"):
                 if 'Chy' in line and r == 1:
                     a = line.find(':') + 2
                     x = line.replace(line[a:], str(chb))
@@ -65,11 +65,10 @@ for root, dirs, files in os.walk(Path.cwd()):
                     x = line.replace(line[a:], str(bodyvOSM))
                     print('{}'.format(x + '\n'), end='')
                 elif 'REF' in line:
-                    print(f"DEBUG NALEZEN REF ŘÁDEK: {line.strip()}")
-                    
+                    # Ošetříme jak textový řádek, tak řádek v Mermaid grafu v úvozovkách
                     if '"Body s problémovou REF hodnotou"' in line or '"Body s problémov' in line:
                         parts = line.split(':')
-                        x = parts[0] + ': ' + str(proble) + '\n'
+                        x = parts[0] + ': ' + str(proble)
                         print('{}'.format(x), end='')
                     else:
                         a = line.find(':') + 2
