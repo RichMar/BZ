@@ -44,16 +44,17 @@ proble = len(data1[0]) -1
 # print(full_path)
 
 print(Path.cwd())
+found_home = False
+
 for root, dirs, files in os.walk(Path.cwd()):
     for name in files:
         if name.endswith(("Home.md")):
+            found_home = True
             full_path = os.path.join(root, name)
 
-            # print(root)
-            # print(dirs)
-            # print(files)
             print(f"Nalezen soubor: {full_path}")
             print(f"Aktuální hodnota 'proble' pro zápis: {proble}")
+            
             for line in fileinput.input(full_path, inplace=True, encoding="cp852"):
                 if 'Chy' in line and r == 1:
                     a = line.find(':') + 2
@@ -64,27 +65,22 @@ for root, dirs, files in os.walk(Path.cwd()):
                     x = line.replace(line[a:], str(bodyvOSM))
                     print('{}'.format(x + '\n'), end='')
                 elif 'REF' in line:
-                    # Diagnostický výpis do konzole GitHub Actions (zobrazí se v logu)
                     print(f"DEBUG NALEZEN REF ŘÁDEK: {line.strip()}")
                     
-                    # Ošetříme jak textový řádek, tak řádek v Mermaid grafu v úvozovkách
                     if '"Body s problémovou REF hodnotou"' in line or '"Body s problémov' in line:
-                        # Řádek v mermaid grafu vypadá např:    "Body s problémovou REF hodnotou" : 1808
                         parts = line.split(':')
-                        # Přidáme zpět odřádkování \n, aby se nerozhodila struktura souboru
                         x = parts[0] + ': ' + str(proble) + '\n'
                         print('{}'.format(x), end='')
                     else:
-                        # Běžný textový řádek dole
                         a = line.find(':') + 2
                         x = line.replace(line[a:], str(proble))
                         print('{}'.format(x + '\n'), end='')
                 else:
                     print('{}'.format(line), end='')
-    
+
         if name.endswith(("Prirustky-bodu-zachrany-do-OSM.md")):
             full_path = os.path.join(root, name)
-            print(full_path)
+            print(f"Nalezen soubor přírůstků: {full_path}")
             with fileinput.input(full_path) as f:
                 for line in f:
                     lineno = fileinput.lineno()
