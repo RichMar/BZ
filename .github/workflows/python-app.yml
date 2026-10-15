@@ -48,11 +48,21 @@ jobs:
         python3 -m pip install geopandas
         python3 -m pip install shapely
         
-        # 0. Úklid případného poškozeného gitmodulu (odstraní chybu 128)
+        # 0. Úplné vyčištění případných submodulů a cache gitu
         git rm -f .gitmodules || true
+        git rm -rf wiki_folder || true
+        git rm -rf markdown || true
+        rm -rf wiki_folder || true
         rm -rf markdown || true
+        git config --unset-all core.worktree || true
+        git submodule deinit -f wiki_folder || true
+        git submodule deinit -f markdown || true
 
-        # 1. Nejdříve si naklonujeme Wiki, aby v ní mohl python upravit Home.md
+        # Přidáme wiki_folder do .gitignore, aby hlavní git vůbec netušil, že tu složku máme
+        echo "wiki_folder/" >> .gitignore
+        echo "markdown/" >> .gitignore
+
+        # 1. Naklonujeme Wiki jako samostatnou složku (ignorovanou gitem)
         git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git wiki_folder
 
         # 2. Spuštění hlavního skriptu
