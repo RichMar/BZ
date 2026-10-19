@@ -200,8 +200,16 @@ for x in data:
         ref = x[2].strip() if len(x) > 2 else ""
         
         # Operator je na indexu 4, User na indexu 5 (pokud řádek obsahuje dostatek sloupců)
-        oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
-        uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+        # Ošetření kódování pro uživatele a operátora
+        try:
+            uzivatel = x[5].encode('latin1').decode('utf-8').strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+
+        try:
+            oper = x[4].encode('latin1').decode('utf-8').strip() if len(x) > 4 and x[4].strip() != '' else ""
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
         
         # Normalizace názvu operátora pro přehlednost v tabulce
         oper_lower = oper.lower()
