@@ -189,8 +189,10 @@ print(f"Staženo řádků z Overpass: {len(data)}")
 # Zpracování stažených dat z Overpass a sběr uživatelů
 from collections import Counter
 from collections import defaultdict
-uzivatele_stats = defaultdict(lambda: {"Lesy ČR": 0, "VLS": 0, "Bez operátora": 0, "Ostatní": 0, "Celkem": 0})
+from collections import defaultdict
 
+# Změna na defaultdict(lambda: defaultdict(int)), takže jakýkoliv nový operátor se automaticky vytvoří s hodnotou 0
+uzivatele_stats = defaultdict(lambda: defaultdict(int))
 body_overpass_raw = []
 
 for x in data:
@@ -199,19 +201,18 @@ for x in data:
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
         
-        # Operator je na indexu 4, User na indexu 5 (pokud řádek obsahuje dostatek sloupců)
-        # Ošetření kódování pro uživatele a operátora
-        try:
-            uzivatel = x[5].encode('latin1').decode('utf-8').strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
-        except (UnicodeEncodeError, UnicodeDecodeError):
-            uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
-
+        # Ošetření kódování pro operátora a uživatele
         try:
             oper = x[4].encode('latin1').decode('utf-8').strip() if len(x) > 4 and x[4].strip() != '' else ""
         except (UnicodeEncodeError, UnicodeDecodeError):
             oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
+
+        try:
+            uzivatel = x[5].encode('latin1').decode('utf-8').strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
         
-        # Normalizace názvu operátora pro přehlednost v tabulce
+        # Normalizace názvu operátora
         oper_lower = oper.lower()
         if "lesy české republiky" in oper_lower or "lčr" in oper_lower or "lesy cr" in oper_lower:
             oper_kategorie = "Lesy ČR"
@@ -220,9 +221,9 @@ for x in data:
         elif oper == "":
             oper_kategorie = "Bez operátora"
         else:
-            oper_kategorie = oper  # Případně zachováme specifický název jiného operátora
+            oper_kategorie = oper  # Zachová originální název (např. KČT apod.)
             
-        # Započítáme uživateli
+        # Započítáme uživateli (automaticky založí klíč, pokud ještě neexistuje)
         uzivatele_stats[uzivatel][oper_kategorie] += 1
         uzivatele_stats[uzivatel]["Celkem"] += 1
             
@@ -382,7 +383,7 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
     Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodychybejiciref.gpx')
     gpxtrcktoway('OSMbodychybejiciref.gpx')
 
-# --- OPRAVENO: Uložení žebříčku uživatelů proběhne VŽDY nezávisle na podmínkách ---
+# Uložení žebříčku uživatelů pro Wiki
 with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Bez operátora', 'Ostatní', 'Celkem'])
@@ -391,14 +392,15 @@ with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
     seazene_uzivatele = sorted(uzivatele_stats.items(), key=lambda item: item[1]["Celkem"], reverse=True)
     
     for uzivatel, stats in seazene_uzivatele:
-        writer.writerow([
-            uzivatel, 
-            stats["Lesy ČR"], 
-            stats["VLS"], 
-            stats["Bez operátora"], 
-            stats["Ostatní"], 
-            stats["Celkem"]
-        ])
+        lcr = stats.get("Lesy ČR", 0)
+        vls = stats.get("VLS", 0)
+        bez_op = stats.get("Bez operátora", 0)
+        
+        # Všechny ostatní operátory sečteme do sloupce "Ostatní"
+        ostatni = sum(val for key, val in stats.items() if key not in ["Lesy ČR", "VLS", "Bez operátora", "Celkem"])
+        celkem = stats.get("Celkem", 0)
+        
+        writer.writerow([uzivatel, lcr, vls, bez_op, ostatni, celkem])
 
 import wikipg
 importlib.reload(wikipg)
