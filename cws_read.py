@@ -135,7 +135,7 @@ overpass_urls = [
 
 # OPRAVENO: Používáme out meta; místo out body;, aby Overpass vracel jména uživatelů (::user)
 overpass_query = """
-[out:csv(::lat, ::lon, "ref", name, ::user)][timeout:90];
+[out:csv(::lat, ::lon, "ref", name, operator, ::user)][timeout:90];
 area[name="Česko"]->.searchArea;
 (
   node(area.searchArea)["highway"="emergency_access_point"];
@@ -188,8 +188,9 @@ print(f"Staženo řádků z Overpass: {len(data)}")
 
 # Zpracování stažených dat z Overpass a sběr uživatelů
 from collections import Counter
+from collections import defaultdict
+uzivatele_stats = defaultdict(lambda: {"Lesy ČR": 0, "VLS": 0, "Bez operátora": 0, "Ostatní": 0, "Celkem": 0})
 
-uzivatele_counter = Counter()
 body_overpass_raw = []
 
 for x in data:
@@ -197,15 +198,30 @@ for x in data:
         lat = x[0].replace(",", ".")
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
-        uzivatel = x[4].strip() if len(x) > 4 and x[4].strip() != '' else "Anonymní / Neznámý"
         
-        if uzivatel:
-            uzivatele_counter[uzivatel] += 1
+        # Operator je na indexu 4, User na indexu 5 (pokud řádek obsahuje dostatek sloupců)
+        oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
+        uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+        
+        # Normalizace názvu operátora pro přehlednost v tabulce
+        oper_lower = oper.lower()
+        if "lesy české republiky" in oper_lower or "lčr" in oper_lower or "lesy cr" in oper_lower:
+            oper_kategorie = "Lesy ČR"
+        elif "vojenské lesy" in oper_lower or "vls" in oper_lower:
+            oper_kategorie = "VLS"
+        elif oper == "":
+            oper_kategorie = "Bez operátora"
+        else:
+            oper_kategorie = oper  # Případně zachováme specifický název jiného operátora
+            
+        # Započítáme uživateli
+        uzivatele_stats[uzivatel][oper_kategorie] += 1
+        uzivatele_stats[uzivatel]["Celkem"] += 1
             
         body_overpass_raw.append([lat, lon, ref])
         pocetboducelkem += 1
 
-print(f"Pocet vsech nalezenych bodu v OSM (vsechny operatory): {pocetboducelkem}")
+print(f"Pocet vsech nalezenych bodu v OSM: {pocetboducelkem}")
 
 # 3. Lokální porovnání a filtrování cizích operátorů (jednou a správně)
 dist = open('dist.txt', 'a')
@@ -361,9 +377,20 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
 # --- OPRAVENO: Uložení žebříčku uživatelů proběhne VŽDY nezávisle na podmínkách ---
 with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerow(['Uzivatel', 'Pocet_bodu'])
-    for uzivatel, pocet in uzivatele_counter.most_common():
-        writer.writerow([uzivatel, pocet])
+    writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Bez operátora', 'Ostatní', 'Celkem'])
+    
+    # Seřadíme uživatele sestupně podle celkového počtu bodů
+    seazene_uzivatele = sorted(uzivatele_stats.items(), key=lambda item: item[1]["Celkem"], reverse=True)
+    
+    for uzivatel, stats in seazene_uzivatele:
+        writer.writerow([
+            uzivatel, 
+            stats["Lesy ČR"], 
+            stats["VLS"], 
+            stats["Bez operátora"], 
+            stats["Ostatní"], 
+            stats["Celkem"]
+        ])
 
 import wikipg
 importlib.reload(wikipg)
