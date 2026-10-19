@@ -124,26 +124,16 @@ with open(vstup, encoding='cp852') as csv_file:
             body_les_seznam.append(bod_les)
             line_count += 1
 
-print("Načteno {len(body_les_seznam)} bodů ze vstupního souboru.")
+print(f"Načteno {len(body_les_seznam)} bodů ze vstupního souboru.")
 
 # 2. Stažení všech bodů z Overpass API najednou (pro celé Česko)
-# Seznam ověřených Overpass endpointů (zrcadel)
 overpass_urls = [
     "https://overpass-api.de/api/interpreter",
     "https://overpass.openstreetmap.fr/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter"
 ]
 
-# overpass_query = """
-# [out:csv(::lat, ::lon, "ref", name)][timeout:90];
-# area[name="Česko"]->.searchArea;
-# (
-#   node(area.searchArea)["highway"="emergency_access_point"];
-#   node(area.searchArea)["emergency"="access_point"];
-# );
-# out body;
-# """
-
+# OPRAVENO: Používáme out meta; místo out body;, aby Overpass vracel jména uživatelů (::user)
 overpass_query = """
 [out:csv(::lat, ::lon, "ref", name, ::user)][timeout:90];
 area[name="Česko"]->.searchArea;
@@ -151,7 +141,7 @@ area[name="Česko"]->.searchArea;
   node(area.searchArea)["highway"="emergency_access_point"];
   node(area.searchArea)["emergency"="access_point"];
 );
-out body;
+out meta;
 """
 
 headers = {
@@ -162,10 +152,9 @@ print("Stahuji všechny body z Overpass API pro celé Česko...")
 response = None
 uspech = False
 
-# Procházíme jednotlivá zrcadla v seznamu
 for overpass_url in overpass_urls:
     print(f"Zkouším server: {overpass_url}")
-    for pokus in range(3): # 3 pokusy na jedno zrcadlo
+    for pokus in range(3):
         try:
             response = requests.post(
                 overpass_url,
@@ -189,7 +178,6 @@ for overpass_url in overpass_urls:
     else:
         print(f"Server {overpass_url} selhal, zkouším další zrcadlo...")
 
-# Pokud selhaly všechny servery, skript ukončíme
 if not uspech:
     print("Nepodařilo se získat data z žádného Overpass API serveru.")
     sys.exit(1)
@@ -198,13 +186,12 @@ response.encoding = 'windows-1250'
 data = [row.split('\t') for row in response.text.split('\n')]
 print(f"Staženo řádků z Overpass: {len(data)}")
 
-# Zpracování stažených dat z Overpass
+# Zpracování stažených dat z Overpass a sběr uživatelů
 from collections import Counter
 
 uzivatele_counter = Counter()
 body_overpass_raw = []
 
-# 1. Nejprve si všechny platné body uložíme do surového seznamu
 for x in data:
     if len(x) >= 2 and x[0].strip() != '' and not "lat" in str(x) and not "<" in str(x):
         lat = x[0].replace(",", ".")
@@ -220,36 +207,27 @@ for x in data:
 
 print(f"Pocet vsech nalezenych bodu v OSM (vsechny operatory): {pocetboducelkem}")
 
-# 3. Lokální porovnání dat
+# 3. Lokální porovnání a filtrování cizích operátorů (jednou a správně)
 dist = open('dist.txt', 'a')
 dist.write("Vzdalenost bodu nize je vetsi nez 100m:\n")
 chybejicibody = body_les_seznam.copy()
 
-# 2. Lokální porovnání a filtrování cizích operátorů
-dist = open('dist.txt', 'a')
-dist.write("Vzdalenost bodu nize je vetsi nez 100m:\n")
-chybejicibody = body_les_seznam.copy()
-
-body_overpass_seznam = [] # Zde budou správně spárované LČR body z OSM
+body_overpass_seznam = [] 
 
 for y in body_overpass_raw:
     lat_osm, lon_osm, ref_osm = float(y[0]), float(y[1]), y[2].replace(" ", "")
     
-    # Pokusíme se najít shodný REF v našem LČR seznamu
     index_les = []
     if ref_osm != "":
         index_les = [(i, element.index(ref_osm)) for i, element in enumerate(body_les_seznam) if ref_osm in element]
     
     if index_les:
-        # Bod v OSM má REF a ten odpovídá našemu seznamu -> je to náš bod
         body_overpass_seznam.append(y)
         
-        # Odebereme z chybějících
         index_chybejici = [(i, element.index(ref_osm)) for i, element in enumerate(chybejicibody) if ref_osm in element]
         if index_chybejici:
             del chybejicibody[index_chybejici[0][0]]
             
-        # Zkontrolujeme vzdálenost
         vzdalenost = get_distance(
             float(body_les_seznam[index_les[0][0]][0]),
             float(body_les_seznam[index_les[0][0]][1]),
@@ -261,8 +239,7 @@ for y in body_overpass_raw:
                         + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
             body_les_seznam_bezref.append(y)
     else:
-        # Bod v OSM nemá REF nebo neodpovídá žádnému našeho REF. 
-        # ZKONTROLUJEME, ZDA JE V BLÍZKOSTI (do 100m) NĚJAKÉHO LČR BODU.
+        # Kontrola, zda cizí bod bez refu leží blízko našeho LČR bodu (do 100m)
         blizko_lcr = False
         for lcr_bod in body_les_seznam:
             vzd_lcr = get_distance(float(lcr_bod[0]), float(lcr_bod[1]), lat_osm, lon_osm) * 1000
@@ -271,22 +248,9 @@ for y in body_overpass_raw:
                 break
         
         if blizko_lcr:
-            # Bod leží blízko našeho LČR bodu, ale nemá správný REF -> je to náš bod s chybějícím/chybným refem!
             body_les_seznam_bezref.append(y)
         else:
-            # Bod je někde úplně jinde a nemá náš REF -> je to cizí operátor (Horská služba atd.), IGNORUJEME HO.
-            pass
-
-# Přidáme sem i ty body z Overpassu, které už v surovém stahování neměly vyplněný ref
-for y_noref in body_overpass_seznam_bezref if 'body_overpass_seznam_bezref' in locals() else []:
-    if y_noref not in body_les_seznam_bezref:
-        body_les_seznam_bezref.append(y_noref)
-
-for s in vymazatz_body_overpass_seznam:
-    ref = s[2]
-    index_body_overpass_seznam = [(i, element.index(ref)) for i, element in enumerate(body_overpass_seznam) if ref in element]
-    if index_body_overpass_seznam:
-        del body_overpass_seznam[index_body_overpass_seznam[0][0]]
+            pass  # Cizí operátor jinde -> ignorujeme
 
 novyseznambodu = len(body_overpass_seznam)
 
@@ -304,7 +268,7 @@ if not os.path.exists('statistika.csv'):
 
 print('Původní počet bodů:' + str(puvodniseznambodu - 1) + "\n" + "Nový počet bodů: " + str(novyseznambodu))
 
-# vymaze bod ktery je v BZneni.csv z Chybejicbody (OSMchybejicibody.csv)
+# vymaze bod ktery je v BZneni.csv z Chybejicbody
 if os.path.exists("BZneni.csv"):
     with open("BZneni.csv", "r", encoding="utf-8") as neni_file:
         csv_reader_neni = csv.reader(neni_file, delimiter=",")
@@ -324,7 +288,7 @@ if os.path.exists("BZneni.csv"):
                                 chybejicibody.remove(rr)
                                 print(f"Bod {rr} byl vymazan z chybejicibody.")
                 except ValueError:
-                    continue # Kdyby řádek nebyl číslo, bezpečně ho přeskočíme
+                    continue
 
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
@@ -391,16 +355,15 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
         writer.writerow(['lat', 'lon', 'ref'])
         writer.writerows(body_les_seznam_bezref)
 
-    # Uložení žebříčku uživatelů pro Wiki
-    with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        writer.writerow(['Uzivatel', 'Pocet_bodu'])
-        # Seřadíme od největšího počtu po nejmenší
-        for uzivatel, pocet in uzivatele_counter.most_common():
-            writer.writerow([uzivatel, pocet])
-
     Converter(input_file='OSMbodychybejiciref.csv').csv_to_gpx(lats_colname='lat', longs_colname='lon', output_file='OSMbodychybejiciref.gpx')
     gpxtrcktoway('OSMbodychybejiciref.gpx')
+
+# --- OPRAVENO: Uložení žebříčku uživatelů proběhne VŽDY nezávisle na podmínkách ---
+with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerow(['Uzivatel', 'Pocet_bodu'])
+    for uzivatel, pocet in uzivatele_counter.most_common():
+        writer.writerow([uzivatel, pocet])
 
 import wikipg
 importlib.reload(wikipg)
