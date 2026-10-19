@@ -121,48 +121,44 @@ if not found_home:
 # Generování stránky žebříčku uživatelů
 uzivatele_csv = 'statistika_uzivatelu.csv'
 if os.path.exists(uzivatele_csv):
-    # Načteme data ze žebříčku
-    rows_uzivatele = []
-    with open(uzivatele_csv, 'r', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        next(reader, None) # přeskočíme hlavičku
-        for r_row in reader:
-            if len(r_row) >= 2:
-                rows_uzivatele.append((r_row[0], r_row[1]))
+        rows_uzivatele = []
+        with open(uzivatele_csv, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            header = next(reader, None) # přeskočíme hlavičku
+            for r_row in reader:
+                if len(r_row) >= 6:
+                    rows_uzivatele.append(r_row)
 
-    # Hledáme soubor Zebricek-uzivatelu.md ve wiki složce
-    found_zebricek = False
-    for root, dirs, files in os.walk(Path.cwd()):
-        for name in files:
-            if name == "Zebricek-uzivatelu.md":
-                found_zebricek = True
-                zeb_path = os.path.join(root, name)
-                
-                # Přepíšeme obsah souboru s aktuální tabulkou
-                with open(zeb_path, 'w', encoding='utf-8') as zf:
-                    zf.write("# Žebříček přispěvatelů do OSM\n\n")
-                    zf.write("Tento žebříček automaticky sleduje uživatele, kteří do OpenStreetMap přidali body záchrany ČR.\n\n")
-                    zf.write("| Pořadí | Uživatelské jméno / Editor | Počet bodů |\n")
-                    zf.write("| :--- | :--- | ---: |\n")
-                    
-                    for idx, (user, count) in enumerate(rows_uzivatele, 1):
-                        zf.write(f"| {idx} | {user} | {count} |\n")
-                print(f"Stránka žebříčku uživatelů byla aktualizována: {zeb_path}")
-
-    # Pokud soubor v repozitáři ještě neexistuje, prohledáme wiki_folder a vytvoříme ho tam
-    if not found_zebricek:
+        found_zebricek = False
         for root, dirs, files in os.walk(Path.cwd()):
-            if os.path.basename(root) == "wiki_folder":
-                new_zeb_path = os.path.join(root, "Zebricek-uzivatelu.md")
-                with open(new_zeb_path, 'w', encoding='utf-8') as zf:
-                    zf.write("# Žebříček přispěvatelů do OSM\n\n")
-                    zf.write("Tento žebříček automaticky sleduje uživatele, kteří do OpenStreetMap přidali body záchrany ČR.\n\n")
-                    zf.write("| Pořadí | Uživatelské jméno / Editor | Počet bodů |\n")
-                    zf.write("| :--- | :--- | ---: |\n")
+            for name in files:
+                if name == "Zebricek-uzivatelu.md":
+                    found_zebricek = True
+                    zeb_path = os.path.join(root, name)
                     
-                    for idx, (user, count) in enumerate(rows_uzivatele, 1):
-                        zf.write(f"| {idx} | {user} | {count} |\n")
-                print(f"Byl vytvořen nový soubor žebříčku: {new_zeb_path}")
-                break
+                    with open(zeb_path, 'w', encoding='utf-8') as zf:
+                        zf.write("# Žebříček přispěvatelů do OSM podle operátorů\n\n")
+                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců/operátorů.\n\n")
+                        zf.write("| Pořadí | Uživatelské jméno / Editor | Lesy ČR | VLS | Bez operátora | Ostatní | Celkem |\n")
+                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: |\n")
+                        
+                        for idx, row in enumerate(rows_uzivatele, 1):
+                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | **{row[5]}** |\n")
+                    print(f"Stránka žebříčku byla aktualizována: {zeb_path}")
+
+        if not found_zebricek:
+            for root, dirs, files in os.walk(Path.cwd()):
+                if os.path.basename(root) == "wiki_folder":
+                    new_zeb_path = os.path.join(root, "Zebricek-uzivatelu.md")
+                    with open(new_zeb_path, 'w', encoding='utf-8') as zf:
+                        zf.write("# Žebříček přispěvatelů do OSM podle operátorů\n\n")
+                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců/operátorů.\n\n")
+                        zf.write("| Pořadí | Uživatelské jméno / Editor | Lesy ČR | VLS | Bez operátora | Ostatní | Celkem |\n")
+                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: |\n")
+                        
+                        for idx, row in enumerate(rows_uzivatele, 1):
+                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | **{row[5]}** |\n")
+                    print(f"Byl vytvořen nový soubor žebříčku: {new_zeb_path}")
+                    break
 
 print("Konec wikipg")
