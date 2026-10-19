@@ -182,7 +182,7 @@ if not uspech:
     print("Nepodařilo se získat data z žádného Overpass API serveru.")
     sys.exit(1)
 
-response.encoding = 'windows-1250'
+response.encoding = 'utf-8'
 data = [row.split('\t') for row in response.text.split('\n')]
 print(f"Staženo řádků z Overpass: {len(data)}")
 
