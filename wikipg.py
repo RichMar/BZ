@@ -138,12 +138,13 @@ if os.path.exists(uzivatele_csv):
                     
                     with open(zeb_path, 'w', encoding='utf-8') as zf:
                         zf.write("# Žebříček přispěvatelů do OSM podle operátorů\n\n")
-                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců/operátorů.\n\n")
-                        zf.write("| Pořadí | Uživatelské jméno / Editor | Lesy ČR | VLS | Bez operátora | Ostatní | Celkem |\n")
-                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: |\n")
+                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců.\n\n")
+                        zf.write("| Pořadí | Uživatel | Lesy ČR | VLS | Městské lesy | Povodí | NP & CHKO | KČT | Školy | Bez operátora | Ostatní | Celkem |\n")
+                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n")
                         
                         for idx, row in enumerate(rows_uzivatele, 1):
-                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | **{row[5]}** |\n")
+                            # row[0]=Uzivatel, row[1]=Lesy ČR, row[2]=VLS, row[3]=Městské, row[4]=Povodí, row[5]=NP&CHKO, row[6]=KČT, row[7]=Školy, row[8]=Bez operátora, row[9]=Ostatní, row[10]=Celkem
+                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]} | {row[7]} | {row[8]} | {row[9]} | **{row[10]}** |\n")
                     print(f"Stránka žebříčku byla aktualizována: {zeb_path}")
 
         if not found_zebricek:
@@ -152,12 +153,13 @@ if os.path.exists(uzivatele_csv):
                     new_zeb_path = os.path.join(root, "Zebricek-uzivatelu.md")
                     with open(new_zeb_path, 'w', encoding='utf-8') as zf:
                         zf.write("# Žebříček přispěvatelů do OSM podle operátorů\n\n")
-                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců/operátorů.\n\n")
-                        zf.write("| Pořadí | Uživatelské jméno / Editor | Lesy ČR | VLS | Bez operátora | Ostatní | Celkem |\n")
-                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: |\n")
+                        zf.write("Tento žebříček automaticky sleduje přispěvatele bodů záchrany rozdělené podle správců.\n\n")
+                        zf.write("| Pořadí | Uživatel | Lesy ČR | VLS | Městské lesy | Povodí | NP & CHKO | KČT | Školy | Bez operátora | Ostatní | Celkem |\n")
+                        zf.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n")
                         
                         for idx, row in enumerate(rows_uzivatele, 1):
-                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | **{row[5]}** |\n")
+                            # row[0]=Uzivatel, row[1]=Lesy ČR, row[2]=VLS, row[3]=Městské, row[4]=Povodí, row[5]=NP&CHKO, row[6]=KČT, row[7]=Školy, row[8]=Bez operátora, row[9]=Ostatní, row[10]=Celkem
+                            zf.write(f"| {idx} | {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]} | {row[7]} | {row[8]} | {row[9]} | **{row[10]}** |\n")
                     print(f"Byl vytvořen nový soubor žebříčku: {new_zeb_path}")
                     break
 
