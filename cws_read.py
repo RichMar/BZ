@@ -202,63 +202,80 @@ print(f"Staženo řádků z Overpass: {len(data)}")
 from collections import Counter
 
 uzivatele_counter = Counter()
+body_overpass_raw = []
 
-# Zpracování stažených dat z Overpass
+# 1. Nejprve si všechny platné body uložíme do surového seznamu
 for x in data:
     if len(x) >= 2 and x[0].strip() != '' and not "lat" in str(x) and not "<" in str(x):
         lat = x[0].replace(",", ".")
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
-        
-        # Získání uživatele z 5. sloupce (index 4), pokud existuje
         uzivatel = x[4].strip() if len(x) > 4 and x[4].strip() != '' else "Anonymní / Neznámý"
+        
         if uzivatel:
             uzivatele_counter[uzivatel] += 1
-        
-        bod_overpass = [lat, lon, ref]
-        
-        if ref != "":
-            body_overpass_seznam.append(bod_overpass)
-        else:
-            body_les_seznam_bezref.append(bod_overpass)
             
+        body_overpass_raw.append([lat, lon, ref])
         pocetboducelkem += 1
 
-print(f"Pocet nalezenych bodu v OSM: {pocetboducelkem}")
+print(f"Pocet vsech nalezenych bodu v OSM (vsechny operatory): {pocetboducelkem}")
 
 # 3. Lokální porovnání dat
 dist = open('dist.txt', 'a')
 dist.write("Vzdalenost bodu nize je vetsi nez 100m:\n")
 chybejicibody = body_les_seznam.copy()
 
-for y in body_overpass_seznam:
-    ref = y[2].replace(" ", "")
-    index_les = [(i, element.index(ref)) for i, element in enumerate(body_les_seznam) if ref in element]
+# 2. Lokální porovnání a filtrování cizích operátorů
+dist = open('dist.txt', 'a')
+dist.write("Vzdalenost bodu nize je vetsi nez 100m:\n")
+chybejicibody = body_les_seznam.copy()
+
+body_overpass_seznam = [] # Zde budou správně spárované LČR body z OSM
+
+for y in body_overpass_raw:
+    lat_osm, lon_osm, ref_osm = float(y[0]), float(y[1]), y[2].replace(" ", "")
+    
+    # Pokusíme se najít shodný REF v našem LČR seznamu
+    index_les = []
+    if ref_osm != "":
+        index_les = [(i, element.index(ref_osm)) for i, element in enumerate(body_les_seznam) if ref_osm in element]
     
     if index_les:
-        index_chybejici = [(i, element.index(ref)) for i, element in enumerate(chybejicibody) if ref in element]
+        # Bod v OSM má REF a ten odpovídá našemu seznamu -> je to náš bod
+        body_overpass_seznam.append(y)
+        
+        # Odebereme z chybějících
+        index_chybejici = [(i, element.index(ref_osm)) for i, element in enumerate(chybejicibody) if ref_osm in element]
         if index_chybejici:
             del chybejicibody[index_chybejici[0][0]]
             
+        # Zkontrolujeme vzdálenost
         vzdalenost = get_distance(
             float(body_les_seznam[index_les[0][0]][0]),
             float(body_les_seznam[index_les[0][0]][1]),
-            float(y[0]), float(y[1])
-        ) * 1000  # převod na metry
+            lat_osm, lon_osm
+        ) * 1000  # v metrech
         
-        # Pokud je bod v OSM dál než 100m od bodu v LČR, má pravděpodobně špatnou pozici nebo ref
         if vzdalenost > 100:
-            dist.write(ref + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
+            dist.write(ref_osm + " " + str(vzdalenost) + '|LCR:' + str(body_les_seznam[index_les[0][0]][0]) + ','
                         + str(body_les_seznam[index_les[0][0]][1]) + '|OSM:' + str(y[0]) + ',' + str(y[1]) + "\n")
-            print('Vzdálenost bodů: ' + str(vzdalenost), " ", y[2])
-            # Tady patří body, které se liší pozicí/nesedí
             body_les_seznam_bezref.append(y)
-            if vstup == 'OSMchybejicibody.csv':
-                vymazatz_body_overpass_seznam.append(y)
     else:
-        # Pokud ref z OSM vůbec není v LČR seznamu (nebo má chybějící ref)
-        body_les_seznam_bezref.append(y)
-        vymazatz_body_overpass_seznam.append(y)
+        # Bod v OSM nemá REF nebo neodpovídá žádnému našeho REF. 
+        # ZKONTROLUJEME, ZDA JE V BLÍZKOSTI (do 100m) NĚJAKÉHO LČR BODU.
+        blizko_lcr = False
+        for lcr_bod in body_les_seznam:
+            vzd_lcr = get_distance(float(lcr_bod[0]), float(lcr_bod[1]), lat_osm, lon_osm) * 1000
+            if vzd_lcr <= 100:
+                blizko_lcr = True
+                break
+        
+        if blizko_lcr:
+            # Bod leží blízko našeho LČR bodu, ale nemá správný REF -> je to náš bod s chybějícím/chybným refem!
+            body_les_seznam_bezref.append(y)
+        else:
+            # Bod je někde úplně jinde a nemá náš REF -> je to cizí operátor (Horská služba atd.), IGNORUJEME HO.
+            pass
 
 # Přidáme sem i ty body z Overpassu, které už v surovém stahování neměly vyplněný ref
 for y_noref in body_overpass_seznam_bezref if 'body_overpass_seznam_bezref' in locals() else []:
