@@ -194,6 +194,7 @@ from collections import defaultdict
 # Změna na defaultdict(lambda: defaultdict(int)), takže jakýkoliv nový operátor se automaticky vytvoří s hodnotou 0
 uzivatele_stats = defaultdict(lambda: defaultdict(int))
 body_overpass_raw = []
+unikatni_operatori = set()
 
 for x in data:
     if len(x) >= 2 and x[0].strip() != '' and not "lat" in str(x) and not "<" in str(x):
@@ -201,34 +202,42 @@ for x in data:
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
         
-        # Ošetření kódování pro operátora a uživatele
+        # Oprava čtení operátora a uživatele (zajištění správného kódování z windows-1250)
         try:
-            oper = x[4].encode('latin1').decode('utf-8').strip() if len(x) > 4 and x[4].strip() != '' else ""
-        except (UnicodeEncodeError, UnicodeDecodeError):
             oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
+        except:
+            oper = ""
 
         try:
-            uzivatel = x[5].encode('latin1').decode('utf-8').strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
-        except (UnicodeEncodeError, UnicodeDecodeError):
             uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+        except:
+            uzivatel = "Anonymní / Neznámý"
+            
+        if oper:
+            unikatni_operatori.add(oper)
         
-        # Normalizace názvu operátora
+        # Robustnější normalizace pro Lesy ČR (pokud řetězec obsahuje "lesy čr", "lčr" nebo "lesy české republiky")
         oper_lower = oper.lower()
-        if "lesy české republiky" in oper_lower or "lčr" in oper_lower or "lesy cr" in oper_lower:
+        if "lesy č" in oper_lower or "lčr" in oper_lower or "lesy cr" in oper_lower:
             oper_kategorie = "Lesy ČR"
         elif "vojenské lesy" in oper_lower or "vls" in oper_lower:
             oper_kategorie = "VLS"
         elif oper == "":
             oper_kategorie = "Bez operátora"
         else:
-            oper_kategorie = oper  # Zachová originální název (např. KČT apod.)
+            oper_kategorie = oper  
             
-        # Započítáme uživateli (automaticky založí klíč, pokud ještě neexistuje)
         uzivatele_stats[uzivatel][oper_kategorie] += 1
         uzivatele_stats[uzivatel]["Celkem"] += 1
             
         body_overpass_raw.append([lat, lon, ref])
         pocetboducelkem += 1
+
+# Vypíšeme do logu všechny operátory, které jsme v OSM našli, ať máte přehled!
+print("--- NALEZENÉ HODNOTY OPERÁTORŮ V OSM ---")
+for op in sorted(unikatni_operatori):
+    print(f"  - '{op}'")
+print("----------------------------------------")
 
 print(f"Pocet vsech nalezenych bodu v OSM: {pocetboducelkem}")
 
