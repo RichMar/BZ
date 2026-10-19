@@ -4,6 +4,7 @@ import time
 import math
 import os
 import importlib
+import re
 from cryptography.fernet import Fernet
 import sys
 from gpx_converter import Converter
@@ -189,7 +190,7 @@ print(f"Staženo řádků z Overpass: {len(data)}")
 # Zpracování stažených dat z Overpass a sběr uživatelů
 from collections import Counter
 from collections import defaultdict
-from collections import defaultdict
+
 
 # Změna na defaultdict(lambda: defaultdict(int)), takže jakýkoliv nový operátor se automaticky vytvoří s hodnotou 0
 uzivatele_stats = defaultdict(lambda: defaultdict(int))
@@ -202,30 +203,41 @@ for x in data:
         lon = x[1].replace(",", ".")
         ref = x[2].strip() if len(x) > 2 else ""
         
-        # Oprava čtení operátora a uživatele (zajištění správného kódování z windows-1250)
+        # Očštění uvozovek, které občas Overpass v CSV vrací (např. '"Lesy ČR, s.p."')
         try:
-            oper = x[4].strip() if len(x) > 4 and x[4].strip() != '' else ""
+            oper = x[4].strip().strip('"\'') if len(x) > 4 and x[4].strip() != '' else ""
         except:
             oper = ""
 
         try:
-            uzivatel = x[5].strip() if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
+            uzivatel = x[5].strip().strip('"\'') if len(x) > 5 and x[5].strip() != '' else "Anonymní / Neznámý"
         except:
             uzivatel = "Anonymní / Neznámý"
             
         if oper:
             unikatni_operatori.add(oper)
         
-        # Robustnější normalizace pro Lesy ČR (pokud řetězec obsahuje "lesy čr", "lčr" nebo "lesy české republiky")
         oper_lower = oper.lower()
-        if "lesy č" in oper_lower or "lčr" in oper_lower or "lesy cr" in oper_lower:
-            oper_kategorie = "Lesy ČR"
-        elif "vojenské lesy" in oper_lower or "vls" in oper_lower:
-            oper_kategorie = "VLS"
-        elif oper == "":
+        
+        # --- REGEX / KLÍČOVÉ PODMÍNKY PRO OPERÁTORY ---
+        if oper == "":
             oper_kategorie = "Bez operátora"
+        elif re.search(r'lesy\s*(čr|cr|české republiky|české republiky,\s*s\.?p\.?)', oper_lower) or 'lčr' in oper_lower:
+            oper_kategorie = "Lesy ČR"
+        elif re.search(r'vls|vojenské lesy', oper_lower):
+            oper_kategorie = "VLS"
+        elif re.search(r'městsk|obec|město|praha|lány|pelhřimov|chrudim|litovel|správa lesů', oper_lower):
+            oper_kategorie = "Městské a obecní lesy"
+        elif 'povodí' in oper_lower:
+            oper_kategorie = "Povodí"
+        elif re.search(r'np\s|národní park|krnap|chko|schko|nationalpark', oper_lower):
+            oper_kategorie = "NP a CHKO"
+        elif 'kčt' in oper_lower:
+            oper_kategorie = "KČT"
+        elif re.search(r'univerzita|mendel|čzu|šlp', oper_lower):
+            oper_kategorie = "Školy a lesní podniky"
         else:
-            oper_kategorie = oper  
+            oper_kategorie = "Ostatní"  # Všechno ostatní nové / nezařazené
             
         uzivatele_stats[uzivatel][oper_kategorie] += 1
         uzivatele_stats[uzivatel]["Celkem"] += 1
@@ -233,7 +245,6 @@ for x in data:
         body_overpass_raw.append([lat, lon, ref])
         pocetboducelkem += 1
 
-# Vypíšeme do logu všechny operátory, které jsme v OSM našli, ať máte přehled!
 print("--- NALEZENÉ HODNOTY OPERÁTORŮ V OSM ---")
 for op in sorted(unikatni_operatori):
     print(f"  - '{op}'")
@@ -395,21 +406,23 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
 # Uložení žebříčku uživatelů pro Wiki
 with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Bez operátora', 'Ostatní', 'Celkem'])
+    writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Městské a obecní lesy', 'Povodí', 'NP a CHKO', 'KČT', 'Školy a lesní podniky', 'Bez operátora', 'Ostatní', 'Celkem'])
     
-    # Seřadíme uživatele sestupně podle celkového počtu bodů
     seazene_uzivatele = sorted(uzivatele_stats.items(), key=lambda item: item[1]["Celkem"], reverse=True)
     
     for uzivatel, stats in seazene_uzivatele:
         lcr = stats.get("Lesy ČR", 0)
         vls = stats.get("VLS", 0)
+        mestske = stats.get("Městské a obecní lesy", 0)
+        povodi = stats.get("Povodí", 0)
+        np_chko = stats.get("NP a CHKO", 0)
+        kct = stats.get("KČT", 0)
+        skoly = stats.get("Školy a lesní podniky", 0)
         bez_op = stats.get("Bez operátora", 0)
-        
-        # Všechny ostatní operátory sečteme do sloupce "Ostatní"
-        ostatni = sum(val for key, val in stats.items() if key not in ["Lesy ČR", "VLS", "Bez operátora", "Celkem"])
+        ostatni = stats.get("Ostatní", 0)
         celkem = stats.get("Celkem", 0)
         
-        writer.writerow([uzivatel, lcr, vls, bez_op, ostatni, celkem])
+        writer.writerow([uzivatel, lcr, vls, mestske, povodi, np_chko, kct, skoly, bez_op, ostatni, celkem])
 
 import wikipg
 importlib.reload(wikipg)
