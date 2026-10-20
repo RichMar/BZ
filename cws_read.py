@@ -228,16 +228,12 @@ for x in data:
             oper_kategorie = "VLS"
         elif re.search(r'městsk|obec|město|praha|lány|pelhřimov|chrudim|litovel|správa lesů', oper_lower):
             oper_kategorie = "Městské a obecní lesy"
-        elif 'povodí' in oper_lower:
-            oper_kategorie = "Povodí"
         elif re.search(r'np\s|národní park|krnap|chko|schko|nationalpark', oper_lower):
             oper_kategorie = "NP a CHKO"
         elif 'kčt' in oper_lower:
             oper_kategorie = "KČT"
-        elif re.search(r'univerzita|mendel|čzu|šlp', oper_lower):
-            oper_kategorie = "Školy a lesní podniky"
         else:
-            oper_kategorie = "Ostatní"  # Všechno ostatní nové / nezařazené
+            oper_kategorie = "Ostatní"  # Sem teď nově spadnou i Povodí, Školy, Rychlebské stezky atd.
             
         uzivatele_stats[uzivatel][oper_kategorie] += 1
         uzivatele_stats[uzivatel]["Celkem"] += 1
@@ -406,7 +402,8 @@ if ((puvodniseznambodu - 1) < novyseznambodu and vstup == 'Lesy_CR_komplet.csv')
 # Uložení žebříčku uživatelů pro Wiki
 with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
-    writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Městské a obecní lesy', 'Povodí', 'NP a CHKO', 'KČT', 'Školy a lesní podniky', 'Bez operátora', 'Ostatní', 'Celkem'])
+    # Nová užší hlavička bez Povodí a Školy
+    writer.writerow(['Uzivatel', 'Lesy ČR', 'VLS', 'Městské a obecní lesy', 'NP a CHKO', 'KČT', 'Bez operátora', 'Ostatní', 'Celkem'])
     
     seazene_uzivatele = sorted(uzivatele_stats.items(), key=lambda item: item[1]["Celkem"], reverse=True)
     
@@ -414,15 +411,15 @@ with open('statistika_uzivatelu.csv', 'w', newline='', encoding='utf-8') as f:
         lcr = stats.get("Lesy ČR", 0)
         vls = stats.get("VLS", 0)
         mestske = stats.get("Městské a obecní lesy", 0)
-        povodi = stats.get("Povodí", 0)
         np_chko = stats.get("NP a CHKO", 0)
         kct = stats.get("KČT", 0)
-        skoly = stats.get("Školy a lesní podniky", 0)
         bez_op = stats.get("Bez operátora", 0)
-        ostatni = stats.get("Ostatní", 0)
+        
+        # Do ostatních sečteme všechno ostatní (včetně případných starých klíčů Povodí/Školy, kdyby v datech zůstaly)
+        ostatni = sum(val for key, val in stats.items() if key not in ["Lesy ČR", "VLS", "Městské a obecní lesy", "NP a CHKO", "KČT", "Bez operátora", "Celkem"])
         celkem = stats.get("Celkem", 0)
         
-        writer.writerow([uzivatel, lcr, vls, mestske, povodi, np_chko, kct, skoly, bez_op, ostatni, celkem])
+        writer.writerow([uzivatel, lcr, vls, mestske, np_chko, kct, bez_op, ostatni, celkem])
 
 import wikipg
 importlib.reload(wikipg)
