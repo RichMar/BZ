@@ -3,6 +3,7 @@
  
 ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FRichMar%2FBZ&label=&icon=github&color=%23198754&message=&style=flat&tz=UTC)
 ![GitHub last commit](https://img.shields.io/github/last-commit/RichMar/BZ?style=flat)
+![License](https://img.shields.io/github/license/RichMar/BZ?style=flat)
 # Body záchrany v OSM
 **Úvod**
 
