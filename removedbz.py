@@ -1,6 +1,5 @@
 import csv
 import requests
-import sys
 
 def stahni_body_s_poskozenou_tabulkou():
     seznam = []
@@ -11,7 +10,6 @@ def stahni_body_s_poskozenou_tabulkou():
         "https://overpass.kumi.systems/api/interpreter"
     ]
     
-    # Dotaz na body, které mají v OSM označenou chybějící/poškozenou fyzickou ceduli (tabulku)
     overpass_query = """
     [out:csv(::lat, ::lon, "ref", name)][timeout:90];
     area[name="Česko"]->.searchArea;
@@ -51,14 +49,17 @@ def stahni_body_s_poskozenou_tabulkou():
         return
 
     response.encoding = 'utf-8'
-    data = [row.split('\t') for row in response.text.split('\n')]
+    
+    # splitlines() automaticky vyřeší problémy s \r\n na koncích řádků
+    data = [row.split('\t') for row in response.text.splitlines()]
     
     for x in data:
-        if len(x) >= 3 and "lat" not in str(x) and x[0].strip() != "" and not "<" in str(x):
-            lat = x[0].replace(",", ".")
-            lon = x[1].replace(",", ".")
-            ref = x[2].strip()
-            seznam.append([lat, lon, ref])
+        if x and "lat" not in str(x) and x[0].strip() != "" and not "<" in str(x):
+            if len(x) >= 3:
+                lat = x[0].strip().replace(",", ".")
+                lon = x[1].strip().replace(",", ".")
+                ref = x[2].strip()
+                seznam.append([lat, lon, ref])
 
     with open('BZneni.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
