@@ -1,21 +1,21 @@
 Uzivatel,Lesy ČR,VLS,Městské a obecní lesy,NP a CHKO,KČT,Bez operátora,Ostatní,Celkem
-tkk,287,5,3,58,26,175,12,566
+tkk,287,5,3,58,26,171,12,562
 VladaC,148,162,7,113,0,8,32,470
-VSA_,148,0,3,11,1,7,0,170
-lenochod,113,9,1,36,0,3,5,167
-mahdi1234,60,4,0,1,0,14,1,80
+lenochod,129,9,1,37,0,3,5,184
+VSA_,152,0,3,10,1,7,0,173
+mahdi1234,60,4,0,1,0,7,1,73
 sannorra,0,10,0,6,0,54,1,71
-Milancer,13,1,0,28,12,11,1,66
+Milancer,13,1,0,28,12,10,1,65
 Marián Kyral,10,2,0,0,0,1,2,15
 meses,1,4,0,0,0,10,0,15
 Spratek,1,0,0,0,0,13,0,14
 michalfabik,2,8,0,0,0,0,0,10
 Dvorný,6,0,0,0,1,1,1,9
-Petr Slavíček,2,0,0,0,0,5,1,8
 Lugiaa,4,0,0,0,0,3,1,8
 MC79,5,0,0,0,1,1,0,7
 APneunzehn74,0,1,0,2,0,4,0,7
 Kate Miháliková,7,0,0,0,0,0,0,7
+Petr Slavíček,2,0,0,0,0,4,1,7
 Minimalis,1,0,0,0,0,5,0,6
 abejorro34,0,0,0,0,0,6,0,6
 szydzio,5,0,0,1,0,0,0,6
@@ -23,11 +23,11 @@ Milan Keršláger,2,2,0,0,0,1,0,5
 Jiri Podhorecky,0,4,0,0,0,0,1,5
 pos513,5,0,0,0,0,0,0,5
 majkaz_imports,0,0,0,0,0,4,0,4
-LiMr,0,0,0,1,1,2,0,4
 onovy,3,0,0,0,0,1,0,4
 Mirek Soukup,1,0,0,0,1,1,0,3
 ironspock,1,0,0,1,0,1,0,3
 Thartek,1,0,0,2,0,0,0,3
+LiMr,0,0,0,1,1,1,0,3
 urk,3,0,0,0,0,0,0,3
 m_p_13,1,0,0,0,0,1,0,2
 Pathetos,0,0,0,2,0,0,0,2
@@ -42,7 +42,6 @@ Miroslav Suchý,1,0,0,0,0,1,0,2
 xpisar,1,0,0,0,0,1,0,2
 Michal Polášek,1,0,0,0,0,1,0,2
 tom3133,0,0,0,1,0,0,1,2
-Pontiac_CZ,0,0,0,0,0,2,0,2
 Mar4s,0,0,0,0,0,2,0,2
 Richard Janda,0,0,0,0,0,2,0,2
 Molimote,2,0,0,0,0,0,0,2
@@ -51,7 +50,6 @@ majkaz,0,0,0,0,1,0,0,1
 Jakub Trojan,0,0,0,0,0,1,0,1
 ondrejsuchy,0,0,0,0,0,1,0,1
 frulifrank,0,0,0,0,1,0,0,1
-Yakari (kleiner Indianer),0,0,0,0,0,1,0,1
 Petr Dlouhý,0,0,0,0,0,1,0,1
 jeef,0,0,0,0,0,1,0,1
 mobileGEO,0,0,0,1,0,0,0,1
@@ -95,6 +93,7 @@ hopet,0,0,1,0,0,0,0,1
 mapperue,0,0,0,0,0,1,0,1
 uvi,0,0,0,0,0,1,0,1
 Malej_viktor,0,0,0,0,0,1,0,1
+Pontiac_CZ,0,0,0,0,0,1,0,1
 alvinx12,1,0,0,0,0,0,0,1
 JochenB,1,0,0,0,0,0,0,1
 matix849,0,0,0,0,0,1,0,1
